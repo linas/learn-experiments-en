@@ -5,7 +5,7 @@
 # ------------
 
 # Directory where corpora files can be found
-export CORPORA_DIR=$TEXT_DIR/beta-pages
+export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-1
 
 # Enable sentence splitting.
 export SENTENCE_SPLIT=true
@@ -21,12 +21,6 @@ export COGSERVER_CONF=${CONFIG_DIR}/2-cogserver/cogserver-pairs-en.conf
 export OBSERVE="observe-text"
 
 # Location of the database where pair counts will be accumulated
-
-# For Postgres, use this. (The quotes are important!)
-export PAIRS_DB=en_pairs
-export STORAGE_NODE="(PostgresStorageNode \"postgres:///${PAIRS_DB}\")"
-
-# For RocksDB, use this.
 export PAIRS_DB=${ROCKS_DATA_DIR}/en_pairs.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"
 
