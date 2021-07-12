@@ -7,5 +7,5 @@ Directories:
 
 Databases in the ~/data directory:
 
-en_pairs-tranche-1.rdb -- just pair counts for guten-tranche-1 only.
+* en_pairs-t1.rdb -- just pair counts for guten-tranche-1 only.
     Above is missing 400+ files. There were some crashes.
