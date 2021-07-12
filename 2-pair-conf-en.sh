@@ -6,6 +6,12 @@
 
 # Directory where corpora files can be found
 export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-1
+# export CORPORA_DIR=$TEXT_DIR/alpha-fanfic-tranche-2
+
+# File processing grunge.
+export IN_PROCESS_DIR=pair-split
+export COMPLETED_DIR=pair-counted-tranche-1
+export MSG="Splitting and word-pair counting"
 
 # Enable sentence splitting.
 export SENTENCE_SPLIT=true
@@ -23,8 +29,3 @@ export OBSERVE="observe-text"
 # Location of the database where pair counts will be accumulated
 export PAIRS_DB=${ROCKS_DATA_DIR}/en_pairs.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"
-
-# File processing grunge.
-export MSG="Splitting and word-pair counting"
-export IN_PROCESS_DIR=pair-split
-export COMPLETED_DIR=pair-counted
