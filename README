@@ -1,16 +1,27 @@
 Restart of English language-learning. July 2021
+===============================================
 
 Directories:
 * run-1 -- attempt to have a perfect run-through of everything.
 * run-2 -- work with a flawed copy of tranche-1 only
 
 
-Databases in the ~/data directory:
+Databases in the `~/data` directory
+===================================
 
 * run-1-en_pairs-tranche-1.rdb -- run-1 guten-tranche-1 only.
 
+* r2-en_pairs.rdb -- just pair counts for guten-tranche-1 only.
+     Above is missing 400+ files. There were some crashes.
+     Part of run-2 -- includes MI
 
-* r2-en_pairs-t1.rdb -- just pair counts for guten-tranche-1 only.
+* r2-mpg_parse.rdb -- MPG disjunct counts for above aka run-2.
+
+
+Dataset details
+===============
+
+* r2-en_pairs.rdb -- just pair counts for guten-tranche-1 only.
      Above is missing 400+ files. There were some crashes.
      Part of run-2 -- includes MI
 Elapsed time to load ANY-link pairs: 696 secs
