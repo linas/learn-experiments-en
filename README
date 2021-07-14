@@ -7,8 +7,12 @@ Directories:
 
 Databases in the ~/data directory:
 
-* en_pairs-t1.rdb -- just pair counts for guten-tranche-1 only.
+* run-1-en_pairs-tranche-1.rdb -- run-1 guten-tranche-1 only.
+
+
+* r2-en_pairs-t1.rdb -- just pair counts for guten-tranche-1 only.
      Above is missing 400+ files. There were some crashes.
+     Part of run-2 -- includes MI
 Elapsed time to load ANY-link pairs: 696 secs
 Support: found num left= 113809 num right= 113865 in 344 secs
 Finished left norm marginals in 426 secs
