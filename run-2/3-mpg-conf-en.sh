@@ -15,7 +15,7 @@ export SPLIT_LANG=en
 
 # IPv4 hostname and port number of where the cogserver is running.
 export HOSTNAME=localhost
-export PORT=18005
+export PORT=18006
 export PROMPT="scheme@(mpg-parse)"
 export COGSERVER_CONF=${CONFIG_DIR}/3-cogserver/cogserver-mst-en.conf
 
@@ -23,7 +23,7 @@ export COGSERVER_CONF=${CONFIG_DIR}/3-cogserver/cogserver-mst-en.conf
 export OBSERVE="observe-mpg"
 
 # Location of the database where disjunct counts will be accumulated
-export MST_DB=${ROCKS_DATA_DIR}/mpg_parse.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r2-mpg_parse.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
 
 # Message printed for each processed file
