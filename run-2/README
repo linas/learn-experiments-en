@@ -10,7 +10,8 @@ Databases in the `~/data` directory
      Above is missing 400+ files. There were some crashes.
      This DB includes MI for pairs.
 
-* r2-mpg_parse.rdb -- MPG disjunct counts.
+* r2-mpg_parse.rdb -- MPG disjunct counts. This includes the MMT
+  marginals, so it's good-to-go.
 
 
 Notes
@@ -96,4 +97,47 @@ Compute disjunct marginals.
 run `3-mst-parsing/compute-mst-marginals.sh.`
 
 Elapsed time to load csets: 1008 secs
+Finished left norm marginals in 3969 secs
+Finished left totals in 503 secs
+Finished column (left) norm averages in 2714 secs
+Done storing 7350903 left-wilds in 2190 secs
+Finished right norm marginals in 424 secs
+Finished right totals in 10 secs
+Finished row (right) norm averages in 40 secs
+Done storing 110388 right-wilds in 20 secs
+Finished mmt norm marginals in 1330 secs
+Finished mmt totals in 7 secs
+Done storing 7350903 left-wilds in 1032 secs
+
+Summary Report for Correlation Matrix Word-Disjunct Pairs (Connector
+Sets)
+Left type: WordNode    Right Type: ConnectorSeq    Pair Type: Section
+Wildcard: (ListLink (ctv 0 0 1.00324e+07)
+  (AnyNode "cset-word")
+  (AnyNode "cset-disjunct"))
+Rows: 110388 Columns: 7350903
+Size: 8145420 non-zero entries of 811451480364 possible
+Fraction non-zero: 1.0038E-5 Sparsity (-log_2): 16.604
+Total observations: 10032415.0  Avg obs per pair: 1.2317
+No MI statistics are present; run compute-mi to get them.
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  33.62        8.9559E+4
+Count   (l_1)  114.7        1.2295E+5     3.413        1.373
+Length  (l_2)  41.54        1140.         1.236        1.2724E-2
+RMS Count      33.31        1089.         .9909        1.2156E-2
+
+MM^T support=8145420.0     count=1151160207.0     entropy=15.815
+No M^TM data present
+
+real    221m6.395s
+user    304m6.116s
+sys     83m52.293s
+
+$ du -s r2-mpg_parse.rdb
+5251780 r2-mpg_parse.rdb
+
+Rocks: initial aid=43127689 (is num atoms plus one, so...)
+Average of 125 Bytes/atom
 
