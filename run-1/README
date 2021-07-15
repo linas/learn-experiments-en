@@ -1,0 +1,45 @@
+Restart of English language-learning. July 2021
+===============================================
+run-1 -- attempt to have a perfect run-through of everything.
+
+
+Databases in the `~/data` directory
+===================================
+
+* run-1-en_pairs-tranche-1.rdb -- run-1 guten-tranche-1 only.
+
+
+Notes:
+------
+tranche1 appears to be 3028 files
+... seems that SSD is maybe 2x faster than spinning disk.
+
+-----------------------------
+tranche-2  is 4500 files -- the submitter ran at
+real    792m5.161s
+user    6m42.704s
+sys     3m2.937s
+
+so 10.56 seconds elapsed wait per file. Ouch.
+
+virt/res RAM is 12.9 11.2GB  and 3085:20 runtime, so 41.1 seconds
+CPU/file.  So this is running with 4 cores. Past experience suggests 
+most of this is actually Rocks doing stuff.
+
+(ListLink . 6921181)
+(EvaluationLink . 6921181) 
+(WordNode . 79348)
+
+scheme@(en-pairs)> (display (monitor-storage storage-node))
+Connected to `rocks:///home/ubuntu/data//en_pairs.rdb`
+Database contents:
+  Next aid: 29287757
+  Atoms/Links/Nodes a@: 29287756 l@: 29145610 n@: 142126
+  Keys/Incoming/Hash k@: 14714945 i@: 58282073 h@: 0
+
+2053120 run-1-en_pairs-tranche-2.rdb -- 2GB
+
+So .. 72 Bytes/atom ! Wow!
+
+
+
