@@ -70,6 +70,13 @@ Database contents:
 
 So 35666393 Atoms = 35M Atoms, or 830 Bytes/Atom resident RAM usage.
 
+Disk usage:
+$ du -s r2-mpg_parse.rdb
+4304176 r2-mpg_parse.rdb
+
+so 124 Bytes/Atom when on disk. Wooot! (without the disjunct marginals)
+
+-------------------------
 (gc-stats)
 $2 = ((gc-time-taken . 7243681057538) (heap-size . 92037120)
 (heap-free-size . 75968512) (heap-total-allocated . 5581286791152)
@@ -84,4 +91,9 @@ Churned through 5581 terabytes RAM in the process. Yikes! That's
 WTF!  ... each file has hundreds of sentences, so that's a dozen GB
 per sentence! Sure, planar parsing is a complicated algo, but really???
 
+-------------------------
+Compute disjunct marginals.
+run `3-mst-parsing/compute-mst-marginals.sh.`
+
+Elapsed time to load csets: 1008 secs
 
