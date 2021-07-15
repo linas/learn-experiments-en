@@ -1,0 +1,87 @@
+Restart of English language-learning. July 2021
+===============================================
+* run-2 -- work with a flawed copy of tranche-1 only
+
+
+Databases in the `~/data` directory
+===================================
+
+* r2-en_pairs.rdb -- just pair counts for guten-tranche-1 only.
+     Above is missing 400+ files. There were some crashes.
+     This DB includes MI for pairs.
+
+* r2-mpg_parse.rdb -- MPG disjunct counts.
+
+
+Notes
+=====
+
+Compute MI stats for  r2-en_pairs.rdb --
+
+```
+Elapsed time to load ANY-link pairs: 696 secs
+Support: found num left= 113809 num right= 113865 in 344 secs
+Finished left norm marginals in 426 secs
+Finished right norm marginals in 382 secs
+Done with wild-card count N(x,*) and N(*,y) in 817 secs
+Done 110000 of 113809 outer loops in 144 secs, pairs=9351757 (5338.4 pairs/sec)
+Done computing 9684723 pair MI's in 1846 secs
+Finished with MI computations; this took 1.421 hours.
+Summary Report for Correlation Matrix Link Grammar ANY link Word Pairs
+Left type: WordNode    Right Type: WordNode    Pair Type: EvaluationLink
+Rows: 113809 Columns: 113865
+Size: 9684723 non-zero entries of 12958861785 possible
+Fraction non-zero: 7.4734E-4 Sparsity (-log_2): 10.386
+Total observations: 230004595.  Avg obs per pair: 23.749
+Entropy Total: 18.029   Left: 9.8981   Right: 9.7612
+Total MI: 1.6307
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  2.1263E+4    2.4050E+4
+Count   (l_1)  2.8642E+6    3.2863E+6     134.7        136.6
+Length  (l_2)  3.1925E+5    3.5502E+5     15.01        14.76
+RMS Count      3.1896E+5    3.5472E+5     15.00        14.75
+```
+
+----------------------------------------------------
+
+MPG parsing ...
+wall-clock time 370 minutes for 3028 files so 7 seconds/file
+total of 6 hours wall-clock time.
+   .. seems to be faster than pair-counting.
+2304:10 CPU time.  So 47 CPU-secs/file -- total of 38 hours CPU
+
+RAM usage: 32.3g  29.5g so this is huge.
+
+(ListLink . 9912398)
+(Connector . 214265)
+(ConnectorSeq . 7350903)
+(Section .  8145420)
+(EvaluationLink . 9912398)
+(WordNode . 130905)
+
+(display (monitor-storage storage-node))
+Connected to `rocks:///home/ubuntu/data//r2-mpg_parse.rdb`
+Database contents:
+  Next aid: 35666394
+  Atoms/Links/Nodes a@: 35666393 l@: 35535384 n@: 130924
+  Keys/Incoming/Hash k@: 38224220 i@: 85829605 h@: 0
+
+So 35666393 Atoms = 35M Atoms, or 830 Bytes/Atom resident RAM usage.
+
+(gc-stats)
+$2 = ((gc-time-taken . 7243681057538) (heap-size . 92037120)
+(heap-free-size . 75968512) (heap-total-allocated . 5581286791152)
+(heap-allocated-since-gc . 2248480) (protected-objects . 46) (gc-times .
+120588))
+
+So: 60 millisec/gc  and total 7243 seconds in GC, so 2 hours flat.
+out of 38 hours CPU time, so about 5% of total CPU time is in GC.
+
+Churned through 5581 terabytes RAM in the process. Yikes! That's
+1.8 terbytes per file!  Holy cow! That seems completely excessive!
+WTF!  ... each file has hundreds of sentences, so that's a dozen GB
+per sentence! Sure, planar parsing is a complicated algo, but really???
+
+
