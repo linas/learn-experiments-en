@@ -17,5 +17,6 @@ Databases in the `~/data` directory
      Part of run-2 -- includes MI
 
 * r2-mpg_parse.rdb -- MPG disjunct counts for above aka run-2.
+     This includes the MM^T marginals.
 
 ...THE END...
