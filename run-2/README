@@ -10,8 +10,8 @@ Databases in the `~/data` directory
      Above is missing 400+ files. There were some crashes.
      This DB includes MI for pairs.
 
-* r2-mpg_parse.rdb -- MPG disjunct counts. This includes the MMT
-  marginals, so it's good-to-go.
+* r2-mpg_parse.rdb -- MPG disjunct counts.
+     This includes the MM^T marginals.
 
 
 Notes
@@ -141,3 +141,37 @@ $ du -s r2-mpg_parse.rdb
 Rocks: initial aid=43127689 (is num atoms plus one, so...)
 Average of 125 Bytes/atom
 
+------------------------------------------------------
+Above seems huge so trim, according to the master README
+
+guile -l ${COMMON_DIR}/cogserver.scm
+   ; (cog-rocks-open "rocks:///home/ubuntu/data/r2-mpg_parse.rdb")
+   (define pca (make-pseudo-cset-api))
+   (define psa (add-pair-stars pca))
+   (psa 'fetch-pairs)        ;; Load the dataset
+   ; Elapsed time to load csets: 1745 secs
+   (cog-close storage-node)  ;; Avoid accidental corruption
+
+   (define psc (add-support-compute psa))
+   (psc 'cache-all)          ;; compute subtotals
+
+Finished left norm marginals in 30757 secs   ; 8.5 hours
+Finished left totals in 12103 secs           ; 3.4 hours
+Finished right norm marginals in 418 secs
+
+   (define fsa (add-subtotal-filter psa 40 8 5 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (define storage-node
+      (RocksStorageNode "rocks:///home/ubuntu/data/r2-mpg-trim-40-8-5.rdb"))
+   (cog-open storage-node)
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+Too many heap sections: Increase MAXHINCR or MAX_HEAP_SECTS
+   (cog-close storage-node)
+
+   (cog-open storage-node)
+   (psa 'fetch-pairs)
+   (batch-all-pair-mi psa)    ;; MI between words and disjuncts
+   (define btr (batch-transpose psa))
+   (btr 'mmt-marginals)       ;; Word-pair entropies
+   (cog-close storage-node)
