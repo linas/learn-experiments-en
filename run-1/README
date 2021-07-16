@@ -6,7 +6,9 @@ run-1 -- attempt to have a perfect run-through of everything.
 Databases in the `~/data` directory
 ===================================
 
-* run-1-en_pairs-tranche-1.rdb -- run-1 guten-tranche-1 only.
+* run-1-en_pairs-tranche-1.rdb -- guten-tranche-1 only.
+* run-1-en_pairs-tranche-12.rdb -- tranch 1 and 2
+* run-1-en_pairs-tranche-123.rdb -- tranch 1, 2 and 3
 
 
 Notes:
@@ -37,9 +39,30 @@ Database contents:
   Atoms/Links/Nodes a@: 29287756 l@: 29145610 n@: 142126
   Keys/Incoming/Hash k@: 14714945 i@: 58282073 h@: 0
 
-2053120 run-1-en_pairs-tranche-2.rdb -- 2GB
+2053120 run-1-en_pairs-tranche-12.rdb -- 2GB
+
 
 So .. 72 Bytes/atom ! Wow!
 
+---------------------------
+tranche-3  has 5711 files
+processed in:
+real    1863m46.768s -- so 31 hours wall-clock.
+user    9m3.785s
+sys     4m3.325s
 
+process is using 30GB RAM at conclusion.
+7985:17 mm:ss runtime, so about 133 cpu-hours.
 
+(gc-time-taken . 31026312786171) total of 31026 seconds = 517 min
+(heap-total-allocated . 2648643234624) = 2648 GB. outrageous. 
+(gc-times .  500306))
+
+(ListLink . 18389495)
+(EvaluationLink . 18389495)
+(WordNode . 242910)
+
+ du -s en_pairs.rdb
+3601356 run-1-en_pairs-tranche-123.rdb - 3.5GB
+
+Next aid: 56675645
