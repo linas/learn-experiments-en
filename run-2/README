@@ -152,12 +152,19 @@ guile -l ${COMMON_DIR}/cogserver.scm
    ; Elapsed time to load csets: 1745 secs
    (cog-close storage-node)  ;; Avoid accidental corruption
 
+   (cog-open storage-node)
    (define psc (add-support-compute psa))
    (psc 'cache-all)          ;; compute subtotals
 
 Finished left norm marginals in 30757 secs   ; 8.5 hours
 Finished left totals in 12103 secs           ; 3.4 hours
 Finished right norm marginals in 418 secs
+
+   (define storage-node
+      (RocksStorageNode "rocks:///home/ubuntu/data/r2-mpg-supp.rdb"))
+	(define stp (make-store psc))
+   (stp 'store-all)
+   (cog-close storage-node)
 
    (define fsa (add-subtotal-filter psa 40 8 5 #f)) ;; The filter itself
    (define lfa (add-linkage-filter fsa))
