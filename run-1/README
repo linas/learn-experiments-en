@@ -66,3 +66,9 @@ process is using 30GB RAM at conclusion.
 3601356 run-1-en_pairs-tranche-123.rdb - 3.5GB
 
 Next aid: 56675645
+
+-------------------------
+tranche 4
+cogserver segfaulted with 4810 articles remaining.
+restart, with unlimited core size...
+crash again with 3539 articles remaining
