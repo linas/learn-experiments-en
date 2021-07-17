@@ -159,11 +159,19 @@ guile -l ${COMMON_DIR}/cogserver.scm
 Finished left norm marginals in 30757 secs   ; 8.5 hours
 Finished left totals in 12103 secs           ; 3.4 hours
 Finished right norm marginals in 418 secs
+again:
+Finished left norm marginals in 27678 secs
+Finished left totals in 10465 secs
+Finished right norm marginals in 579 secs
 
    (define storage-node
       (RocksStorageNode "rocks:///home/ubuntu/data/r2-mpg-supp.rdb"))
 	(define stp (make-store psc))
    (stp 'store-all)
+Done storing 7350903 left-wilds in 3535 secs
+Done storing 110388 right-wilds in 25 secs
+Done storing 8145420 pairs in 2254 secs
+
    (cog-close storage-node)
 
    (define fsa (add-subtotal-filter psa 40 8 5 #f)) ;; The filter itself
@@ -174,7 +182,31 @@ Finished right norm marginals in 418 secs
    (define fso (make-store lfa))
    (fso 'store-all-elts)     ;; Do NOT store the marginals!
 Too many heap sections: Increase MAXHINCR or MAX_HEAP_SECTS
+again:
+Done storing 52791 pairs in 11 secs
    (cog-close storage-node)
+
+   (define fsa (add-subtotal-filter psa 20 4 3 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (define storage-node
+      (RocksStorageNode "rocks:///home/ubuntu/data/r2-mpg-trim-20-4-3.rdb"))
+   (cog-open storage-node)
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+Done storing 105393 pairs in 24 secs
+   (cog-close storage-node)
+
+   (define fsa (add-subtotal-filter psa 10 2 1 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (define storage-node
+      (RocksStorageNode "rocks:///home/ubuntu/data/r2-mpg-trim-10-2-1.rdb"))
+   (cog-open storage-node)
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+Done storing 309654 pairs in 68 secs
+   (cog-close storage-node)
+
+---------
 
    (cog-open storage-node)
    (psa 'fetch-pairs)
