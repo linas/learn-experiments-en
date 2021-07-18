@@ -2,6 +2,11 @@ Restart of English language-learning. July 2021
 ===============================================
 * run-2 -- work with a flawed copy of tranche-1 only
 
+This flawed copy contains:
+* 3026 articles
+* 426941 sentences
+* 8133834 words
+
 
 Databases in the `~/data` directory
 ===================================
@@ -458,7 +463,48 @@ merger, what is left over in the unmerged connectors would have a
 low MI. Is this a bug in the code, or is this a theoretical failure?
 Given that the merge fraction was so low...
 
+Oh, hang on, lets double-check:
 
+(ent "of" "of") 6.148 -- so that's less than before ....
+(ent "to" "to") 6.013
+
+Crap I forgot to do this; however `make-merger` does do this correctly.
+
+(psu 'clobber)
+(ptc 'clobber)
+(psu 'set-right-marginals of-to)
+(psu 'set-right-marginals (Word "of"))
+(psu 'set-right-marginals (Word "to"))
+
+(ptc 'set-mmt-marginals of-to)
+(ptc 'set-mmt-marginals (Word "of"))
+(ptc 'set-mmt-marginals (Word "to"))
+
+(get-mi of-to of-to) 10.009 - same as before
+(ent "of" "of") 11.70
+(ent "to" "to") 11.92
+
+
+(prj "of") 8.411 -- yikes -- even higher!
+(prj "to") 8.216
+(prj "in") 6.044 -- no change from before
+(prj "he") 1.937 --  "
+(prj "it") 1.629 --  "
+(prj "that") 2.970
+(prj "said") 1.900
+
+(ent "of" "to") -inf.0
+(ent "of" "in") 5.294
+(ent "of" "he") -4.44
+(ent "of" "it") -3.34
+(ent "of" "that") 1.012
+(ent "of" "said") -3.25
+(ent "to" "in") 3.558
+(ent "to" "he") 0.874
+(ent "to" "it") -0.25
+(ent "to" "that") 1.432
+(ent "to" "said") -1.97
+(ent "in" "in") 5.694
 
 
 
