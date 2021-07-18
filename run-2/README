@@ -283,6 +283,13 @@ Right off the bat -- lots of crappy merges. Ouch.
 Dist of 5 might be better.
 
 In fact, above is so bad, its halted.
+---------Bingo! Dist=3.7201 for word "of" -- "to"
+---------Bingo! Dist=6.0441 for class "of to" -- "in"
+---------Bingo! Dist=3.2455 for class "of to" -- "he"
+---------Bingo! Dist=4.0717 for class "of to" -- "it"
+---------Bingo! Dist=4.8130 for class "of to" -- "that"
+---------Bingo! Dist=4.0295 for class "of to" -- "said"
+
 
 * r2-gram-shape-40-disinfo-5.0-4.rdb
 
@@ -291,4 +298,10 @@ In fact, above is so bad, its halted.
 Yikes, no better -- this fails to merge a lot of plausible words.
 But then it finds two good things, OK ... andthen after that,
 it will merge any old crap.   What's going on? Why is it doing that?
+
+---------Bingo! Dist=5.5520 for word "be" -- "have"
+---------Bingo! Dist=5.0712 for class "be have" -- "him"
+---------Bingo! Dist=7.3089 for class "be have" -- "do"
+---------Bingo! Dist=5.1829 for class "be have" -- "all"
+---------Bingo! Dist=5.4233 for class "be have" -- "her"
 
