@@ -305,3 +305,64 @@ it will merge any old crap.   What's going on? Why is it doing that?
 ---------Bingo! Dist=5.1829 for class "be have" -- "all"
 ---------Bingo! Dist=5.4233 for class "be have" -- "her"
 
+So.. what's going wrong? obviously, this is a "small dataset" still,
+surprising.  So explore by hand.
+
+./run-gram-cogserver.sh
+(define pmi (add-symmetric-mi-compute star-obj))
+(define (get-mi wa wb) (pmi 'mmt-fmi wa wb))
+(define (ent swa swb)
+	(format #t "~5f\n" (get-mi (Word swa) (Word swb))) *unspecified*)
+
+(ent "of" "to")  3.720 -- looks reasonable.
+(ent "of" "in")  4.443
+(ent "to" "in")  3.019
+
+(ent "of" "of") 7.460  -- a baseline, of sorts.
+(ent "to" "to") 6.848
+(ent "in" "in") 5.699
+
+(ent "of" "he") -1.74  -- as expected.
+(ent "of" "it") -1.44
+(ent "of" "that") 0.619
+(ent "of" "said") -1.43
+
+(ent "to" "he") 0.449  -- higher than expected but still low
+(ent "to" "it") -0.18
+(ent "to" "that") 0.935
+(ent "to" "said") 0.070
+
+(ent "in" "he") 1.348 -- higher than expected but still low.
+(ent "in" "it") 0.255
+(ent "in" "that") 1.517
+(ent "in" "said") -0.53
+
+(ent "he" "he") 3.968  -- pathetically low .. small dataset, so OK.
+(ent "it" "it") 2.405
+(ent "that" "that") 3.664
+(ent "said" "said") 3.223
+
+So what the heck is the merger doing???
+
+make-merger
+
+FRAC-FUN is the fraction to merge
+   ; The fraction to merge is a linear ramp, starting at zero
+   ; at the cutoff, and ramping up to one when these are very
+   ; similar.
+   (define (mi-fraction WA WB)
+      (define milo (min (get-self-mi WA) (get-self-mi WB)))
+      (define fmi (get-mi WA WB))
+      (/ (- fmi CUTOFF) (- milo CUTOFF)))
+
+Rewrite above for convenience:
+   (define (frac swa swb)
+      (define WA (Word swa))
+      (define WB (Word swb))
+      (define CUTOFF 3.0)
+      (define milo (min (get-mi WA WA) (get-mi WB WB)))
+      (define fmi (get-mi WA WB))
+      (/ (- fmi CUTOFF) (- milo CUTOFF)))
+
+For cutoff of 3.0, we get
+(frac "of" to")
