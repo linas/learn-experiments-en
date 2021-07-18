@@ -363,6 +363,103 @@ Rewrite above for convenience:
       (define milo (min (get-mi WA WA) (get-mi WB WB)))
       (define fmi (get-mi WA WB))
       (/ (- fmi CUTOFF) (- milo CUTOFF)))
+   (define (pfrac swa swb)
+      (format #t "~5f\n" (frac swa swb)) *unspecified*)
 
 For cutoff of 3.0, we get
-(frac "of" to")
+(pfrac "of" "to") 0.187   -- yuck too low!
+(pfrac "of" "in") 0.535   -- higher than expected...
+(pfrac "to" "in") 0.007   -- well, barely above cutoff so not surprising!?
+
+These lead to the above:
+(ent "of" "to")  3.720
+(ent "of" "in")  4.443
+(ent "to" "in")  3.019
+
+(ent "of" "of") 7.460
+(ent "to" "to") 6.848
+(ent "in" "in") 5.699
+
+Conclude: maybe the frac fun is pessimisitic, or gives poor weighting.
+... what should it be? What's the theory?
+
+anyway, what happens next...? From make-merger
+
+; (define STARS star-obj)
+; (define psu (add-support-compute STARS))
+; (define cls (STARS 'make-cluster WA WB))
+; (start-cluster psu cls WA WB FRAC-FN NOISE MRG-CON)
+
+So MRG-CON is ... #t and this is hard-coded in make-disinfo.
+NOISE is ... 4  aka ZIPF in gram-classify-greedy-disinfo
+MIN-OBS is 4, given in argument
+
+greedy-grow throws away a word if discard? is true
+trim-and-rank ignores word if discard-margin? is true
+
+(define pmi (add-symmetric-mi-compute star-obj))
+(define (get-mi wa wb) (pmi 'mmt-fmi wa wb))
+
+   (define (mi-fraction WA WB)
+      (define CUTOFF 3.0)
+      (define milo (min (get-mi WA WA) (get-mi WB WB)))
+      (define fmi (get-mi WA WB))
+      (/ (- fmi CUTOFF) (- milo CUTOFF)))
+
+(define (start-clu swa swb)
+   (define STARS star-obj)
+   (define WA (Word swa))
+   (define WB (Word swb))
+   (define psu (add-support-compute STARS))
+   (define cls (STARS 'make-cluster WA WB))
+   (start-cluster psu cls WA WB mi-fraction 4.0 #t))
+
+Likewise ... merge-into-cluster ...
+
+So let's see what happens.
+(start-clu "of" "to")
+------ Create: Merged 7620 sections in 4.000 secs; 1905.0 scts/sec
+------ Create: Revised 7620 shapes in 8.000 secs; 952.50 scts/sec
+------ Create: cleanup 1 in 3.000 secs; 0.3333 ops/sec
+
+(star-obj 'make-cluster (Word "of") (Word "to"))
+(define of-to (WordClassNode "of to"))
+
+(get-mi of-to of-to)
+"Numerical overflow"
+
+(define (prj swa)
+	(format #t "~5f\n" (get-mi of-to (Word swa))) *unspecified*)
+
+(define psu (add-support-compute star-obj))
+(psu 'clobber)
+(psu 'set-right-marginals of-to)
+
+(EvaluationLink
+  (PredicateNode "*-Direct Sum Wild (cset⊕cross-section)")
+  (WordClassNode "of to")
+  (AnyNode "right-wild-direct-sum"))
+
+(define ptc (add-transpose-compute star-obj))
+(ptc 'set-mmt-marginals of-to)
+
+(get-mi of-to of-to) 10.009
+
+(prj "of") 5.637  -- oh no -- why so high??
+(prj "to") 5.261  -- oh no -- why so high?
+(prj "in") 6.044
+(prj "he") 1.937
+(prj "it") 1.629
+(prj "that") 2.970
+(prj "said") 1.900
+
+OK, so clearly, the projection failed. One would expect that after
+merger, what is left over in the unmerged connectors would have a
+low MI. Is this a bug in the code, or is this a theoretical failure?
+Given that the merge fraction was so low...
+
+
+
+
+
+===============================
