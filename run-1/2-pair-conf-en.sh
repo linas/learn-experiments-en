@@ -8,14 +8,16 @@
 # export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-1
 # export CORPORA_DIR=$TEXT_DIR/alpha-fanfic-tranche-2
 # export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-3
-export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-4
+# export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-4
+export CORPORA_DIR=$TEXT_DIR/alpha-guten-tranche-5
 
 # File processing grunge.
 export IN_PROCESS_DIR=pair-split
 # export COMPLETED_DIR=pair-counted-tranche-1
 # export COMPLETED_DIR=pair-counted-tranche-2
 # export COMPLETED_DIR=pair-counted-tranche-3
-export COMPLETED_DIR=pair-counted-tranche-4
+# export COMPLETED_DIR=pair-counted-tranche-4
+export COMPLETED_DIR=pair-counted-tranche-5
 export MSG="Splitting and word-pair counting"
 
 # Enable sentence splitting.
