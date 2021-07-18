@@ -11,7 +11,13 @@ Databases in the `~/data` directory
      This DB includes MI for pairs.
 
 * r2-mpg_parse.rdb -- MPG disjunct counts.
-     This includes the MM^T marginals.
+     This includes the MM^T marginals. w/o the shapes, though.
+
+* r2-mpg-trim-10-2-1.rdb
+* r2-mpg-trim-20-4-3.rdb
+* r2-mpg-trim-40-8-5.rdb
+     Trimmed version of above, with Shape MMT marginals.
+
 
 
 Notes
@@ -207,10 +213,57 @@ Done storing 309654 pairs in 68 secs
    (cog-close storage-node)
 
 ---------
+run compute-mst-marginals.sh for each of the three files above.
 
-   (cog-open storage-node)
-   (psa 'fetch-pairs)
-   (batch-all-pair-mi psa)    ;; MI between words and disjuncts
-   (define btr (batch-transpose psa))
-   (btr 'mmt-marginals)       ;; Word-pair entropies
-   (cog-close storage-node)
+* r2-mpg-trim-40-8-5.rdb
+
+Rows: 6029 Columns: 98102
+Size: 171922 non-zero entries of 591456958 possible
+Fraction non-zero: 2.9068E-4 Sparsity (-log_2): 11.748
+Total observations:  4006152.0  Avg obs per pair: 23.302
+No MI statistics are present; run compute-mi to get them.
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  45.55        2573.
+Count   (l_1)  1708.        6.6260E+4     37.49        25.75
+Length  (l_2)  380.5        2834.         8.352        1.101
+RMS Count      290.3        2620.         6.373        1.018
+
+MM^T support=171922.0     count=6842054908.0     entropy=2.1110
+
+* r2-mpg-trim-20-4-3.rdb
+
+Rows: 10216 Columns: 191449
+Size: 343153 non-zero entries of 1955842984 possible
+Fraction non-zero: 1.7545E-4 Sparsity (-log_2): 12.477
+Total observations:  4892090.0  Avg obs per pair: 14.256
+No MI statistics are present; run compute-mi to get them.
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  74.81        5014.
+Count   (l_1)  1721.        7.8050E+4     23.00        15.57
+Length  (l_2)  332.1        2763.         4.439        .5511
+RMS Count      267.4        2608.         3.574        .5202
+
+MM^T support=343153.0     count=8418062550.0     entropy=3.8061
+
+* r2-mpg-trim-10-2-1.rdb
+
+Rows: 18997 Columns: 542181
+Size: 1012198 non-zero entries of 10299812457 possible
+Fraction non-zero: 9.8273E-5 Sparsity (-log_2): 13.313
+Total observations:  6607826.0  Avg obs per pair: 6.5282
+No MI statistics are present; run compute-mi to get them.
+
+                 Left         Right     Avg-left     Avg-right
+                 ----         -----     --------     ---------
+Support (l_0)  123.4        1.3267E+4
+Count   (l_1)  1578.        9.6517E+4     12.78        7.275
+Length  (l_2)  264.9        2609.         2.146        .1967
+RMS Count      224.4        2517.         1.818        .1898
+
+MM^T support=1012198.0     count=10427173042.0     entropy=6.6185
+
+---------
