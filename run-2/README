@@ -267,3 +267,28 @@ RMS Count      224.4        2517.         1.818        .1898
 MM^T support=1012198.0     count=10427173042.0     entropy=6.6185
 
 ---------
+
+Gram classification
+
+Going into
+* r2-gram-shape-40-disinfo-3.0-4.rdb
+
+scheme@(gram-class)> (define psa star-obj)
+scheme@(gram-class)> (gram-classify-greedy-disinfo psa 3.0 4)
+After trimming, 6029 words left, out of 6029
+Sorting in 2.010 seconds
+Start greedy-agglomeration of 6029 words
+
+Right off the bat -- lots of crappy merges. Ouch.
+Dist of 5 might be better.
+
+In fact, above is so bad, its halted.
+
+* r2-gram-shape-40-disinfo-5.0-4.rdb
+
+ (gram-classify-greedy-disinfo star-obj 5.0 4)
+
+Yikes, no better -- this fails to merge a lot of plausible words.
+But then it finds two good things, OK ... andthen after that,
+it will merge any old crap.   What's going on? Why is it doing that?
+
