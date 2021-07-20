@@ -507,5 +507,32 @@ Crap I forgot to do this; however `make-merger` does do this correctly.
 (ent "in" "in") 5.694
 
 
+See diary for extended discussion.
+
+(define pmi (add-symmetric-mi-compute star-obj))
+(define (get-mi wa wb) (pmi 'mmt-fmi wa wb))
+(define (ent swa swb)
+	(format #t "~5f\n" (get-mi (Word swa) (Word swb))) *unspecified*)
+
+(define (jp swa swb)
+	(format #t "~8g\n" (pmi 'mmt-joint-prob (Word swa) (Word swb))) *unspecified*)
+
+; Compute the total entropy for two words. (pre-merger)
+(define (rmi swa swb)
+	(define wa (Word swa))
+	(define wb (Word swb))
+	(define tot-prob (+
+		(pmi 'mmt-joint-prob wa wa)
+		(* 2 (pmi 'mmt-joint-prob wa wb))
+		(pmi 'mmt-joint-prob wb wb)))
+
+	(define tot-mi (+
+		(* (pmi 'mmt-joint-prob wa wa) (pmi 'mmt-fmi wa wa))
+		(* 2 (pmi 'mmt-joint-prob wa wb) (pmi 'mmt-fmi wa wb))
+		(* (pmi 'mmt-joint-prob wb wb) (pmi 'mmt-fmi wb wb))))
+
+	(format #t "Tot prob=~8g tot mi=~8g  fmi=~6f\n"
+		tot-prob tot-mi (/ tot-mi tot-prob))
+	*unspecified*)
 
 ===============================
