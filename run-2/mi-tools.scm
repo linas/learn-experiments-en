@@ -138,6 +138,9 @@
 	(define mgg (pmi 'mmt-fmi clu clu))
 	(define mga (pmi 'mmt-fmi clu wa))
 	(define mgb (pmi 'mmt-fmi clu wb))
+
+	(set! mga (if (< mga -100) -100 mga))
+	(set! mgb (if (< mgb -100) -100 mgb))
 	(format #t "mgg mga mgb = ~6f ~6f ~6f\n" mgg mga mgb)
 
 

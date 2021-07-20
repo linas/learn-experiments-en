@@ -7,8 +7,12 @@ Databases in the `~/data` directory
 ===================================
 
 * run-1-en_pairs-tranche-1.rdb -- guten-tranche-1 only.
-* run-1-en_pairs-tranche-12.rdb -- tranch 1 and 2
-* run-1-en_pairs-tranche-123.rdb -- tranch 1, 2 and 3
+* run-1-en_pairs-tranche-12.rdb -- tranche 1 and 2
+* run-1-en_pairs-tranche-123.rdb -- tranche 1, 2 and 3
+* run-1-en_pairs-tranche-1234.rdb -- tranche 1-4
+* run-1-en_pairs-tranche-12345.rdb -- tranche 1-5
+
+All of the above include the MI marginals for word-pairs.
 
 
 Notes:
