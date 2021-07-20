@@ -147,7 +147,7 @@
 		(* paa maa) (* pbb mbb) (* pgg mgg)
 			(* 2 (+ (* pga mga) (* pgb mgb)))))
 
-	(format #t "Tot prob=~8g tot mi=~8g  fmi=~6f\n"
+	(format #t "Tot prob= ~8g tot mi= ~8g  fmi= ~6f\n"
 		tot-prob tot-mi (/ tot-mi tot-prob))
 
 	*unspecified*
