@@ -73,6 +73,8 @@
 	(ptc 'set-mmt-marginals clu)
 	(ptc 'set-mmt-marginals WA)
 	(ptc 'set-mmt-marginals WB)
+
+	*unspecified*
 )
 
 (define of-to (WordClassNode "of to"))
@@ -99,6 +101,51 @@
 
 	(format #t "Tot prob=~8g tot mi=~8g  fmi=~6f\n"
 		tot-prob tot-mi (/ tot-mi tot-prob))
-	*unspecified*)
+
+	*unspecified*
+)
+
+(define (post-merge-mi swa swb)
+	(define wa (Word swa))
+	(define wb (Word swb))
+	(define sclu (string-append swb " " swb))
+	(define clu (WordClassNode sclu))
+
+	(format #t "Report for merge of `~A` and `~A`\n" swa swb)
+	(define paa (pmi 'mmt-joint-prob wa wa))
+	(define pab (pmi 'mmt-joint-prob wa wb))
+	(define pbb (pmi 'mmt-joint-prob wb wb))
+
+	(format #t "paa pab pbb = ~8g ~8g ~8g\n" paa pab pbb)
+
+	(define pgg (pmi 'mmt-joint-prob clu clu))
+	(define pga (pmi 'mmt-joint-prob clu wa))
+	(define pgb (pmi 'mmt-joint-prob clu wb))
+	(format #t "pgg pga pgb = ~8g ~8g ~8g\n" pgg pga pgb)
+
+
+	(define maa (pmi 'mmt-fmi wa wa))
+	(define mab (pmi 'mmt-fmi wa wb))
+	(define mbb (pmi 'mmt-fmi wb wb))
+
+	(format #t "MI maa mab mbb = ~6f ~6f ~6f\n" maa mab mbb)
+
+	(define mgg (pmi 'mmt-fmi clu clu))
+	(define mga (pmi 'mmt-fmi clu wa))
+	(define mgb (pmi 'mmt-fmi clu wb))
+	(format #t "mgg mga mgb = ~6f ~6f ~6f\n" mgg mga mgb)
+
+
+	(define tot-prob (+ paa pbb pgg (* 2 (+ pga pgb))))
+
+	(define tot-mi (+
+		(* paa maa) (* pbb mbb) (* pgg mgg)
+			(* 2 (+ (* pga mga) (* pgb mgb)))))
+
+	(format #t "Tot prob=~8g tot mi=~8g  fmi=~6f\n"
+		tot-prob tot-mi (/ tot-mi tot-prob))
+
+	*unspecified*
+)
 
 ; ===============================
