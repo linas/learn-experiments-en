@@ -79,5 +79,25 @@ initial aid=76425718
 -------------------------
 tranche 5
 
+ingestion of articles:
+real    2438m9.787s -- so 41 hours wall-clock time.
+user    12m43.386s
+sys     5m51.068s
+
+process is using 37GB RAM at conclusion.
+11944:03 mm:ss runtime, so about 200 cpu-hours.
+
+(gc-time-taken . 70893060058413)
+(heap-total-allocated . 3542955891120)
+(gc-times .  566691)
+
+(ListLink . 22982070)
+(EvaluationLink . 22982070)
+(WordNode . 278963)
+
+Rocks: initial aid=104150297
+
+du -s
+6590776 run-1-en_pairs-tranche-12345.rdb -- 6.6 GBytes
 
 -------------------------
