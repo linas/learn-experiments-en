@@ -59,7 +59,7 @@
 (define (clobber swa swb)
    (define WA (Word swa))
    (define WB (Word swb))
-	(define clu (star-obj 'make-cluster wa wb))
+	(define clu (star-obj 'make-cluster WA WB))
 
 	(define psu (add-support-compute star-obj))
 	(psu 'clobber)
