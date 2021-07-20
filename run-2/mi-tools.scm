@@ -106,11 +106,16 @@
 	*unspecified*
 )
 
-(define (post-merge-mi swa swb)
+(define (post-merge-mi swa swb FRAC)
 	(define wa (Word swa))
 	(define wb (Word swb))
-	(define sclu (string-append swa " " swb))
-	(define clu (WordClassNode sclu))
+	(define clu (star-obj 'make-cluster wa wb))
+
+	; Compute the merge
+	(define (mi-frac WA WB) FRAC)
+	(define psu (add-support-compute star-obj))
+	(start-cluster psu clu wa wb mi-frac 4.0 #t)
+	(clobber swa swb)
 
 	(format #t "Report for merge of `~A` and `~A` - ~A\n" swa swb clu)
 	(define paa (pmi 'mmt-joint-prob wa wa))
