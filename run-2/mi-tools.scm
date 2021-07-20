@@ -64,12 +64,13 @@
 
 	(define psu (add-support-compute star-obj))
 	(psu 'clobber)
+	(define ptc (add-transpose-compute star-obj))
+	(ptc 'clobber)
+
 	(psu 'set-right-marginals clu)
 	(psu 'set-right-marginals WA)
 	(psu 'set-right-marginals WB)
 
-	(define ptc (add-transpose-compute star-obj))
-	(ptc 'clobber)
 	(ptc 'set-mmt-marginals clu)
 	(ptc 'set-mmt-marginals WA)
 	(ptc 'set-mmt-marginals WB)
@@ -108,10 +109,10 @@
 (define (post-merge-mi swa swb)
 	(define wa (Word swa))
 	(define wb (Word swb))
-	(define sclu (string-append swb " " swb))
+	(define sclu (string-append swa " " swb))
 	(define clu (WordClassNode sclu))
 
-	(format #t "Report for merge of `~A` and `~A`\n" swa swb)
+	(format #t "Report for merge of `~A` and `~A` - ~A\n" swa swb clu)
 	(define paa (pmi 'mmt-joint-prob wa wa))
 	(define pab (pmi 'mmt-joint-prob wa wb))
 	(define pbb (pmi 'mmt-joint-prob wb wb))
