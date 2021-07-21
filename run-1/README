@@ -29,11 +29,11 @@ sys     3m2.937s
 so 10.56 seconds elapsed wait per file. Ouch.
 
 virt/res RAM is 12.9 11.2GB  and 3085:20 runtime, so 41.1 seconds
-CPU/file.  So this is running with 4 cores. Past experience suggests 
+CPU/file.  So this is running with 4 cores. Past experience suggests
 most of this is actually Rocks doing stuff.
 
 (ListLink . 6921181)
-(EvaluationLink . 6921181) 
+(EvaluationLink . 6921181)
 (WordNode . 79348)
 
 scheme@(en-pairs)> (display (monitor-storage storage-node))
@@ -59,7 +59,7 @@ process is using 30GB RAM at conclusion.
 7985:17 mm:ss runtime, so about 133 cpu-hours.
 
 (gc-time-taken . 31026312786171) total of 31026 seconds = 517 min
-(heap-total-allocated . 2648643234624) = 2648 GB. outrageous. 
+(heap-total-allocated . 2648643234624) = 2648 GB. outrageous.
 (gc-times .  500306))
 
 (ListLink . 18389495)
@@ -105,3 +105,24 @@ du -s
 6590776 run-1-en_pairs-tranche-12345.rdb -- 6.6 GBytes
 
 -------------------------
+
+Computing word-pair MI.
+tranche-1:
+Elapsed time to load ANY-link pairs: 577 secs
+Support: found num left= 104879 num right= 105701 in 283 secs
+Finished left norm marginals in 402 secs
+Finished right norm marginals in 396 secs
+Done with wild-card count N(x,*) and N(*,y) in 807 secs
+Done computing 9797694 pair frequencies in 508 secs
+Done computing 9797694 pair MI's in 2079 secs
+Finished left entropy subtotals in 410 secs
+Finished right entropy subtotals in 407 secs
+Finished left MI subtotals in 404 secs
+Finished right MI subtotals in 414 secs
+Finished with MI computations; this took  1.51 hours.
+Rows: 104879 Columns: 105701
+Sparsity (-log_2): 10.144
+Avg obs per pair: 27.449
+Entropy Total: 17.827   Left: 9.7963   Right: 9.5884
+Total MI: 1.5572
+

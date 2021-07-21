@@ -535,4 +535,37 @@ See diary for extended discussion.
 		tot-prob tot-mi (/ tot-mi tot-prob))
 	*unspecified*)
 
-===============================
+========================================================================
+OK, restart.
+
+* r2-gram-shape-40-mifuzz-0-4.rdb  has
+  (gram-classify-greedy-mifuzz star-obj 3.0 0 4)
+
+Same bad shit as before.
+--- Greedy-checking next 200 items
+---------Bingo! Dist=6.2186 for class "of to" -- "in"
+---------Bingo! Dist=3.4062 for class "of to" -- "he"
+---------Bingo! Dist=4.1679 for class "of to" -- "it"
+---------Bingo! Dist=5.7443 for class "of to" -- "that"
+---------Bingo! Dist=5.6019 for class "of to" -- "said"
+
+Clearly, 3 is too small.
+
+* r2-gram-shape-40-mifuzz-5-0-4.rdb  has
+  (gram-classify-greedy-mifuzz star-obj 5.0 0 4)
+
+Crap again. Nothing happens for the first 33 words, and then:
+
+---------Bingo! Dist=5.5520 for word "be" -- "have"
+---------Bingo! Dist=5.6404 for class "be have" -- "him"
+---------Bingo! Dist=6.3487 for class "be have" -- "this"
+---------Bingo! Dist=7.0597 for class "be have" -- "all"
+---------Bingo! Dist=7.4523 for class "be have" -- "her"
+---------Bingo! Dist=5.8003 for class "be have" -- "if"
+---------Bingo! Dist=8.1334 for class "be have" -- "me"
+---------Bingo! Dist=6.3648 for class "be have" -- "work"
+
+So ... be-have looks plausible, and then everything else piled on is
+crap. Crapity crap. What's happening?
+
+========================================================================
