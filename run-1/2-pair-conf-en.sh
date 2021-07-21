@@ -36,5 +36,9 @@ export OBSERVE="observe-text"
 # Location of the database where pair counts will be accumulated
 # export PAIRS_DB=${ROCKS_DATA_DIR}/en_pairs.rdb
 # export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-1.rdb
-export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-12.rdb
+# export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-12.rdb
+# export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-123.rdb
+# export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-1234.rdb
+export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-12345.rdb
+
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"

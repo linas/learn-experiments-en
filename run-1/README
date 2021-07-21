@@ -126,3 +126,26 @@ Avg obs per pair: 27.449
 Entropy Total: 17.827   Left: 9.7963   Right: 9.5884
 Total MI: 1.5572
 
+tranche-2: 
+Finished with MI computations; this took 2.185 hours.
+Rows: 140140 Columns: 142101
+Sparsity (-log_2): 10.416
+Avg obs per pair: 33.804
+Entropy Total: 17.889   Left: 9.8102   Right: 9.5463
+Total MI: 1.4677
+
+tranche-3
+Finished with MI computations; this took 4.428 hours.
+Rows: 304085 Columns: 306920
+Sparsity (-log_2): 11.693
+Avg obs per pair: 34.966
+Entropy Total: 18.378   Left: 10.069   Right: 9.8321
+Total MI: 1.5227
+
+tranche-4
+Finished with MI computations; this took 6.144 hours.
+Rows: 397229 Columns: 402896
+Sparsity (-log_2): 12.040
+Avg obs per pair: 37.660
+Entropy Total: 18.503   Left: 10.109   Right: 9.8801
+Total MI: 1.4863
