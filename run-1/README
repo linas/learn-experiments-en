@@ -149,3 +149,11 @@ Sparsity (-log_2): 12.040
 Avg obs per pair: 37.660
 Entropy Total: 18.503   Left: 10.109   Right: 9.8801
 Total MI: 1.4863
+
+tranche-5
+Finished with MI computations; this took 9.248 hours.
+Rows: 531345 Columns: 538513
+Sparsity (-log_2): 12.431
+Avg obs per pair: 40.360
+Entropy Total: 18.631   Left: 10.148   Right: 9.9265
+Total MI: 1.4431
