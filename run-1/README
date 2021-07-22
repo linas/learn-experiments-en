@@ -157,3 +157,9 @@ Sparsity (-log_2): 12.431
 Avg obs per pair: 40.360
 Entropy Total: 18.631   Left: 10.148   Right: 9.9265
 Total MI: 1.4431
+
+=========================================
+MPG processing.
+
+run-1-en_mpg-tranche-1.rdb -- done, looks good, I guess.
+
