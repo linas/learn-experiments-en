@@ -8,16 +8,48 @@
 ; cp -pr r2-mpg-trim-40-8-5.rdb r2-gram-shape-40-junk.rdb
 ; ./run-gram-cogserver.sh
 ;
+
+(use-modules (srfi srfi-1))
+
+; First, the shapeless disjuncts
+(define cset-obj (make-pseudo-cset-api))
+(define cstars (add-pair-stars cset-obj))
+(define cmi  (add-symmetric-mi-compute cstars))
+
+; Now, with shapes.
+(define covr-obj (add-covering-sections cset-obj))
+(define star-obj covr-obj)
+
 (define pmi (add-symmetric-mi-compute star-obj))
 (define (get-mi wa wb) (pmi 'mmt-fmi wa wb))
 (define (ent swa swb)
 	(format #t "~5f\n" (get-mi (Word swa) (Word swb))) *unspecified*)
 
+; Above prints cset+shape MI, prints the cset-only MI.
+; Only one of these two will work.
+(define (ext swa swb)
+	(format #t "~5f\n"
+		(cmi 'mmt-fmi (Word swa) (Word swb)))
+	*unspecified*)
+
 ; Examples:
 ; (ent "of" "to")  3.720 -- looks reasonable.
 ; (ent "of" "in")  4.443
 ; (ent "to" "in")  3.019
+; ------------------------------------------------------------
 
+(define (almi sw)
+	(define wlist (cog-get-atoms 'WordNode))
+	(define w (WordNode sw))
+	(define prli
+		(map
+			(lambda (aw) (cons aw (cmi 'mmt-fmi w aw)))
+			wlist))
+	(sort prli
+		(lambda (cla clb) (< (cdr cla) (cdr clb))))
+)
+
+; ------------------------------------------------------------
 ; The fraction to merge is a linear ramp, starting at zero
 ; at the cutoff, and ramping up to one when these are very
 ; similar.
