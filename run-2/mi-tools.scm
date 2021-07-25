@@ -38,15 +38,29 @@
 ; (ent "to" "in")  3.019
 ; ------------------------------------------------------------
 
+; Return a sorted list of MI values between a word and all others.
 (define (almi sw)
 	(define wlist (cog-get-atoms 'WordNode))
 	(define w (WordNode sw))
 	(define prli
 		(map
-			(lambda (aw) (cons aw (cmi 'mmt-fmi w aw)))
+			; (lambda (aw) (cons aw (cmi 'mmt-fmi w aw)))
+			(lambda (aw) (cons aw (pmi 'mmt-fmi w aw)))
 			wlist))
 	(sort prli
 		(lambda (cla clb) (< (cdr cla) (cdr clb))))
+)
+
+; MI to selected words.
+; (define slist (list "him" "me" "example" "us" "them" "speak" "instance" "happen" "difference" "themselves" "himself" "live" "why" "listen" "herself" "behind" "myself" "her" "try" "say" ))
+(define (lmi sw slist)
+	(define wlist (map WordNode slist))
+	(define w (WordNode sw))
+	(define prli
+		(map
+			; (lambda (aw) (cons aw (cmi 'mmt-fmi w aw)))
+			(lambda (aw) (cons aw (pmi 'mmt-fmi w aw)))
+			wlist))
 )
 
 ; ------------------------------------------------------------
