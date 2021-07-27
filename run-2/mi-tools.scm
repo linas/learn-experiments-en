@@ -64,6 +64,14 @@
 )
 
 ; ------------------------------------------------------------
+; Support (and length) of a vector
+
+(define so (add-support-compute star-obj))
+; (so 'right-support (Word "sink"))
+; (so 'right-count (Word "sink"))
+; (so 'right-length (Word "sink"))
+
+; ------------------------------------------------------------
 ; The fraction to merge is a linear ramp, starting at zero
 ; at the cutoff, and ramping up to one when these are very
 ; similar.
