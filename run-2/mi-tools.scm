@@ -61,6 +61,7 @@
 			; (lambda (aw) (cons aw (cmi 'mmt-fmi w aw)))
 			(lambda (aw) (cons aw (pmi 'mmt-fmi w aw)))
 			wlist))
+	prli
 )
 
 ; ------------------------------------------------------------
@@ -209,5 +210,105 @@
 
 	*unspecified*
 )
+
+; ===============================
+; Alternate MI tools.
+
+(define trans-obj (add-transpose-api star-obj))
+(define prod-obj  (add-support-compute
+        (add-tuple-math star-obj * 'get-count)))
+
+; The conventional definition.
+(define (vanilla-mi swa swb)
+	(define (log2 a b) (/ (log (/ a b)) (log 2)))
+	(define wa (Word swa))
+	(define wb (Word swb))
+   (define marga (trans-obj 'mmt-count wa))
+   (define margb (trans-obj 'mmt-count wb))
+   (define prod (prod-obj 'right-count (list wa wb)))
+   (define mmt-total (trans-obj 'total-mmt-count))
+   (log2 (* prod mmt-total) (* marga margb)))
+
+
+(define (supp-mi swa swb)
+	(define (log2 a b) (/ (log (/ a b)) (log 2)))
+	(define wa (Word swa))
+	(define wb (Word swb))
+   (define marga (trans-obj 'mmt-support wa))
+   (define margb (trans-obj 'mmt-support wb))
+   (define prod (prod-obj 'right-support (list wa wb)))
+   (define mmt-total (trans-obj 'total-mmt-support))
+   (log2 (* prod mmt-total) (* marga margb)))
+
+(define (amp-mi swa swb)
+	(define (log2 a b) (/ (log (/ a b)) (log 2)))
+	(define wa (Word swa))
+	(define wb (Word swb))
+   (define marga (trans-obj 'mmt-amplitude wa))
+   (define margb (trans-obj 'mmt-amplitude wb))
+   (define prod (prod-obj 'right-amplitude (list wa wb)))
+   (define mmt-total (trans-obj 'total-mmt-amplitude))
+   (log2 (* prod mmt-total) (* marga margb)))
+
+
+(define (len-mi swa swb)
+	(define (log2 a b) (/ (log (/ a b)) (log 2)))
+	(define wa (Word swa))
+	(define wb (Word swb))
+   (define marga (trans-obj 'mmt-length wa))
+   (define margb (trans-obj 'mmt-length wb))
+   (define prod (prod-obj 'right-length (list wa wb)))
+   (define mmt-total (trans-obj 'total-mmt-length))
+   (log2 (* prod mmt-total) (* marga margb)))
+
+(define so (add-support-compute star-obj))
+; (so 'right-support (Word "sink"))
+; (so 'right-count (Word "sink"))
+; (so 'right-length (Word "sink"))
+
+; MI to selected words.
+; (define slist (list "him" "me" "example" "us" "them" "speak" "instance" "happen" "difference" "themselves" "himself" "live" "why" "listen" "herself" "behind" "myself" "her" "try" "say" ))
+(define (mmi sw slist)
+	(define w (WordNode sw))
+	(for-each
+		(lambda (aw)
+			(format #t "~A\t ~d ~d ~8,3f ~8,3f ~8,3f ~8,3f ~8,3f\n"
+				aw
+				(so 'right-support (Word aw))
+				(so 'right-count (Word aw))
+				(supp-mi sw aw)
+				(amp-mi sw aw)
+				(pmi 'mmt-fmi w (Word aw))
+				(vanilla-mi sw aw)
+				(len-mi sw aw)))
+		slist)
+)
+
+(define (statmi sw slist fn)
+	(define w (WordNode sw))
+	(define mn 1e6)
+	(define mx -1e6)
+	(define sm 0)
+	(define sq 0)
+	(for-each
+		(lambda (aw)
+			(define v (fn sw aw))
+			(if (< mx v) (set! mx v))
+			(if (> mn v) (set! mn v))
+			(set! sm (+ sm v))
+			(set! sq (+ sq (* v v))))
+		slist)
+	(set! sm (/ sm (length slist)))
+	(set! sq (/ sq (length slist)))
+	(set! sq (- sq (* sm sm)))
+	(set! sq (sqrt sq))
+	(format #t "min ~6f max ~6f avg ~6f rms ~6f\n" mn mx sm sq)
+)
+
+; (define plist (list "him" "me" "us" "them" "themselves" "himself"))
+; (define olist (list "example" "speak" "instance" "happen" "difference" "say" ))
+; (statmi "him" plist vanilla-mi)
+
+; "sink" "fill" "grow" "consider" "be" "have" "feel" "take" "make" "come" "think" "say" "him" "me" "her" "like" "Pierre" "go" "see" "them"
 
 ; ===============================
