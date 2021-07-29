@@ -3,15 +3,15 @@
 # Configuration parameters for Planar MPG parsing.
 #
 # export CORPORA_DIR=$TEXT_DIR/pair-counted-tranche-1
-export CORPORA_DIR=$TEXT_DIR/pair-counted-tranche-2
-# export CORPORA_DIR=$TEXT_DIR/pair-counted-tranche-3
+# export CORPORA_DIR=$TEXT_DIR/pair-counted-tranche-2
+export CORPORA_DIR=$TEXT_DIR/pair-counted-tranche-3
 # export CORPORA_DIR=$TEXT_DIR/pair-counted-tranche-4
 
 # Directories where in-process and completed files will be moved.
 export IN_PROCESS_DIR=mpg-split
 # export COMPLETED_DIR=mpg-done-tranche-1
-export COMPLETED_DIR=mpg-done-tranche-2
-# export COMPLETED_DIR=mpg-done-tranche-3
+# export COMPLETED_DIR=mpg-done-tranche-2
+export COMPLETED_DIR=mpg-done-tranche-3
 # export COMPLETED_DIR=mpg-done-tranche-4
 
 export SENTENCE_SPLIT=true
