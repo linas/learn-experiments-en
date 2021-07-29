@@ -1,0 +1,11 @@
+
+This is the working directory for the Similarity Smackdown
+diary entry. All testing is done on the run-1-en_mpg-tranche-123.rdb
+dataset.  To avoid accidental data destruction/confusion, all work
+is done here in the run-3 directory.
+
+Datasets:
+* r3-mpg-marg.rdb -- copy of full run-1-en_mpg-tranche-123.rdb set,
+      with marginals for Sections only, no CrossSections.
+      Computed with `guile -l run-common/marginals-mst.scm`
+
