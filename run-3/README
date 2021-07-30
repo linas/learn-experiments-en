@@ -9,3 +9,25 @@ Datasets:
       with marginals for Sections only, no CrossSections.
       Computed with `guile -l run-common/marginals-mst.scm`
 
+* r3-filt-40-8-5-marg.rdb -- filtered version of baseline tranche-123
+
+Notes:
+Filtering doe as README suggests:
+   (cog-rocks-open "rocks:///where/ever/all_disjunct_dataset")
+   (define pca (make-pseudo-cset-api))
+   (define psa (add-pair-stars pca))
+   (psa 'fetch-pairs)        ;; Load the dataset
+; Elapsed time to load csets: 3961 secs
+; Total RAM use 41.3 GB
+
+   (cog-close storage-node)         ;; Avoid accidental corruption
+   (define psc (add-support-compute psa))
+   (psc 'cache-all)          ;; compute subtotals
+
+   (define fsa (add-subtotal-filter psa 40 8 5 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-40-8-5-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
+
