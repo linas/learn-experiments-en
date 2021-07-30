@@ -164,13 +164,15 @@ MPG processing.
 run-1-en_mpg-tranche-1.rdb -- done, looks good, I guess.
 
 
-MPG for tranche 5:
+MPG for tranche 5: load each of the prior tranches and then restart:
+start with tranche-1:
 reported time to load pairs: 6488 sec 
 takes 93.1 GB to load word pairs. MPG of tranche 1 goes up to 105.6 GB
 So delta = 12.5GB extra
 wall-clock time of 408 mins. = 6.8 hours
 cpu time of 3155 mins =  52.6 hours
 
+next tranche-2:
 reported time to load pairs: 7397 sec 
 cpu time to load pairs = 126:01 mm:ss = 7560 sec
 tranche 2 is then goes up to 103.7 GB
@@ -178,6 +180,11 @@ so delta = 10.6GB extra
 wall-clock time of 260m29.689s = 4.3 hrs
 cputime = 2061:02 = 34.3 hours
 
-tranche-3
+next tranche-3
 Elapsed time to load ANY-link pairs: 7235 secs
+tranche-3 RAM 116.2 GB so delta = 23.1 GB
+wall clocl     816m13.339s = 13.6 hours
+cpu time = 6095:27 = 101.58 hours
+
+next tranche-4
 
