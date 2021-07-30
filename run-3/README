@@ -23,10 +23,54 @@ Filtering doe as README suggests:
    (cog-close storage-node)         ;; Avoid accidental corruption
    (define psc (add-support-compute psa))
    (psc 'cache-all)          ;; compute subtotals
+Finished left norm marginals in 20157 secs -- 5.6 hours!
+
+
+   (define fsa (add-subtotal-filter psa 1280 256 1600 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-1280-256-160-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
+
+   (define fsa (add-subtotal-filter psa 640 128 80 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-640-128-80-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
+
+   (define fsa (add-subtotal-filter psa 320 64 40 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-320-64-40-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
+
+   (define fsa (add-subtotal-filter psa 160 32 20 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-160-32-20-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
+
+   (define fsa (add-subtotal-filter psa 80 16 10 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-80-16-10-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
 
    (define fsa (add-subtotal-filter psa 40 8 5 #f)) ;; The filter itself
    (define lfa (add-linkage-filter fsa))
    (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-40-8-5-marg.rdb")
+   (define fso (make-store lfa))
+   (fso 'store-all-elts)     ;; Do NOT store the marginals!
+   (cog-rocks-close)
+
+   (define fsa (add-subtotal-filter psa 20 4 2 #f)) ;; The filter itself
+   (define lfa (add-linkage-filter fsa))
+   (cog-rocks-open "rocks:///home/ubuntu/data/r3-filt-20-4-2-marg.rdb")
    (define fso (make-store lfa))
    (fso 'store-all-elts)     ;; Do NOT store the marginals!
    (cog-rocks-close)
