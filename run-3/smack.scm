@@ -87,6 +87,16 @@
 ; Given an assoc list of pairs and values, find the min, max,
 ; the unweighted mean, and the unweighted rms.
 
+(define (wgood alist)
+	(define cnt 0)
+	(for-each
+		(lambda (item)
+			(define val (cdr item))
+			(if (< -inf.0 val)
+				(set! cnt (+ 1 cnt))))
+		alist)
+	cnt)
+
 (define (wmin alist)
 	(define lo 1e6)
 	(define lopr #f)
@@ -157,11 +167,12 @@
 	(define hi (wmax stats))
 	(define av (wavg stats))
 	(define rm (wrms stats av))
-	(format #t "cluster ~A has ~D words:\n" (car CLU) (length words))
-	(format #t "   min ~A ~6f" (car lo) (cdr lo))
-	(format #t "   max ~A ~6f" (car hi) (cdr hi))
-	(format #t "   avg: ~6f" av)
-	(format #t "   rms: ~6f\n" rm)
+	(format #t "cluster ~A has ~D words and ~D pairs:\n"
+		(car CLU) (length words) (wgood stats))
+	(format #t "   min ~A ~5f" (car lo) (cdr lo))
+	(format #t "   max ~A ~5f" (car hi) (cdr hi))
+	(format #t "   avg: ~5f" av)
+	(format #t "   rms: ~5f\n" rm)
 	*unspecified*
 )
 
@@ -173,22 +184,22 @@
 	*unspecified*
 )
 
-(intra-report-all plain-mi)
-
 ; ------------------------------------------
 ;
 ; Report inter-cluster stats for two cluster
 (define (inter-report CLUA CLUB func)
-	(define stats (inter-apply (cdr CLUA) (cdr CLUB) func))
+	(define wla (filter have-word? (cdr CLUA)))
+	(define wlb (filter have-word? (cdr CLUB)))
+	(define stats (inter-apply wla wlb func))
 	(define lo (wmin stats))
 	(define hi (wmax stats))
 	(define av (wavg stats))
 	(define rm (wrms stats av))
-	(format #t "cluster ~A vs ~A:\n" (car CLUA) (car CLUB))
-	(format #t "\tmin ~A ~6f " (car lo) (cdr lo))
-	(format #t "\tmax ~A ~6f " (car hi) (cdr hi))
-	(format #t "\tavg: ~6f " av)
-	(format #t "\trms: ~6f\n" rm)
+	(format #t "cluster ~A vs ~A pairs: ~D\n" (car CLUA) (car CLUB) (wgood stats))
+	(format #t "   min ~A ~5f" (car lo) (cdr lo))
+	(format #t "   max ~A ~5f" (car hi) (cdr hi))
+	(format #t "   avg: ~5f" av)
+	(format #t "   rms: ~5f\n" rm)
 	*unspecified*
 )
 
@@ -204,3 +215,9 @@
 	(repr (car clusters) (cdr clusters))
 	*unspecified*
 )
+
+; ------------------------------------------
+; Run stuff
+
+; (intra-report-all plain-mi)
+(inter-report-all plain-mi)
