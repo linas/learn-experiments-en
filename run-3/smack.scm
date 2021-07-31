@@ -138,16 +138,21 @@
 (define (plain-mi swa swb)
 	(cmi 'mmt-fmi (Word swa) (Word swb)))
 
+(define (have-word? sw)
+	(not (nil?
+		(find (lambda (w) (equal? w (Word sw))) (cstars 'left-basis)))))
+
 ; ------------------------------------------
 ;
 ; Report intra-cluster stats for just one cluster
 (define (intra-report CLU func)
-	(define stats (intra-apply (cdr CLU) func))
+	(define words (find have-word? (cdr CLU)))
+	(define stats (intra-apply words func))
 	(define lo (wmin stats))
 	(define hi (wmax stats))
 	(define av (wavg stats))
 	(define rm (wrms stats av))
-	(format #t "cluster ~A:\n" (car CLU))
+	(format #t "cluster ~A has ~D words:\n" (car CLU) (length words))
 	(format #t "   min ~A ~6f" (car lo) (cdr lo))
 	(format #t "   max ~A ~6f" (car hi) (cdr hi))
 	(format #t "   avg: ~6f" av)
