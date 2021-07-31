@@ -125,22 +125,28 @@
 
 (define (wavg alist)
 	(define avg 0)
+	(define sum 0)
 	(for-each
 		(lambda (item)
 			(if (< -inf.0 (cdr item))
-				(set! avg (+ avg (cdr item)))))
+				(begin
+					(set! sum (+ sum 1))
+					(set! avg (+ avg (cdr item))))))
 		alist)
-	(/ avg (length alist))
+	(/ avg sum)
 )
 
 (define (wrms alist avg)
 	(define rms 0)
+	(define sum 0)
 	(for-each
 		(lambda (item)
 			(if (< -inf.0 (cdr item))
-				(set! rms (+ rms (* (cdr item) (cdr item))))))
+				(begin
+					(set! sum (+ sum 1))
+					(set! rms (+ rms (* (cdr item) (cdr item)))))))
 		alist)
-	(sqrt (- (/ rms (length alist)) (* avg avg)))
+	(sqrt (- (/ rms sum) (* avg avg)))
 )
 
 ; ------------------------------------------
@@ -219,5 +225,5 @@
 ; ------------------------------------------
 ; Run stuff
 
-; (intra-report-all plain-mi)
+(intra-report-all plain-mi)
 (inter-report-all plain-mi)
