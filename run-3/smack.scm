@@ -93,7 +93,7 @@
 	(for-each
 		(lambda (item)
 			(define val (cdr item))
-			(if (and (< val lo) (< -inf.0 val))
+			(if (< val lo)
 				(begin
 					(set! lopr item)
 					(set! lo val))))
