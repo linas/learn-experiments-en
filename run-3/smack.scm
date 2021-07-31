@@ -194,20 +194,22 @@
 	(define tot 0)
 	(define avg 0)
 	(define rms 0)
-	(for-each
-		(lambda (CLU)
-			(define words (filter have-word? (cdr CLU)))
-			(define stats (intra-apply words func))
-			(define av (wavg stats))
-			(define rm (wrms stats av))
-			(define nu (wgood stats))
-			(set! tot (+ tot nu))
-			(set! avg (+ avg (* nu av)))
-			(set! rms (+ rms (* nu (+ (* rm rm) (* av av)))))
-			(format #t ".")
-			(force-output)
-		)
-		clusters)
+	(define (intra-sum CLU)
+		(define words (filter have-word? (cdr CLU)))
+		(define stats (intra-apply words func))
+		(define av (wavg stats))
+		(define rm (wrms stats av))
+		(define nu (wgood stats))
+		(set! tot (+ tot nu))
+		(set! avg (+ avg (* nu av)))
+		(set! rms (+ rms (* nu (+ (* rm rm) (* av av)))))
+		(format #t ".")
+		(force-output)
+	)
+
+	(for-each intra-sum clusters)
+	(newline)
+
 	(set! avg (/ avg tot))
 	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
 	(format #t "Total inter ~D mean= ~5f rms = ~5f\n" tot avg rms)
@@ -246,9 +248,46 @@
 	*unspecified*
 )
 
+(define (inter-all-mean func)
+	(define tot 0)
+	(define avg 0)
+	(define rms 0)
+
+
+	(define (inter-sum CLUA CLUB func)
+		(define wla (filter have-word? (cdr CLUA)))
+		(define wlb (filter have-word? (cdr CLUB)))
+		(define stats (inter-apply wla wlb func))
+		(define av (wavg stats))
+		(define rm (wrms stats av))
+		(define nu (wgood stats))
+		(set! tot (+ tot nu))
+		(set! avg (+ avg (* nu av)))
+		(set! rms (+ rms (* nu (+ (* rm rm) (* av av)))))
+		(format #t ".")
+		(force-output)
+	)
+
+	(define (repr CLUA CLST)
+		(for-each
+			(lambda (CLUB) (inter-sum CLUA CLUB func))
+			CLST)
+		(if (not (nil? (cdr CLST)))
+			(repr (car CLST) (cdr CLST))))
+
+	(repr (car clusters) (cdr clusters))
+	(newline)
+
+	(set! avg (/ avg tot))
+	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
+	(format #t "Total intra ~D mean= ~5f rms = ~5f\n" tot avg rms)
+	*unspecified*
+)
+
 ; ------------------------------------------
 ; Run stuff
 
-(intra-report-all plain-mi)
-(intra-all-mean plain-mi)
+; (intra-report-all plain-mi)
+; (intra-all-mean plain-mi)
 ; (inter-report-all plain-mi)
+(inter-all-mean plain-mi)
