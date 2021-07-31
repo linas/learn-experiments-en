@@ -11,5 +11,6 @@ export COGSERVER_CONF=${CONFIG_DIR}/3-cogserver/marg.conf
 # Location of the database containing MPG pairs
 # export MST_DB=${ROCKS_DATA_DIR}/r3-mpg-marg.rdb
 # export MST_DB=${ROCKS_DATA_DIR}/r3-filt-1280-256-160-marg.rdb
-export MST_DB=${ROCKS_DATA_DIR}/r3-filt-640-128-80-marg.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/r3-filt-640-128-80-marg.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r3-filt-40-8-5-marg.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"

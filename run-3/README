@@ -70,4 +70,7 @@ Done storing 93758 pairs in 25 secs
 Total store time = 3079 secs
 
 	(fsto 40 8 5 "r3-filt-40-8-5-marg.rdb")
+Done storing 213735 pairs in 46 secs
+Total store time = 2985 secs
+
 	(fsto 20 4 2 "r3-filt-20-4-2-marg.rdb")
