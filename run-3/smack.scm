@@ -100,12 +100,12 @@
 	lopr)
 
 (define (wmax alist)
-	(define hi -1e6)
+	(define hi -inf.0)
 	(define hipr #f)
 	(for-each
 		(lambda (item)
 			(define val (cdr item))
-			(if (> val hi)
+			(if (>= val hi)
 				(begin
 					(set! hipr item)
 					(set! hi val))))
@@ -148,10 +148,10 @@
 	(define av (wavg stats))
 	(define rm (wrms stats av))
 	(format #t "cluster ~A:\n" (car CLU))
-	(format #t "\tmin ~A ~6f " (car lo) (cdr lo))
-	(format #t "\tmax ~A ~6f " (car hi) (cdr hi))
-	(format #t "\tavg: ~6f " av)
-	(format #t "\trms: ~6f\n" rm)
+	(format #t "   min ~A ~6f" (car lo) (cdr lo))
+	(format #t "   max ~A ~6f" (car hi) (cdr hi))
+	(format #t "   avg: ~6f" av)
+	(format #t "   rms: ~6f\n" rm)
 	*unspecified*
 )
 
