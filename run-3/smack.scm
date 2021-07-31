@@ -65,7 +65,8 @@
 		(if (nil? (cdr LST)) retv
 			(mkpr (car LST) (cdr LST) retv)))
 
-	(mkpr (car wlist) (cdr wlist) '())
+	(if (nil? (cdr wlist)) '()
+		(mkpr (car wlist) (cdr wlist) '()))
 )
 
 ; ------------------------------------------
@@ -146,7 +147,7 @@
 ;
 ; Report intra-cluster stats for just one cluster
 (define (intra-report CLU func)
-	(define words (find have-word? (cdr CLU)))
+	(define words (filter have-word? (cdr CLU)))
 	(define stats (intra-apply words func))
 	(define lo (wmin stats))
 	(define hi (wmax stats))
