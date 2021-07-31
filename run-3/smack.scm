@@ -60,10 +60,10 @@
 		(define stuff
 			(map
 				(lambda (WB) (cons (cons ELEM WB) (func ELEM WB)))
-				LST)
+				LST))
 		(define retv (append RV stuff))
 		(if (nil? (cdr LST)) retv
-			(mkpr (car LST) (cdr LST) retv))))
+			(mkpr (car LST) (cdr LST) retv)))
 
 	(mkpr (car wlist) (cdr wlist) '())
 )
