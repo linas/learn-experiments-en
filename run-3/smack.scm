@@ -133,7 +133,7 @@
 					(set! sum (+ sum 1))
 					(set! avg (+ avg (cdr item))))))
 		alist)
-	(/ avg sum)
+	(if (< 0 sum) (/ avg sum) -inf.0)
 )
 
 (define (wrms alist avg)
@@ -146,7 +146,7 @@
 					(set! sum (+ sum 1))
 					(set! rms (+ rms (* (cdr item) (cdr item)))))))
 		alist)
-	(sqrt (- (/ rms sum) (* avg avg)))
+	(if (< 0 sum) (sqrt (- (/ rms sum) (* avg avg))) -inf.0)
 )
 
 ; ------------------------------------------
