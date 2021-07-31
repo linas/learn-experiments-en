@@ -93,7 +93,7 @@
 	(for-each
 		(lambda (item)
 			(define val (cdr item))
-			(if (< val lo)
+			(if (and (< val lo) (< -inf.0 val))
 				(begin
 					(set! lopr item)
 					(set! lo val))))
@@ -116,7 +116,9 @@
 (define (wavg alist)
 	(define avg 0)
 	(for-each
-		(lambda (item) (set! avg (+ avg (cdr item))))
+		(lambda (item)
+			(if (< -inf.0 (cdr item))
+				(set! avg (+ avg (cdr item)))))
 		alist)
 	(/ avg (length alist))
 )
@@ -124,7 +126,9 @@
 (define (wrms alist avg)
 	(define rms 0)
 	(for-each
-		(lambda (item) (set! rms (+ rms (* (cdr item) (cdr item)))))
+		(lambda (item)
+			(if (< -inf.0 (cdr item))
+				(set! rms (+ rms (* (cdr item) (cdr item))))))
 		alist)
 	(sqrt (- (/ rms (length alist)) (* avg avg)))
 )
