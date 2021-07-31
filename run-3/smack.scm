@@ -24,22 +24,22 @@
 ;
 ; Official word lists.
 ;
-(define wl-1-det "the" "a" "that" "this" "an" "some" "any" "these" "those" "most")
-(define wl-2-prep "of" "to" "in" "with" "for" "at" "on" "by" "from" "up")
-(define wl-3-verb-ir "was" "is" "had" "be" "have" "were" "are" "would" "been" "will")
-(define wl-4-verb-act "said" "like" "do" "did" "know" "made" "see" "go" "came" "come")
-(define wl-5-pronoun "I" "he" "it" "you" "him" "she" "they" "me" "them" "we")
-(define wl-6-posessive "his" "her" "my" "thier" "your" "its" "our" "ones")
-(define wl-7-adverb "that" "as" "not" "no" "there" "about" "only" "then" "very" "just")
-(define wl-8-conj "and" "but" "or" "so" "if" "than" "both" "either" "yet" "nor")
-(define wl-9-adj "all" "one" "other" "little" "even" "good" "great" "long" "old" "many")
-(define wl-10-wh "which" "who" "when" "what" "where" "why" "how" "while" "whatever" "whose")
-(define wl-11-noun "time" "man" "way" "eyes" "day" "hand" "head" "men" "face" "place")
-(define wl-12-aux "can" "should" "could" "may" "must" "might" "shall" "cannot" "am" "has")
+(define wl-1-det (list "the" "a" "that" "this" "an" "some" "any" "these" "those" "most"))
+(define wl-2-prep (list "of" "to" "in" "with" "for" "at" "on" "by" "from" "up"))
+(define wl-3-verb-ir (list "was" "is" "had" "be" "have" "were" "are" "would" "been" "will"))
+(define wl-4-verb-act (list "said" "like" "do" "did" "know" "made" "see" "go" "came" "come"))
+(define wl-5-pronoun (list "I" "he" "it" "you" "him" "she" "they" "me" "them" "we"))
+(define wl-6-posessive (list "his" "her" "my" "thier" "your" "its" "our" "ones"))
+(define wl-7-adverb (list "that" "as" "not" "no" "there" "about" "only" "then" "very" "just"))
+(define wl-8-conj (list "and" "but" "or" "so" "if" "than" "both" "either" "yet" "nor"))
+(define wl-9-adj (list "all" "one" "other" "little" "even" "good" "great" "long" "old" "many"))
+(define wl-10-wh (list "which" "who" "when" "what" "where" "why" "how" "while" "whatever" "whose"))
+(define wl-11-noun (list "time" "man" "way" "eyes" "day" "hand" "head" "men" "face" "place"))
+(define wl-12-aux (list "can" "should" "could" "may" "must" "might" "shall" "cannot" "am" "has"))
 
 (define clusters
 	(list
-		(cons "wl-1-det" wl-1-detp)
+		(cons "wl-1-det" wl-1-det)
 		(cons "wl-2-prep" wl-2-prep)
 		(cons "wl-3-verb-ir" wl-3-verb-ir)
 		(cons "wl-4-verb-act" wl-4-verb-act)
