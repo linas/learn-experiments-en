@@ -190,6 +190,30 @@
 	*unspecified*
 )
 
+(define (intra-all-mean func)
+	(define tot 0)
+	(define avg 0)
+	(define rms 0)
+	(for-each
+		(lambda (CLU)
+			(define words (filter have-word? (cdr CLU)))
+			(define stats (intra-apply words func))
+			(define av (wavg stats))
+			(define rm (wrms stats av))
+			(define nu (wgood stats))
+			(set! tot (+ tot nu))
+			(set! avg (+ avg (* nu av)))
+			(set! rms (+ rms (* nu (+ (* rm rm) (* av av)))))
+			(format #t ".")
+			(force-output)
+		)
+		clusters)
+	(set! avg (/ avg tot))
+	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
+	(format #t "Total inter ~D mean= ~5f rms = ~5f\n" tot avg rms)
+	*unspecified*
+)
+
 ; ------------------------------------------
 ;
 ; Report inter-cluster stats for two cluster
@@ -226,4 +250,5 @@
 ; Run stuff
 
 (intra-report-all plain-mi)
+(intra-all-mean plain-mi)
 ; (inter-report-all plain-mi)
