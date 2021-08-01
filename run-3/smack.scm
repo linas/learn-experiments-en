@@ -156,8 +156,14 @@
 (define cstars (add-pair-stars cset-obj))
 (define cmi  (add-symmetric-mi-compute cstars))
 ;
+(define csc (add-covering-sections cset-obj))
+(define smi (add-symmetric-mi-compute csc))
+
+;
 (define (plain-mi swa swb)
-	(cmi 'mmt-fmi (Word swa) (Word swb)))
+	; (cmi 'mmt-fmi (Word swa) (Word swb))
+	(smi 'mmt-fmi (Word swa) (Word swb))
+)
 
 (define (have-word? sw)
 	(not (nil?
@@ -212,7 +218,7 @@
 
 	(set! avg (/ avg tot))
 	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
-	(format #t "Total inter ~D mean= ~5f rms = ~5f\n" tot avg rms)
+	(format #t "Total intra ~D mean= ~6f rms = ~5f\n" tot avg rms)
 	*unspecified*
 )
 
@@ -283,14 +289,14 @@
 
 	(set! avg (/ avg tot))
 	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
-	(format #t "Total intra ~D mean= ~5f rms = ~5f\n" tot avg rms)
+	(format #t "Total inter ~D mean= ~6f rms = ~5f\n" tot avg rms)
 	*unspecified*
 )
 
 ; ------------------------------------------
 ; Run stuff
 
-; (intra-report-all plain-mi)
-; (intra-all-mean plain-mi)
+(intra-report-all plain-mi)
+(intra-all-mean plain-mi)
 ; (inter-report-all plain-mi)
 (inter-all-mean plain-mi)
