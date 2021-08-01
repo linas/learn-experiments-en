@@ -162,7 +162,10 @@
 ;
 (define (plain-mi swa swb)
 	(cmi 'mmt-fmi (Word swa) (Word swb))
-	; (smi 'mmt-fmi (Word swa) (Word swb))
+)
+
+(define (shape-mi swa swb)
+	(smi 'mmt-fmi (Word swa) (Word swb))
 )
 
 (define (have-word? sw)
@@ -296,7 +299,14 @@
 ; ------------------------------------------
 ; Run stuff
 
-(intra-report-all plain-mi)
-(intra-all-mean plain-mi)
-; (inter-report-all plain-mi)
-(inter-all-mean plain-mi)
+(define (do-plain-mi)
+	(intra-report-all plain-mi)
+	(intra-all-mean plain-mi)
+	; (inter-report-all plain-mi)
+	(inter-all-mean plain-mi))
+
+(define (do-shape-mi)
+	(intra-report-all shape-mi)
+	(intra-all-mean shape-mi)
+	; (inter-report-all shape-mi)
+	(inter-all-mean shape-mi))
