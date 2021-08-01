@@ -161,8 +161,8 @@
 
 ;
 (define (plain-mi swa swb)
-	; (cmi 'mmt-fmi (Word swa) (Word swb))
-	(smi 'mmt-fmi (Word swa) (Word swb))
+	(cmi 'mmt-fmi (Word swa) (Word swb))
+	; (smi 'mmt-fmi (Word swa) (Word swb))
 )
 
 (define (have-word? sw)
