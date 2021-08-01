@@ -17,5 +17,6 @@ export COGSERVER_CONF=${CONFIG_DIR}/3-cogserver/marg.conf
 
 # export MST_DB=${ROCKS_DATA_DIR}/r3-filt-640-128-80-shape.rdb
 # export MST_DB=${ROCKS_DATA_DIR}/r3-filt-80-16-10-shape.rdb
-export MST_DB=${ROCKS_DATA_DIR}/r3-filt-40-8-5-shape.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/r3-filt-40-8-5-shape.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r3-filt-20-4-2-shape.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"

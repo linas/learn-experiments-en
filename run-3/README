@@ -64,8 +64,10 @@ Done storing 78 pairs in 0 secs
 	)
 
 	(fsto 320 64 40 "r3-filt-320-64-40-marg.rdb")
-	(fsto 160 32 20 "r3-filt-160-32-20-marg.rdb")
 
+	(fsto 160 32 20 "r3-filt-160-32-20-marg.rdb")
+Done storing 40357 pairs in 37 secs
+Total store time = 4038 secs
 
 	(fsto 80 16 10 "r3-filt-80-16-10-marg.rdb")
 Done storing 93758 pairs in 25 secs
@@ -78,3 +80,5 @@ Total store time = 2985 secs
 	(fsto 20 4 2 "r3-filt-20-4-2-marg.rdb")
 Done storing 546345 pairs in 206 secs
 Total store time = 8081 secs
+
+=======================================
