@@ -10,6 +10,7 @@ Datasets:
       Computed with `guile -l run-common/marginals-mst.scm`
 
 * r3-filt-40-8-5-marg.rdb -- filtered version of baseline tranche-123
+     Uh no, its's screwed up. Crap. Failed to zero-filter.
 
 Notes:
 Filtering doe as README suggests:
@@ -84,3 +85,28 @@ Done storing 546345 pairs in 206 secs
 Total store time = 8081 secs
 
 =======================================
+
+; Do it again, this time with the correct filer.
+	(define (zsto a b c fi)
+		(define fsa (add-subtotal-filter psa a b c #f))
+		(define zfa (add-zero-filter fsa #f))
+		(define lfa (add-linkage-filter zfa))
+		(define fso (make-store lfa))
+		(define now (current-time))
+		(cog-rocks-open (string-append "rocks:///home/ubuntu/data/" fi))
+		(fso 'store-all-elts)	  ;; Do NOT store the marginals!
+		(cog-rocks-close)
+		(format #t "Total store time = ~A secs\n" (- (current-time) now))
+	)
+
+
+(zsto 640 128 80 "r3-zfil-640-128-80-marg.rdb")
+Done storing 4006 pairs in 1 secs
+Total store time = 4224 secs
+
+(zsto 320 64 40 "r3-zfil-320-64-40-marg.rdb")
+
+(zsto 160 32 20 "r3-zfil-160-32-20-marg.rdb")
+(zsto 80 16 10 "r3-zfil-80-16-10-marg.rdb")
+(zsto 40 8 5 "r3-zfil-40-8-5-marg.rdb")
+(zsto 20 4 2 "r3-zfil-20-4-2-marg.rdb")
