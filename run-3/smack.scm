@@ -286,42 +286,40 @@
 ; ------------------------------------------
 ; Other measures.
 
-#! -----------------
 (define-public (add-symmetric-cosine-compute LLOBJ)
+	(define GET-CNT 'get-count)
 
-	(let*
-		(star-obj (add-pair-stars LLOBJ))
-		; Cache of the totals
-	)
-
-	(define (compute-left-product COL-A COL-B)
-		(prod-obj 'left-count (list COL-A COL-B)))
+	(let* (
+			(star-obj (add-pair-stars LLOBJ))
+			(prod-obj  (add-support-compute
+				(add-tuple-math star-obj * GET-CNT)))
+		)
 
       ; -------------
-      ; Return the vector product of column A and column B
-      ; The prod-obj takes the product of pairs of matrix entries,
-      ; and the 'left-count method just adds them up.  Equivalently,
-      ; we could just sum over the left-stars ourselves, but this
-      ; would take three lines of code instead of one.
-      (define (compute-left-product COL-A COL-B)
-         (prod-obj 'left-count (list COL-A COL-B)))
+      ; Return the cosine product of column A and column B
+      (define (compute-left-cosine COL-A COL-B)
+         (/ (prod-obj 'left-count (list COL-A COL-B))
+				(sqrt (*
+					(prod-obj 'left-count (list COL-A COL-A))
+					(prod-obj 'left-count (list COL-B COL-B))))))
 
       ; Return the vector product of row A and row B
-      (define (compute-right-product ROW-A ROW-B)
-         (prod-obj 'right-count (list ROW-A ROW-B)))
+      (define (compute-right-cosine ROW-A ROW-B)
+         (/ (prod-obj 'right-count (list ROW-A ROW-B))
+				(sqrt (*
+					(prod-obj 'right-count (list ROW-A ROW-A))
+					(prod-obj 'right-count (list ROW-B ROW-B))))))
 
 
-      ; Same as above, but normalized, so that the value is the
-      ; joint probability between COL-A and COL-B.
-      (define (compute-left-prob COL-A COL-B)
-         (set-mtm-total)
-         (/ (compute-left-product COL-A COL-B) mtm-total))
+		; -------------
+		; Methods on this class.
+		(lambda (message . args)
+			(case message
+				((mtm-cosine)      (apply compute-left-cosine args))
+				((mmt-cosine)      (apply compute-right-cosine args))
+				(else              (apply LLOBJ (cons message args))))
+	)))
 
-      (define (compute-right-prob ROW-A ROW-B)
-         (set-mmt-total)
-         (/ (compute-right-product ROW-A ROW-B) mmt-total))
-
------------ !#
 
 ; ------------------------------------------
 ; Run stuff
@@ -352,6 +350,17 @@
 	(log2 (smi 'mmt-joint-prob (Word swa) (Word swb)))
 )
 
+(define cco (add-symmetric-cosine-compute cstars))
+(define sco (add-symmetric-cosine-compute csc))
+
+(define (plain-cosine swa swb)
+	(cco 'mmt-cosine (Word swa) (Word swb))
+)
+
+(define (shape-cosine swa swb)
+	(sco 'mmt-cosine (Word swa) (Word swb))
+)
+
 
 (define (do-report fun)
 	; (intra-report-all fun)
@@ -364,3 +373,4 @@
 ; (do-report shape-mi)
 ; (do-report plain-joint)
 ; (do-report shape-joint)
+; (do-report plain-cosine)
