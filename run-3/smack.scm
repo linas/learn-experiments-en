@@ -353,12 +353,41 @@
 (define cco (add-symmetric-cosine-compute cstars))
 (define sco (add-symmetric-cosine-compute csc))
 
+(define csi (add-similarity-compute cstars))
+(define ssi (add-similarity-compute csc))
+
 (define (plain-cosine swa swb)
-	(cco 'mmt-cosine (Word swa) (Word swb))
+	; (cco 'mmt-cosine (Word swa) (Word swb))
+	(csi 'right-cosine (Word swa) (Word swb))
 )
 
 (define (shape-cosine swa swb)
-	(sco 'mmt-cosine (Word swa) (Word swb))
+	; (sco 'mmt-cosine (Word swa) (Word swb))
+	(ssi 'right-cosine (Word swa) (Word swb))
+)
+
+(define (plain-overlap swa swb)
+	(csi 'right-overlap (Word swa) (Word swb))
+)
+
+(define (shape-overlap swa swb)
+	(ssi 'right-overlap (Word swa) (Word swb))
+)
+
+(define (plain-jaccard swa swb)
+	(csi 'right-cond-jacc (Word swa) (Word swb))
+)
+
+(define (shape-jaccard swa swb)
+	(ssi 'right-cond-jacc (Word swa) (Word swb))
+)
+
+(define (plain-prjaccard swa swb)
+	(csi 'right-prjaccard (Word swa) (Word swb))
+)
+
+(define (shape-prjaccard swa swb)
+	(ssi 'right-prjaccard (Word swa) (Word swb))
 )
 
 
