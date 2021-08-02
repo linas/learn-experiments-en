@@ -209,7 +209,7 @@
 	(set! avg (/ avg tot))
 	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
 	(format #t "Total intra ~D mean= ~6f rms = ~5f\n" tot avg rms)
-	*unspecified*
+	(cons avg rms)
 )
 
 ; ------------------------------------------
@@ -280,7 +280,8 @@
 	(set! avg (/ avg tot))
 	(set! rms (sqrt (- (/ rms tot) (* avg avg))))
 	(format #t "Total inter ~D mean= ~6f rms = ~5f\n" tot avg rms)
-	*unspecified*
+
+	(cons avg rms)
 )
 
 ; ------------------------------------------
@@ -400,20 +401,24 @@
 	(log2 (- 1.0 (ssi 'right-cond-jacc (Word swa) (Word swb))))
 )
 
-(define (plain-prjaccard swa swb)
+(define (plain-prjacc swa swb)
 	(log2 (- 1.0 (csi 'right-prjaccard (Word swa) (Word swb))))
 )
 
-(define (shape-prjaccard swa swb)
+(define (shape-prjacc swa swb)
 	(log2 (- 1.0 (ssi 'right-prjaccard (Word swa) (Word swb))))
 )
 
 
-(define (do-report fun)
+(define (do-report fun name)
+	(format #t "Start work on ~A\n" name)
 	; (intra-report-all fun)
-	(intra-all-mean fun)
+	(define intra (intra-all-mean fun))
 	; (inter-report-all fun)
-	(inter-all-mean fun)
+	(define inter (inter-all-mean fun))
+	(define sep (/ (- (car intra) (car inter)) (max (cdr intra) (cdr inter))))
+	(format #t "Separation = ~5f\n" sep)
+	(format #t "---------------\n")
 )
 
 ; (do-report plain-mi)
@@ -421,3 +426,13 @@
 ; (do-report plain-joint)
 ; (do-report shape-joint)
 ; (do-report plain-cosine)
+
+(define (report-plain)
+	(do-report plain-mi "plain-mi")
+	(do-report plain-joint "plain-joint")
+	(do-report plain-cosine "plain-cosine")
+	(do-report plain-logcos "plain-logcos")
+	(do-report plain-overlap "plain-overlap")
+	(do-report plain-jaccard "plain-jaccard")
+	(do-report plain-prjacc "plain-prjacc")
+)
