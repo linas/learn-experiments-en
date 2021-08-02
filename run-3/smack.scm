@@ -340,14 +340,24 @@
 	(smi 'mmt-fmi (Word swa) (Word swb))
 )
 
-(define (log2 x) (if (< 0.0 x) (- (/ (log x) (log 2.0))) -inf.0))
+(define (log2 x) (if (< 0.0 x) (/ (log x) (log 2.0)) -inf.0))
+(define csu (add-support-compute cstars))
+(define ssu (add-support-compute csc))
 
 (define (plain-joint swa swb)
-	(log2 (cmi 'mmt-joint-prob (Word swa) (Word swb)))
+	(define j (cmi 'mmt-joint-prob (Word swa) (Word swb)))
+	(define tot (csu 'total-count-right))
+	(define ma (/ (csu 'right-count (Word swa)) tot))
+	(define mb (/ (csu 'right-count (Word swb)) tot))
+	(log2 (/ j (* ma mb)))
 )
 
 (define (shape-joint swa swb)
-	(log2 (smi 'mmt-joint-prob (Word swa) (Word swb)))
+	(define j (smi 'mmt-joint-prob (Word swa) (Word swb)))
+	(define tot (ssu 'total-count-right))
+	(define ma (/ (ssu 'right-count (Word swa)) tot))
+	(define mb (/ (ssu 'right-count (Word swb)) tot))
+	(log2 (/ j (* ma mb)))
 )
 
 (define cco (add-symmetric-cosine-compute cstars))
@@ -366,28 +376,36 @@
 	(ssi 'right-cosine (Word swa) (Word swb))
 )
 
+(define (plain-logcos swa swb)
+	(log2 (csi 'right-cosine (Word swa) (Word swb)))
+)
+
+(define (shape-logcos swa swb)
+	(log2 (ssi 'right-cosine (Word swa) (Word swb)))
+)
+
 (define (plain-overlap swa swb)
-	(csi 'right-overlap (Word swa) (Word swb))
+	(log2 (csi 'right-overlap (Word swa) (Word swb)))
 )
 
 (define (shape-overlap swa swb)
-	(ssi 'right-overlap (Word swa) (Word swb))
+	(log2 (ssi 'right-overlap (Word swa) (Word swb)))
 )
 
 (define (plain-jaccard swa swb)
-	(csi 'right-cond-jacc (Word swa) (Word swb))
+	(log2 (- 1.0 (csi 'right-cond-jacc (Word swa) (Word swb))))
 )
 
 (define (shape-jaccard swa swb)
-	(ssi 'right-cond-jacc (Word swa) (Word swb))
+	(log2 (- 1.0 (ssi 'right-cond-jacc (Word swa) (Word swb))))
 )
 
 (define (plain-prjaccard swa swb)
-	(csi 'right-prjaccard (Word swa) (Word swb))
+	(log2 (- 1.0 (csi 'right-prjaccard (Word swa) (Word swb))))
 )
 
 (define (shape-prjaccard swa swb)
-	(ssi 'right-prjaccard (Word swa) (Word swb))
+	(log2 (- 1.0 (ssi 'right-prjaccard (Word swa) (Word swb))))
 )
 
 
