@@ -121,3 +121,6 @@ Done storing 172853 pairs in 39 secs
 Total store time = 4358 secs
 
 (zsto 20 4 2 "r3-zfil-20-4-2-marg.rdb")
+Done storing 470567 pairs in 102 secs
+Total store time = 4790 secs
+
