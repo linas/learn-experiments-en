@@ -151,22 +151,9 @@
 
 ; ------------------------------------------
 
-; First, the shapeless disjuncts
+; A needed filtering utility.
 (define cset-obj (make-pseudo-cset-api))
 (define cstars (add-pair-stars cset-obj))
-(define cmi  (add-symmetric-mi-compute cstars))
-;
-(define csc (add-covering-sections cset-obj))
-(define smi (add-symmetric-mi-compute csc))
-
-;
-(define (plain-mi swa swb)
-	(cmi 'mmt-fmi (Word swa) (Word swb))
-)
-
-(define (shape-mi swa swb)
-	(smi 'mmt-fmi (Word swa) (Word swb))
-)
 
 (define (have-word? sw)
 	(not (nil?
@@ -297,16 +284,83 @@
 )
 
 ; ------------------------------------------
+; Other measures.
+
+#! -----------------
+(define-public (add-symmetric-cosine-compute LLOBJ)
+
+	(let*
+		(star-obj (add-pair-stars LLOBJ))
+		; Cache of the totals
+	)
+
+	(define (compute-left-product COL-A COL-B)
+		(prod-obj 'left-count (list COL-A COL-B)))
+
+      ; -------------
+      ; Return the vector product of column A and column B
+      ; The prod-obj takes the product of pairs of matrix entries,
+      ; and the 'left-count method just adds them up.  Equivalently,
+      ; we could just sum over the left-stars ourselves, but this
+      ; would take three lines of code instead of one.
+      (define (compute-left-product COL-A COL-B)
+         (prod-obj 'left-count (list COL-A COL-B)))
+
+      ; Return the vector product of row A and row B
+      (define (compute-right-product ROW-A ROW-B)
+         (prod-obj 'right-count (list ROW-A ROW-B)))
+
+
+      ; Same as above, but normalized, so that the value is the
+      ; joint probability between COL-A and COL-B.
+      (define (compute-left-prob COL-A COL-B)
+         (set-mtm-total)
+         (/ (compute-left-product COL-A COL-B) mtm-total))
+
+      (define (compute-right-prob ROW-A ROW-B)
+         (set-mmt-total)
+         (/ (compute-right-product ROW-A ROW-B) mmt-total))
+
+----------- !#
+
+; ------------------------------------------
 ; Run stuff
 
-(define (do-plain-mi)
-	(intra-report-all plain-mi)
-	(intra-all-mean plain-mi)
-	; (inter-report-all plain-mi)
-	(inter-all-mean plain-mi))
+; First, the shapeless disjuncts
+(define cmi  (add-symmetric-mi-compute cstars))
+;
+; Now with shapes.
+(define csc (add-covering-sections cstars))
+(define smi (add-symmetric-mi-compute csc))
 
-(define (do-shape-mi)
-	(intra-report-all shape-mi)
-	(intra-all-mean shape-mi)
-	; (inter-report-all shape-mi)
-	(inter-all-mean shape-mi))
+;
+(define (plain-mi swa swb)
+	(cmi 'mmt-fmi (Word swa) (Word swb))
+)
+
+(define (shape-mi swa swb)
+	(smi 'mmt-fmi (Word swa) (Word swb))
+)
+
+(define (log2 x) (if (< 0.0 x) (- (/ (log x) (log 2.0))) -inf.0))
+
+(define (plain-joint swa swb)
+	(log2 (cmi 'mmt-joint-prob (Word swa) (Word swb)))
+)
+
+(define (shape-joint swa swb)
+	(log2 (smi 'mmt-joint-prob (Word swa) (Word swb)))
+)
+
+
+(define (do-report fun)
+	; (intra-report-all fun)
+	(intra-all-mean fun)
+	; (inter-report-all fun)
+	(inter-all-mean fun)
+)
+
+; (do-report plain-mi)
+; (do-report shape-mi)
+; (do-report plain-joint)
+; (do-report shape-joint)
