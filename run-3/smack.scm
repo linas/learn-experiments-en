@@ -436,3 +436,13 @@
 	(do-report plain-jaccard "plain-jaccard")
 	(do-report plain-prjacc "plain-prjacc")
 )
+
+(define (report-shape)
+	(do-report shape-mi "shape-mi")
+	(do-report shape-joint "shape-joint")
+	(do-report shape-cosine "shape-cosine")
+	(do-report shape-logcos "shape-logcos")
+	(do-report shape-overlap "shape-overlap")
+	(do-report shape-jaccard "shape-jaccard")
+	(do-report shape-prjacc "shape-prjacc")
+)
