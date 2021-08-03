@@ -342,6 +342,32 @@
 )
 
 (define (log2 x) (if (< 0.0 x) (/ (log x) (log 2.0)) -inf.0))
+
+; vi == variation of information
+(define (plain-vi swa swb)
+	(define mi (cmi 'mmt-fmi (Word swa) (Word swb)))
+	(define h (- (log2 (cmi 'mmt-joint-prob (Word swa) (Word swb)))))
+	(if (< h 100) (- h mi) -inf.0)
+)
+
+(define (shape-vi swa swb)
+	(define mi (smi 'mmt-fmi (Word swa) (Word swb)))
+	(define h (- (log2 (smi 'mmt-joint-prob (Word swa) (Word swb)))))
+	(if (< h 100) (- h mi) -inf.0)
+)
+
+(define (plain-nvi swa swb)
+	(define mi (cmi 'mmt-fmi (Word swa) (Word swb)))
+	(define h (- (log2 (cmi 'mmt-joint-prob (Word swa) (Word swb)))))
+	(/ mi h)
+)
+
+(define (shape-nvi swa swb)
+	(define mi (smi 'mmt-fmi (Word swa) (Word swb)))
+	(define h (- (log2 (smi 'mmt-joint-prob (Word swa) (Word swb)))))
+	(/ mi h)
+)
+
 (define csu (add-support-compute cstars))
 (define ssu (add-support-compute csc))
 
@@ -417,7 +443,7 @@
 	; (inter-report-all fun)
 	(define inter (inter-all-mean fun))
 	(define sep (/ (- (car intra) (car inter)) (max (cdr intra) (cdr inter))))
-	(format #t "Separation = ~5f\n" sep)
+	(format #t "Separation = ~5f\n" (abs sep))
 	(format #t "---------------\n")
 )
 
@@ -437,6 +463,11 @@
 	(do-report plain-prjacc "plain-prjacc")
 )
 
+(define (report-plain-vi)
+	(do-report plain-vi "plain-vi")
+	(do-report plain-nvi "plain-nvi")
+)
+
 (define (report-shape)
 	(do-report shape-mi "shape-mi")
 	(do-report shape-joint "shape-joint")
@@ -446,3 +477,9 @@
 	(do-report shape-jaccard "shape-jaccard")
 	(do-report shape-prjacc "shape-prjacc")
 )
+
+(define (report-shape-vi)
+	(do-report shape-vi "shape-vi")
+	(do-report shape-nvi "shape-nvi")
+)
+
