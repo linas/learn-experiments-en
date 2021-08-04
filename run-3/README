@@ -124,3 +124,6 @@ Total store time = 4358 secs
 Done storing 470567 pairs in 102 secs
 Total store time = 4790 secs
 
+-----------------------------------------
+Fresh copy for debugging:
+(zsto 640 128 80 "r3-zfil-640-128-80-fresh.rdb")
