@@ -18,16 +18,88 @@ Do as the README suggests:
    (define pca (make-pseudo-cset-api))
    (define psa (add-pair-stars pca))
    (psa 'fetch-pairs)        ;; Load the dataset
-; Elapsed time to load csets: 3961 secs
-; Total RAM use 41.3 GB
+	(cog-close storage-node)
+
+Rocks: initial aid=138920739
+Elapsed time to load csets: 6796 secs
+(print-matrix-summary-report psa) says : no cached data! Yikes!
+RSS is 60.6 GB
 
 The ../run-3/README file explains how to create filtered subsets.
 
-=======================================
+We'll do this like so:
 
-* r3-mpg-marg.rdb
-Rocks: initial aid=138920738
-Elapsed time to load csets: 8140 secs
-Finished mmt norm marginals in 3905 secs
-Done storing 25698949 left-wilds in 12427 secs
-No cached matrix data available;  (!)
+((add-support-compute psa) 'cache-all)
+((make-central-compute psa) 'cache-all)
+(print-matrix-summary-report psa)
+
+; The correct filer.
+	(define (zsto a b c fi)
+		(define fsa (add-subtotal-filter psa a b c #f))
+		(define zfa (add-zero-filter fsa #f))
+		(define lfa (add-linkage-filter zfa))
+		(define fso (make-store lfa))
+		(define now (current-time))
+		(cog-rocks-open (string-append "rocks:///home/ubuntu/data/" fi))
+		(fso 'store-all-elts)	  ;; Do NOT store the marginals!
+		(cog-rocks-close)
+		(format #t "Total store time = ~A secs\n" (- (current-time) now))
+	)
+
+(zsto 10 4 2 "r4-zfil-10-4-2-pass-1.rdb")
+After zsto its 81.2 GB RSS
+
+Found 473877 pairs in 7326 secs
+Stored 100000 of 473877 pairs in 25 secs (4000 pairs/sec)
+Stored 200000 of 473877 pairs in 23 secs (4348 pairs/sec)
+Stored 300000 of 473877 pairs in 23 secs (4348 pairs/sec)
+Stored 400000 of 473877 pairs in 25 secs (4000 pairs/sec)
+Done storing 473877 pairs in 115 secs
+Total store time = 7441 secs
+
+Do it again, but this time load pass 1 to create pass 2.
+((add-support-compute psa) 'cache-all)
+(zsto 10 4 2 "r4-zfil-10-4-2-pass-2.rdb")
+
+(zsto 10 4 2 "r4-zfil-10-4-2-pass-3.rdb")
+(zsto 10 4 2 "r4-zfil-10-4-2-pass-4.rdb")
+
+(define (zall a b c fi)
+   (define pca (make-pseudo-cset-api))
+   (define psa (add-pair-stars pca))
+   (psa 'fetch-pairs)        ;; Load the dataset
+	(cog-close storage-node)
+
+	((add-support-compute psa) 'cache-all)
+	((make-central-compute psa) 'cache-all)
+	(print-matrix-summary-report psa)
+
+	(define fsa (add-subtotal-filter psa a b c #f))
+	(define zfa (add-zero-filter fsa #f))
+	(define lfa (add-linkage-filter zfa))
+	(define fso (make-store lfa))
+	(define now (current-time))
+	(cog-rocks-open (string-append "rocks:///home/ubuntu/data/" fi))
+	(fso 'store-all-elts)	  ;; Do NOT store the marginals!
+	(cog-rocks-close)
+	(format #t "Total store time = ~A secs\n" (- (current-time) now))
+)
+
+(zall 10 4 2 "r4-zfil-10-4-2-pass-5.rdb")
+(zall 10 4 2 "r4-zfil-10-4-2-pass-6.rdb")
+(zall 10 4 2 "r4-zfil-10-4-2-pass-7.rdb")
+(zall 10 4 2 "r4-zfil-10-4-2-pass-8.rdb")
+
+(define (filt star-obj a b c)
+	((add-support-compute star-obj) 'cache-all)
+	((make-central-compute star-obj) 'cache-all)
+	(print-matrix-summary-report psa)
+
+	(define fsa (add-subtotal-filter star-obj a b c #f))
+	(define zfa (add-zero-filter fsa #f))
+	(define lfa (add-linkage-filter zfa))
+
+	; Return the filter object
+	lfa
+)
+
