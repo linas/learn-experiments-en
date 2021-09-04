@@ -126,7 +126,7 @@ Avg obs per pair: 27.449
 Entropy Total: 17.827   Left: 9.7963   Right: 9.5884
 Total MI: 1.5572
 
-tranche-2: 
+tranche-2:
 Finished with MI computations; this took 2.185 hours.
 Rows: 140140 Columns: 142101
 Sparsity (-log_2): 10.416
@@ -166,14 +166,14 @@ run-1-en_mpg-tranche-1.rdb -- done, looks good, I guess.
 
 MPG for tranche 5: load each of the prior tranches and then restart:
 start with tranche-1:
-reported time to load pairs: 6488 sec 
+reported time to load pairs: 6488 sec
 takes 93.1 GB to load word pairs. MPG of tranche 1 goes up to 105.6 GB
 So delta = 12.5GB extra
 wall-clock time of 408 mins. = 6.8 hours
 cpu time of 3155 mins =  52.6 hours
 
 next tranche-2:
-reported time to load pairs: 7397 sec 
+reported time to load pairs: 7397 sec
 cpu time to load pairs = 126:01 mm:ss = 7560 sec
 tranche 2 is then goes up to 103.7 GB
 so delta = 10.6GB extra
@@ -187,4 +187,16 @@ wall clocl     816m13.339s = 13.6 hours
 cpu time = 6095:27 = 101.58 hours
 
 next tranche-4
+
+---------
+I guess that MPG for tranche-4 and tranche 5 was never done!?
+Except maybe it was for tranche-4 This was .. dropped part way through.
+Crap.
+
+Also .. looks like (add-support-compute) was run for the MPG files,
+but add-central-compute was not. Which means that print-summary-matrix
+fails.  wildcard does have (PredicateNode "*-Right Total Key-*")
+ (PredicateNode "*-Left Total Key-*") (PredicateNode "*-MM^T Product Key-*")
+So it seems the MMT stuff was run.
+But "*-Dimension Key-*" is missing, so central never ran.
 

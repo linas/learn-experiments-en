@@ -22,8 +22,11 @@ Do as the README suggests:
 
 Rocks: initial aid=138920739
 Elapsed time to load csets: 6796 secs
+Elapsed time to load csets: 6606 secs  second time...
 (print-matrix-summary-report psa) says : no cached data! Yikes!
 RSS is 60.6 GB
+
+
 
 The ../run-3/README file explains how to create filtered subsets.
 
@@ -91,13 +94,13 @@ Do it again, but this time load pass 1 to create pass 2.
 (zall 10 4 2 "r4-zfil-10-4-2-pass-8.rdb")
 
 (define (filt star-obj a b c)
-	((add-support-compute star-obj) 'cache-all)
-	((make-central-compute star-obj) 'cache-all)
-	(print-matrix-summary-report psa)
-
-	(define fsa (add-subtotal-filter star-obj a b c #f))
-	(define zfa (add-zero-filter fsa #f))
+	(define fsa (add-subtotal-filter star-obj a b c #t))
+	(define zfa (add-zero-filter fsa #t))
 	(define lfa (add-linkage-filter zfa))
+
+	((add-support-compute lfa) 'cache-all)
+	((make-central-compute lfa) 'cache-all)
+	(print-matrix-summary-report lfa)
 
 	; Return the filter object
 	lfa
