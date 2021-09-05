@@ -19,4 +19,7 @@ export MST_DB=${ROCKS_DATA_DIR}/r4-zfil-10-4-2-pass-6.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r4-zfil-10-4-2-pass-7.rdb
 
 export MST_DB=${ROCKS_DATA_DIR}/r4-mpg-marg.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r4-trim-1-1-1-pass-1.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r4-trim-1-1-1-pass-2.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r4-trim-2-2-2.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"

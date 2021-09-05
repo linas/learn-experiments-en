@@ -189,14 +189,13 @@ cpu time = 6095:27 = 101.58 hours
 next tranche-4
 
 ---------
-I guess that MPG for tranche-4 and tranche 5 was never done!?
-Except maybe it was for tranche-4 This was .. dropped part way through.
-Crap.
+MPG for tranche-5 has had tranche 1,2,3 MPG-parsed, but not 4,5
 
-Also .. looks like (add-support-compute) was run for the MPG files,
+---------
+Looks like (add-support-compute) was run for the MPG tranche-1,2,3,4 files,
 but add-central-compute was not. Which means that print-summary-matrix
-fails.  wildcard does have (PredicateNode "*-Right Total Key-*")
+fails.  So, wildcard does have (PredicateNode "*-Right Total Key-*")
  (PredicateNode "*-Left Total Key-*") (PredicateNode "*-MM^T Product Key-*")
 So it seems the MMT stuff was run.
-But "*-Dimension Key-*" is missing, so central never ran.
 
+But "*-Dimension Key-*" is missing, so central never ran.
