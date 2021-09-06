@@ -14,6 +14,25 @@ Databases in the `~/data` directory
 
 All of the above include the MI marginals for word-pairs.
 
+* run-1-en_mpg-tranche-1.rdb
+* run-1-en_mpg-tranche-12.rdb
+* run-1-en_mpg-tranche-123.rdb
+* run-1-en_mpg-tranche-1234.rdb
+* run-1-en_mpg-tranche-12345.rdb -- Missing tranche 4,5
+
+Above have mpg parsing data in them. The last file is incomplete.
+Above to NOT have support marginals in them. These are added below:
+
+* run-1-marg-tranche-1234.rdb
+
+Above contain support marginals.
+
+* run-1-t1234-trim-1-1-1.rdb
+
+Trimmed to remove everything with count of 1.
+Trimming experiments done in run-4, this is the application of those
+to the "master copy" datasets here. See notes below on how to trim.
+
 
 Notes:
 ------
@@ -197,5 +216,56 @@ but add-central-compute was not. Which means that print-summary-matrix
 fails.  So, wildcard does have (PredicateNode "*-Right Total Key-*")
  (PredicateNode "*-Left Total Key-*") (PredicateNode "*-MM^T Product Key-*")
 So it seems the MMT stuff was run.
+XXX Above statements are ??? not true?? caveat emptor?
 
 But "*-Dimension Key-*" is missing, so central never ran.
+
+------------------------------------
+Above is not true:
+at least run-1-en_mpg-tranche-1234.rdb does not contain an incoming
+set for (AnyNode "cset-word") which implies there are no marginals.
+Am recomputing this now:
+
+	(define pca (make-pseudo-cset-api))
+	(define psa (add-pair-stars pca))
+	(psa 'fetch-pairs)
+	((add-support-compute psa) 'cache-all)
+	((make-store psa) 'store-all)
+
+'fetch-pairs: Elapsed time to load csets: 5807 secs
+Total 78660479 Atoms (count-all) and 59.5 GB RSS
+(Connector . 951753)
+(ConnectorSeq . 36562917)
+(Section . 40648096)
+(WordNode . 497690)
+
+Finished left norm marginals in 17161 secs
+Finished left totals in 2599 secs
+Finished right norm marginals in 1568 secs
+Done storing 36562917 left-wilds in 12295 secs
+Done storing 40648095 pairs in 6133 secs
+
+------------------------------------
+The fastest way to perform triming is this:
+
+(load-atoms-of-type 'Any)
+(fetch-incoming-set (AnyNode "cset-word"))
+(fetch-incoming-set (AnyNode "cset-disjunct"))
+(iter-trim 1 1 1)  ; This misses the sections, but OK for first pass.
+
+Now fetch the pairs, and then continue trimming.
+(load-atoms-of-type 'Section)
+
+(define (iter-trim a b c)
+	(define pca (make-pseudo-cset-api))
+	(define psa (add-pair-stars pca))
+	(subtotal-trim psa a b c)
+	(trim-linkage psa)
+	(set! pca (make-pseudo-cset-api))
+	(set! psa (add-pair-stars pca))
+	((add-support-compute psa) 'cache-all)
+	(print-matrix-summary-report psa)
+	(inexact->exact (round ((add-support-api psa) 'total-support-left)))
+)
+
+------- the end -------
