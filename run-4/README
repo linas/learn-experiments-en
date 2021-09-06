@@ -165,8 +165,13 @@ Lets try some automation.
 
 
 (define (iter-trim a b c)
+	(define pca (make-pseudo-cset-api))
+	(define psa (add-pair-stars pca))
 	(subtotal-trim psa a b c)
 	(trim-linkage psa)
+	(set! pca (make-pseudo-cset-api))
+	(set! psa (add-pair-stars pca))
 	((add-support-compute psa) 'cache-all)
+	(print-matrix-summary-report psa)
 	(inexact->exact (round ((add-support-api psa) 'total-support-left)))
 )
