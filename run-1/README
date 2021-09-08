@@ -14,11 +14,11 @@ Databases in the `~/data` directory
 
 All of the above include the MI marginals for word-pairs.
 
-* run-1-prs1-trim-1-1-1.rdb
+* r5-prs1-trim-1-1-1.rdb
+* r5-prs1-trim-5-5-2.rdb
 
 The above pairs files, but trimmed. Created by scripts in run-5 so
-as not to pollute the historical record in this directory. Named run-1
-so that they remain easy-to-find "master copies".
+as not to pollute the historical record in this directory.
 
 * run-1-en_mpg-tranche-1.rdb
 * run-1-en_mpg-tranche-12.rdb
@@ -29,6 +29,7 @@ so that they remain easy-to-find "master copies".
 Above have mpg parsing data in them. The last file is incomplete.
 Above to NOT have support marginals in them. These are added below:
 
+* run-1-marg-tranche-12.rdb
 * run-1-marg-tranche-1234.rdb
 
 Above contain support marginals.

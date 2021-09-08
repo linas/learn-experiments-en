@@ -27,5 +27,6 @@ export MST_DB=${ROCKS_DATA_DIR}/r4-trim-10-4-2.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r4-tranche-1234-trim-1-1-1.rdb
 export MST_DB=${ROCKS_DATA_DIR}/run-1-marg-tranche-1234.rdb
 export MST_DB=${ROCKS_DATA_DIR}/run-1-t1234-trim-1-1-1.rdb
+export MST_DB=${ROCKS_DATA_DIR}/run-1-marg-tranche-12.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
