@@ -11,6 +11,7 @@ export PROMPT="scheme@(en-pairs)"
 export COGSERVER_CONF=${CONFIG_DIR}/2-cogserver/cogserver-pairs-en.conf
 
 # Location of the trimmed database
-export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-prs1-trim-1-1-1.rdb
+export PAIRS_DB=${ROCKS_DATA_DIR}/r5-prs1-trim-1-1-1.rdb
+export PAIRS_DB=${ROCKS_DATA_DIR}/r5-prs1-trim-5-5-2.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"

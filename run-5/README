@@ -6,7 +6,30 @@ Lets just take a better look at trimming of word-pair files.
 This directory is for messing with that. The final versions
 of the data files follow this naming sequence:
 
- * run-1-prs1-trim-1-1-1.rdb
+ * r5-prs1-trim-1-1-1.rdb
+ * r5-prs1-trim-5-5-2.rdb
 
-They're called "run-1" so that they are easier to find, and represent
-the "master copies" of the dataset.
+
+To actually trim:
+
+	(define ala (make-any-link-api))
+	(define als (add-pair-stars ala))
+	(als 'fetch-pairs)
+	(print-matrix-summary-report als)
+
+	(subtotal-trim als 1 1 1)
+	(set! ala (make-any-link-api))
+	(set! als (add-pair-stars ala))
+
+Then batch the MI.
+
+First: need backwards-compat for the marginals; done like so:
+
+	(define sup (add-support-api als))
+	(sup 'set-size (als 'left-basis-size) (als 'right-basis-size)
+		(sup 'wild-wild-count))
+	(store-atom (als 'wild-wild))
+
+(batch-all-pair-mi als)
+(barrier storage-node)
+
