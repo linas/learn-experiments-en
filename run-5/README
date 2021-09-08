@@ -1,0 +1,12 @@
+
+run-5 - Trimming of run-1 word-pair files
+=========================================
+
+Lets just take a better look at trimming of word-pair files.
+This directory is for messing with that. The final versions
+of the data files follow this naming sequence:
+
+ * run-1-prs1-trim-1-1-1.rdb
+
+They're called "run-1" so that they are easier to find, and represent
+the "master copies" of the dataset.

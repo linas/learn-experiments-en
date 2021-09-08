@@ -14,6 +14,12 @@ Databases in the `~/data` directory
 
 All of the above include the MI marginals for word-pairs.
 
+* run-1-prs1-trim-1-1-1.rdb
+
+The above pairs files, but trimmed. Created by scripts in run-5 so
+as not to pollute the historical record in this directory. Named run-1
+so that they remain easy-to-find "master copies".
+
 * run-1-en_mpg-tranche-1.rdb
 * run-1-en_mpg-tranche-12.rdb
 * run-1-en_mpg-tranche-123.rdb
@@ -246,15 +252,8 @@ Done storing 36562917 left-wilds in 12295 secs
 Done storing 40648095 pairs in 6133 secs
 
 ------------------------------------
-The fastest way to perform triming is this:
 
-(load-atoms-of-type 'Any)
-(fetch-incoming-set (AnyNode "cset-word"))
-(fetch-incoming-set (AnyNode "cset-disjunct"))
-(iter-trim 1 1 1)  ; This misses the sections, but OK for first pass.
-
-Now fetch the pairs, and then continue trimming.
-(load-atoms-of-type 'Section)
+(iter-trim 1 1 1)
 
 (define (iter-trim a b c)
 	(define pca (make-pseudo-cset-api))
@@ -267,5 +266,32 @@ Now fetch the pairs, and then continue trimming.
 	(print-matrix-summary-report psa)
 	(inexact->exact (round ((add-support-api psa) 'total-support-left)))
 )
+
+---------
+foo
+
+   (define (left-basis-p ITEM)
+      (< 1 (sup-obj 'right-count ITEM)))
+
+ (for-each (lambda (base)
+         (if (and (cog-atom? base) (not (left-basis-p base)))
+            (cog-delete-recursive! base)))
+(cog-get-atoms 'Word))
+
+(define (right-basis-p ITEM)
+      (< 1 (sup-obj 'left-count ITEM)))
+(for-each (lambda (base)
+         (if (and (cog-atom? base) (not (right-basis-p base)))
+            (cog-delete-recursive! base)))
+(cog-get-atoms 'ConnectorSeq))
+
+Yes, do this one:
+	(for-each
+      (lambda (base)
+         (if (and (cog-atom? base) (equal? 1 (cog-incoming-size base)))
+            (cog-delete-recursive! base)))
+	(cog-get-atoms 'ConnectorSeq))
+
+and also for words (after killing zero-incoming-set connectors)
 
 ------- the end -------
