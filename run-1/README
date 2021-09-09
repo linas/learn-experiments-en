@@ -34,6 +34,7 @@ Above to NOT have support marginals in them. These are added below:
 
 Above contain support marginals.
 
+* run-1-t12-trim-1-1-1.rdb
 * run-1-t1234-trim-1-1-1.rdb
 
 Trimmed to remove everything with count of 1.
