@@ -260,8 +260,19 @@ Support computed as follows:
 	((make-store psa) 'store-all)
 
 
-run-1-marg-1234
----------------
+MM^T and Support
+================
+Best to also compute MM^T too.  Like so:
+
+	(define pca (make-pseudo-cset-api))
+	(define psa (add-pair-stars pca))
+	(psa 'fetch-pairs)
+	((add-support-compute psa) 'cache-all)
+	((batch-transpose psa) 'mmt-marginals)
+	(cog-barrier storage-node)
+
+run-1-marg-tranche-1234
+-----------------------
  'fetch-pairs: Elapsed time to load csets: 5807 secs
  Total 78660479 Atoms (count-all) and 59.5 GB RSS
  (Connector . 951753)
@@ -275,21 +286,31 @@ run-1-marg-1234
  Done storing 36562917 left-wilds in 12295 secs
  Done storing 40648095 pairs in 6133 secs
 
-
-MM^T and Support
-================
-Best to also compute MM^T too.  Like so:
-
-	(define pca (make-pseudo-cset-api))
-	(define psa (add-pair-stars pca))
-	(psa 'fetch-pairs)
-	((add-support-compute psa) 'cache-all)
-	((batch-transpose psa) 'mmt-marginals)
-	(cog-barrier storage-node)
-
-run-1-marg-123
---------------
+run-1-marg-tranche-123
+----------------------
  Elapsed time to load csets: 3844 secs  (approx 50 GB RSS)
+ Finished left norm marginals in 10165 secs
+ Finished left totals in 976 secs
+ Finished right norm marginals in 1131 secs
+ Finished right totals in 12 secs
+ Finished mmt norm marginals in 2908 secs (RSS of 71.5GB)
+ Done storing 25698949 left-wilds in 8385 secs
+
+run-1-marg-tranche-1
+--------------------
+ Elapsed time to load csets: 823 secs (RSS of 12.1 GB)
+ Finished left norm marginals in 17197 secs
+ Finished left totals in 6932 secs
+ Finished right norm marginals in 360 secs
+ Finished right totals in 8 secs
+ Finished mmt norm marginals in 1443 secs
+ Done storing 7470276 left-wilds in 2182 secs
+
+Wow! why did the marginals take just as long as the 1234 job, a much
+larger job above? Was it cause I was running two jobs at once, and
+the CPU memory controller was overwhelmed by both at once? Oof!
+
+
 
 
 
@@ -361,6 +382,13 @@ Times:
  Finished with MI computations; this took 4.249 hours.
 
 
+run-1-t123-trim-1-1-1
+---------------------
+first pass:
+ Trimmed left basis in 4551 seconds.
+ Trimmed right basis in 37298 seconds.
+ Trimmed all pairs in 1871 seconds.
+ Trimmed left basis in 3 seconds.
 
 
 
