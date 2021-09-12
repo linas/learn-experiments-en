@@ -340,10 +340,11 @@ Run this 6-8 times:
 (iter-trim 1 1 1)
 (iter-trim 1 1 1)
 
+((make-store psa) 'store-wildcards) ; else the support will be lost!
+
 This invalidates the (word,disjunct) marginals. These need to be
 recomputed:
 
-   ((add-support-compute psa) 'cache-all) ;; Must recompute!
    ((batch-transpose psa) 'mmt-marginals)
    (print-matrix-summary-report psa)
 
@@ -361,7 +362,8 @@ follows:
 	(load-atoms-of-type 'WordNode)
 	(for-each
 		(lambda (base)
-			(if (and (cog-atom? base) (equal? 0 (cog-incoming-size base)))
+			(if (and (cog-atom? base)
+					(equal? 0 (cog-incoming-size-by-type base 'Section)))
 				(cog-delete-recursive! base)))
 		(cog-get-atoms 'WordNode))
 
@@ -390,33 +392,5 @@ first pass:
  Trimmed all pairs in 1871 seconds.
  Trimmed left basis in 3 seconds.
 
-
-
----------
-foo manual cleanup of crudola left by other manual actions.
-
-   (define (left-basis-p ITEM)
-      (< 1 (sup-obj 'right-count ITEM)))
-
- (for-each (lambda (base)
-         (if (and (cog-atom? base) (not (left-basis-p base)))
-            (cog-delete-recursive! base)))
-(cog-get-atoms 'Word))
-
-(define (right-basis-p ITEM)
-      (< 1 (sup-obj 'left-count ITEM)))
-(for-each (lambda (base)
-         (if (and (cog-atom? base) (not (right-basis-p base)))
-            (cog-delete-recursive! base)))
-(cog-get-atoms 'ConnectorSeq))
-
-Yes, do this one:
-	(for-each
-      (lambda (base)
-         (if (and (cog-atom? base) (equal? 1 (cog-incoming-size base)))
-            (cog-delete-recursive! base)))
-	(cog-get-atoms 'ConnectorSeq))
-
-and also for words (after killing zero-incoming-set connectors)
 
 ------- the end -------
