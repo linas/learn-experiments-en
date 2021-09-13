@@ -1,16 +1,59 @@
 
-Compute similiary scores.
+Run-6: Compute similiary scores
+-------------------------------
+Explore the two best scores from run-3 (diary part-two) and compare
+to MI in greater detail.  The two best were overlap (consistently in
+first place) and condjacc (usually second, sometimes 3rd place).
+Compare both to MI.
 
+But first, we have to compute them.
 Use scripts in `learn-lang-diary/utils/similarity-jacc.scm`
 
 (define bover (batch-similarity pcs #f "overlap" -8.0 prt-overlap))
 (bover 'batch-compute 10) ; speed about (13.98 sec/pr) or maybe slower ...
 (bover 'batch-compute 20) ; speed (7.735 sec/pr)
 (bover 'batch-compute 40) ;
+Done 10/10 Frac=41.82% Time: 741 Done: 100.% Rate=0.072 prs/sec (13.98 sec/pr)
+Done 20/20 Frac=37.14% Time: 1199 Done: 100.% Rate=0.129 prs/sec (7.735 sec/pr)
+Done 30/40 Frac=31.61% Time: 1420 Done: 56.7% Rate=0.180 prs/sec (5.569 sec/pr)
+Done 40/40 Frac=37.07% Time: 1464 Done: 100.% Rate=8.068 prs/sec (0.124 sec/pr)
+Done 50/100 Frac=15.84% Time: 1558 Done: 25.2% Rate=0.292 prs/sec (3.424 sec/pr)
+Done 60/100 Frac=24.04% Time: 1655 Done: 36.2% Rate=5.722 prs/sec (0.175 sec/pr)
+Done 70/100 Frac=24.75% Time: 1624 Done: 49.2% Rate=-21.1 prs/sec (-0.05 sec/pr)
+Done 80/100 Frac=26.17% Time: 1635 Done: 64.2% Rate=68.64 prs/sec (0.015 sec/pr)
+Done 90/100 Frac=28.01% Time: 1703 Done: 81.1% Rate=12.57 prs/sec (0.080 sec/pr)
+Done 100/100 Frac=27.84% Time: 1881 Done: 100.% Rate=5.365 prs/sec (0.186 sec/pr)
+Done 110/110 Frac=6.437% Time: 1886 Done: 100.% Rate=0.559 prs/sec (1.788 sec/pr)
+
+
+
+
+
+
+
 
 (define bcond (batch-similarity pcs #f "condjacc" -8.0 prt-condjacc))
 (bcond 'batch-compute 10) ; speed (18.78 sec/pr)
 (bcond 'batch-compute 30)
+Done 10/10 Frac=47.27% Time: 1033 Done: 100.% Rate=0.053 prs/sec (18.78 sec/pr)
+Done 20/30 Frac=38.10% Time: 1487 Done: 45.2% Rate=0.104 prs/sec (9.594 sec/pr)
+Done 30/30 Frac=50.11% Time: 1652 Done: 100.% Rate=1.545 prs/sec (0.647 sec/pr)
+Done 40/40 Frac=20.85% Time: 1838 Done: 100.% Rate=0.193 prs/sec (5.177 sec/pr)
+Done 50/50 Frac= 16.0% Time: 1861 Done: 100.% Rate=0.244 prs/sec (4.090 sec/pr)
+Done 60/60 Frac=15.19% Time: 2234 Done: 100.% Rate=0.248 prs/sec (4.025 sec/pr)
+Done 70/70 Frac=8.209% Time: 2153 Done: 100.% Rate=0.304 prs/sec (3.287 sec/pr)
+
+
+
+
+(define bami (batch-similarity pcs #f "mi" 0.0 prt-mi))
+(bami 'batch-compute 40)
+Done 10/40 Frac=49.09% Time: 409 Done: 6.71% Rate=0.134 prs/sec (7.436 sec/pr)
+Done 20/40 Frac=50.95% Time: 595 Done: 25.6% Rate=0.833 prs/sec (1.200 sec/pr)
+Done 30/40 Frac=56.34% Time: 680 Done: 56.7% Rate=3.000 prs/sec (0.333 sec/pr)
+Done 40/40 Frac=52.07% Time: 715 Done: 100.% Rate=10.14 prs/sec (0.099 sec/pr)
+Done 50/50 Frac=17.18% Time: 780 Done: 100.% Rate=0.583 prs/sec (1.714 sec/pr)
+Done 60/300 Frac=15.41% Time: 834 Done: 4.05% Rate=0.665 prs/sec (1.503 sec/pr)
 
 
 
