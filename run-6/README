@@ -1,0 +1,17 @@
+
+Compute similiary scores.
+
+Use scripts in `learn-lang-diary/utils/similarity-jacc.scm`
+
+(define bover (batch-similarity pcs #f "overlap" -8.0 prt-overlap))
+(bover 'batch-compute 10) ; speed about (13.98 sec/pr) or maybe slower ...
+(bover 'batch-compute 20) ; speed (7.735 sec/pr)
+(bover 'batch-compute 40) ;
+
+(define bcond (batch-similarity pcs #f "condjacc" -8.0 prt-condjacc))
+(bcond 'batch-compute 10) ; speed (18.78 sec/pr)
+(bcond 'batch-compute 30)
+
+
+
+
