@@ -10,22 +10,15 @@ But first, we have to compute them.
 Use scripts in `learn-lang-diary/utils/similarity-jacc.scm`
 
 (define bover (batch-similarity pcs #f "overlap" -8.0 prt-overlap))
-(bover 'batch-compute 10) ; speed about (13.98 sec/pr) or maybe slower ...
-(bover 'batch-compute 20) ; speed (7.735 sec/pr)
-(bover 'batch-compute 40) ;
-Done 10/10 Frac=41.82% Time: 741 Done: 100.% Rate=0.072 prs/sec (13.98 sec/pr)
-Done 20/20 Frac=37.14% Time: 1199 Done: 100.% Rate=0.129 prs/sec (7.735 sec/pr)
-Done 30/40 Frac=31.61% Time: 1420 Done: 56.7% Rate=0.180 prs/sec (5.569 sec/pr)
-Done 40/40 Frac=37.07% Time: 1464 Done: 100.% Rate=8.068 prs/sec (0.124 sec/pr)
-Done 50/100 Frac=15.84% Time: 1558 Done: 25.2% Rate=0.292 prs/sec (3.424 sec/pr)
-Done 60/100 Frac=24.04% Time: 1655 Done: 36.2% Rate=5.722 prs/sec (0.175 sec/pr)
-Done 70/100 Frac=24.75% Time: 1624 Done: 49.2% Rate=-21.1 prs/sec (-0.05 sec/pr)
-Done 80/100 Frac=26.17% Time: 1635 Done: 64.2% Rate=68.64 prs/sec (0.015 sec/pr)
-Done 90/100 Frac=28.01% Time: 1703 Done: 81.1% Rate=12.57 prs/sec (0.080 sec/pr)
-Done 100/100 Frac=27.84% Time: 1881 Done: 100.% Rate=5.365 prs/sec (0.186 sec/pr)
-Done 110/110 Frac=6.437% Time: 1886 Done: 100.% Rate=0.559 prs/sec (1.788 sec/pr)
-
-
+(bover 'batch-compute 200) ;
+Done 110/200 Frac=11.43% Time: 1390.9 Done: 30.4% Rate=0.523 prs/sec (1.913 sec/pr)
+Done 120/200 Frac=24.93% Time: 1716.9 Done: 36.1% Rate=0.673 prs/sec (1.487 sec/pr)
+Done 130/200 Frac=35.22% Time: 1833.9 Done: 42.4% Rate=0.684 prs/sec (1.461 sec/pr)
+Done 140/200 Frac=43.38% Time: 1846.9 Done: 49.1% Rate=0.734 prs/sec (1.363 sec/pr)
+Done 150/200 Frac=49.86% Time: 1717.9 Done: 56.3% Rate=0.847 prs/sec (1.181 sec/pr)
+Done 160/200 Frac=55.09% Time: 1822.9 Done: 64.1% Rate=0.853 prs/sec (1.172 sec/pr)
+Done 170/200 Frac=58.47% Time: 1715.9 Done: 72.3% Rate=0.964 prs/sec (1.037 sec/pr)
+Done 180/200 Frac=61.74% Time: 1838.9 Done: 81.0% Rate=0.954 prs/sec (1.048 sec/pr)
 
 
 
@@ -35,26 +28,31 @@ Done 110/110 Frac=6.437% Time: 1886 Done: 100.% Rate=0.559 prs/sec (1.788 sec/pr
 (define bcond (batch-similarity pcs #f "condjacc" -8.0 prt-condjacc))
 (bcond 'batch-compute 10) ; speed (18.78 sec/pr)
 (bcond 'batch-compute 30)
-Done 10/10 Frac=47.27% Time: 1033 Done: 100.% Rate=0.053 prs/sec (18.78 sec/pr)
-Done 20/30 Frac=38.10% Time: 1487 Done: 45.2% Rate=0.104 prs/sec (9.594 sec/pr)
-Done 30/30 Frac=50.11% Time: 1652 Done: 100.% Rate=1.545 prs/sec (0.647 sec/pr)
-Done 40/40 Frac=20.85% Time: 1838 Done: 100.% Rate=0.193 prs/sec (5.177 sec/pr)
-Done 50/50 Frac= 16.0% Time: 1861 Done: 100.% Rate=0.244 prs/sec (4.090 sec/pr)
-Done 60/60 Frac=15.19% Time: 2234 Done: 100.% Rate=0.248 prs/sec (4.025 sec/pr)
-Done 70/70 Frac=8.209% Time: 2153 Done: 100.% Rate=0.304 prs/sec (3.287 sec/pr)
+Done 10/10 Frac=40.00% Time: 601.0 Done: 100.0% Rate=0.05 prs/sec (21.46 sec/pr)
+Done 20/30 Frac=31.90% Time: 925.0 Done: 45.2% Rate=0.08 prs/sec (12.33 sec/pr)
+Done 30/30 Frac=33.98% Time: 978.0 Done: 100.0% Rate=0.10 prs/sec (9.78 sec/pr)
 
 
 
 
 (define bami (batch-similarity pcs #f "mi" 0.0 prt-mi))
 (bami 'batch-compute 40)
-Done 10/40 Frac=49.09% Time: 409 Done: 6.71% Rate=0.134 prs/sec (7.436 sec/pr)
-Done 20/40 Frac=50.95% Time: 595 Done: 25.6% Rate=0.833 prs/sec (1.200 sec/pr)
-Done 30/40 Frac=56.34% Time: 680 Done: 56.7% Rate=3.000 prs/sec (0.333 sec/pr)
-Done 40/40 Frac=52.07% Time: 715 Done: 100.% Rate=10.14 prs/sec (0.099 sec/pr)
-Done 50/50 Frac=17.18% Time: 780 Done: 100.% Rate=0.583 prs/sec (1.714 sec/pr)
-Done 60/300 Frac=15.41% Time: 834 Done: 4.05% Rate=0.665 prs/sec (1.503 sec/pr)
+Done 120/200 Frac=15.32% Time: 837.9 Done: 36.1% Rate=1.378 prs/sec (0.726 sec/pr)
+Done 130/200 Frac=27.02% Time: 872.9 Done: 42.4% Rate=1.438 prs/sec (0.696 sec/pr)
+Done 140/200 Frac=36.31% Time: 888.9 Done: 49.1% Rate=1.524 prs/sec (0.656 sec/pr)
+Done 150/200 Frac=43.70% Time: 897.9 Done: 56.3% Rate=1.620 prs/sec (0.617 sec/pr)
+Done 160/200 Frac=49.67% Time: 885.9 Done: 64.1% Rate=1.755 prs/sec (0.570 sec/pr)
+Done 170/200 Frac=53.66% Time: 912.9 Done: 72.3% Rate=1.813 prs/sec (0.552 sec/pr)
+Done 180/200 Frac=57.46% Time: 906.9 Done: 81.0% Rate=1.935 prs/sec (0.517 sec/pr)
+Done 190/200 Frac=60.99% Time: 987.9 Done: 90.3% Rate=1.878 prs/sec (0.533 sec/pr)
+Done 200/200 Frac=62.47% Time: 821.9 Done: 100.% Rate=2.158 prs/sec (0.463 sec/pr)
 
 
 
 
+
+
+
+
+
+---------
