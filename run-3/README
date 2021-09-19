@@ -1,8 +1,14 @@
 
+Similarity Smackdown
+--------------------
+August 2021
+
 This is the working directory for the Similarity Smackdown
 diary entry. All testing is done on the run-1-en_mpg-tranche-123.rdb
 dataset.  To avoid accidental data destruction/confusion, all work
 is done here in the run-3 directory.
+
+Results reported near end of diary Part Two.
 
 Datasets:
 * r3-mpg-marg.rdb -- copy of full run-1-en_mpg-tranche-123.rdb set,

@@ -57,6 +57,10 @@ and are thus ready for clustering.  The above include word-pairs too.
 The word-pair marginals and word-pair MI have been recomputed after
 trimming.
 
+Upon further exploration, the above trims are not deep enough: we need to
+trim words, disjuncts with a support of 1.  Many disjuncts appear on just
+one word.  These seem to be junk, and should be removed.
+
 
 Notes:
 ======

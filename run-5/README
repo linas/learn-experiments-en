@@ -1,6 +1,7 @@
 
 run-5 - Trimming of run-1 word-pair files
 =========================================
+Sept 2021
 
 Lets just take a better look at trimming of word-pair files.
 This directory is for messing with that. The final versions
@@ -9,6 +10,8 @@ of the data files follow this naming sequence:
  * r5-prs1-trim-1-1-1.rdb
  * r5-prs1-trim-5-5-2.rdb
 
+
+Reuslts reported in diary Part 3: "Expt-5 – Trimming pairs – Sept 2021"
 
 To actually trim:
 

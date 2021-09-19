@@ -1,11 +1,13 @@
-Restart of English language-learning. Sept 2021
+Restart of English language-learning. July 2021
 ===============================================
 
 Directories:
-* run-1 -- attempt to have a perfect run-through of everything.
+* run-1 -- attempt to have a perfect run-through of everything. (July 2021)
 * run-2 -- work with a flawed copy of tranche-1 only
-* run-3 -- the Similarity Smackdown experiment.
-* run-4 -- disjunct distributions
+* run-3 -- Similarity Smackdown - compare MI to overlap, jaccard, etc. (Aug 2021)
+* run-4 -- Deep trimming of datasets (Sept 2021)
+* run-5 -- Trimming of word-pair files
+* run-6 -- all similarities between top-ranked words
 
 
 Databases in the `~/data` directory

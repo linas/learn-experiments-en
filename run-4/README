@@ -1,8 +1,13 @@
 
-This is the working directory for examining disjunct distributions.
+Sept 2021
+---------
+This is the working directory for examining deep trimming of a dataset.
 All testing is done on the run-1-en_mpg-tranche-123.rdb dataset.
 To avoid accidental data destruction/confusion, all work is done here
 in the run-4 directory.
+
+Results are reported in diary Part Three, title "Expt-4 Trimming Sept 2021"
+
 
 Datasets:
 * r4-mpg-marg.rdb -- copy of full run-1-en_mpg-tranche-123.rdb set,

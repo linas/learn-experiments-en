@@ -1,13 +1,23 @@
 
 Run-6: Compute similiary scores
 -------------------------------
+Sept 2021
+
 Explore the two best scores from run-3 (diary part-two) and compare
 to MI in greater detail.  The two best were overlap (consistently in
 first place) and condjacc (usually second, sometimes 3rd place).
 Compare both to MI.
 
+Results reported in diary Part Three: "Expt-6 – Similarity – Sept 2021"
+
 But first, we have to compute them.
 Use scripts in `learn-lang-diary/utils/similarity-jacc.scm`
+
+Data file `r6-similarity.rdb` is a copy of `run-1-t1234-trim-1-1-1.rdb`
+with the similarity between the top-ranked 1200 words computed.
+Problem: the run-1-t1234-trim-1-1-1.rdb file contains disjuncts with
+a count of 2 or greater, but a support of only 1. These seem to be ...
+junk, and need to be trimmed also.
 
 (define bover (batch-similarity pcs #f "overlap" -8.0 prt-overlap))
 (bover 'batch-compute 200) ;
@@ -22,16 +32,12 @@ Done 180/200 Frac=61.74% Time: 1838.9 Done: 81.0% Rate=0.954 prs/sec (1.048 sec/
 
 
 
-
-
-
 (define bcond (batch-similarity pcs #f "condjacc" -8.0 prt-condjacc))
 (bcond 'batch-compute 10) ; speed (18.78 sec/pr)
 (bcond 'batch-compute 30)
 Done 10/10 Frac=40.00% Time: 601.0 Done: 100.0% Rate=0.05 prs/sec (21.46 sec/pr)
 Done 20/30 Frac=31.90% Time: 925.0 Done: 45.2% Rate=0.08 prs/sec (12.33 sec/pr)
 Done 30/30 Frac=33.98% Time: 978.0 Done: 100.0% Rate=0.10 prs/sec (9.78 sec/pr)
-
 
 
 
@@ -48,7 +54,7 @@ Done 190/200 Frac=60.99% Time: 987.9 Done: 90.3% Rate=1.878 prs/sec (0.533 sec/p
 Done 200/200 Frac=62.47% Time: 821.9 Done: 100.% Rate=2.158 prs/sec (0.463 sec/pr)
 
 
-Now up to 900 for all three.
+Now up to 1200 for all three.
 
 
 ---------
