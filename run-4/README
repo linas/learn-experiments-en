@@ -8,6 +8,9 @@ in the run-4 directory.
 
 Results are reported in diary Part Three, title "Expt-4 Trimming Sept 2021"
 
+The scripts in this directory were also used to prepare teh "clean"
+trimmed files in run-1.
+
 
 Datasets:
 * r4-mpg-marg.rdb -- copy of full run-1-en_mpg-tranche-123.rdb set,
@@ -162,7 +165,7 @@ Because we forgot to trim-linkage first. If we trim-linkage, then:
       (cog-get-atoms 'WordNode))
 
 ----------------------------
-Lets try some automation.
+Lets try some automation.  This is the "Golden" code for trimming.
 
    (define pca (make-pseudo-cset-api))
    (define psa (add-pair-stars pca))
@@ -180,3 +183,38 @@ Lets try some automation.
 	(print-matrix-summary-report psa)
 	(inexact->exact (round ((add-support-api psa) 'total-support-left)))
 )
+
+; Same as above, but trims support.
+(define (supp-trim a b c)
+	(define pca (make-pseudo-cset-api))
+	(define psa (add-pair-stars pca))
+	(support-trim psa a b c)
+	(trim-linkage psa)
+	(set! pca (make-pseudo-cset-api))
+	(set! psa (add-pair-stars pca))
+	((add-support-compute psa) 'cache-all)
+	(print-matrix-summary-report psa)
+	(inexact->exact (round ((add-support-api psa) 'total-support-left)))
+)
+
+((batch-transpose psa) 'mmt-marginals)
+
+====================================================
+WTF. After trimming, and loading the trimmed file, there are .. word-nodes,
+that got loaded ... and are not a part of the matrix.  How'd that happen?
+
+Well, all that trimming seems to fail to trim some of the marginals
+that were just hanging out.  So we do that by hand:
+
+(for-each
+	(lambda (base)
+		(if (and (cog-atom? base) (equal? 0 (cog-incoming-size-by-type base 'Section)))
+			(cog-delete-recursive! base)))
+      (cog-get-atoms 'ConnectorSeq))
+
+(for-each
+	(lambda (base)
+		(if (and (cog-atom? base) (equal? 0 (cog-incoming-size-by-type base 'Section)))
+			(cog-delete-recursive! base)))
+      (cog-get-atoms 'Word))
+

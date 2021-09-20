@@ -4,7 +4,7 @@
 #
 # IPv4 hostname and port number of where the cogserver is running.
 export HOSTNAME=localhost
-export PORT=19006
+export PORT=19004
 export PROMPT="scheme@(run-4)"
 export COGSERVER_CONF=${CONFIG_DIR}/4-cogserver/cogserver-gram-en.conf
 
@@ -30,6 +30,10 @@ export MST_DB=${ROCKS_DATA_DIR}/run-1-t1234-trim-1-1-1.rdb
 export MST_DB=${ROCKS_DATA_DIR}/run-1-marg-tranche-12.rdb
 export MST_DB=${ROCKS_DATA_DIR}/run-1-t12-trim-1-1-1.rdb
 export MST_DB=${ROCKS_DATA_DIR}/run-1-marg-tranche-123.rdb
-# export MST_DB=${ROCKS_DATA_DIR}/run-1-t123-trim-1-1-1.rdb
+export MST_DB=${ROCKS_DATA_DIR}/run-1-t123-trim-1-1-1.rdb
+export MST_DB=${ROCKS_DATA_DIR}/run-1-t1-tsup-1-1-1.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/run-1-t12-tsup-1-1-1.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/run-1-t123-tsup-1-1-1.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/run-1-t1234-tsup-1-1-1.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
