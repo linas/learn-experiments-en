@@ -15,9 +15,23 @@ Use scripts in `learn-lang-diary/utils/similarity-jacc.scm`
 
 Data file `r6-similarity.rdb` is a copy of `run-1-t1234-trim-1-1-1.rdb`
 with the similarity between the top-ranked 1200 words computed.
+This include the MI similarity, the overlap similarity, and the condjacc
+similarity.
 Problem: the run-1-t1234-trim-1-1-1.rdb file contains disjuncts with
 a count of 2 or greater, but a support of only 1. These seem to be ...
 junk, and need to be trimmed also.
+
+Data file `r6-similarity-tsup.rdb` is a copy of `run-1-t1234-tsup-1-1-1.rdb`
+which trims everything with a support of only 1. It contains MI similarity
+for the top-ranked 1200 words. (Same as before)
+
+	(define pca (make-pseudo-cset-api))
+	(define psa (add-pair-stars pca))
+	(psa 'fetch-pairs)        ;; Load the dataset
+
+
+======================
+Some reports from `r6-similarity.rdb`
 
 (define bover (batch-similarity pcs #f "overlap" -8.0 prt-overlap))
 (bover 'batch-compute 200) ;
