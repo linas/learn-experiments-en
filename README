@@ -6,8 +6,9 @@ Directories:
 * run-2 -- work with a flawed copy of tranche-1 only
 * run-3 -- Similarity Smackdown - compare MI to overlap, jaccard, etc. (Aug 2021)
 * run-4 -- Deep trimming of datasets (Sept 2021)
-* run-5 -- Trimming of word-pair files
-* run-6 -- all similarities between top-ranked words
+* run-5 -- Trimming of word-pair files.
+* run-6 -- All similarities between top-ranked words.
+* run-7 -- Exploring one merge at a time.
 
 
 Databases in the `~/data` directory
@@ -17,6 +18,9 @@ Databases in the `~/data` directory
 * run-1-en_pairs-tranche-12.rdb -- run-1 guten-tranche-1 and 2.
 * run-1-en_pairs-tranche-12*.rdb -- etc.
 
+* run-1-t1*-tsup-1-1-1.rdb -- MPG-parsed and correctly trimmed, see run-5, run-6
+     and diary part three. Includes MM^T marginals.
+
 * r2-en_pairs.rdb -- just pair counts for guten-tranche-1 only.
      Above is missing 400+ files. There were some crashes.
      Part of run-2 -- includes MI
@@ -25,5 +29,8 @@ Databases in the `~/data` directory
      This includes the MM^T marginals.
 
 * r3-* -- Assorted Similarilty Smackdown databases.
+
+* r6-similarity-tsup.rdb -- copy of run-1-t1234-tsup-1-1-1.rdb with MI for
+     word-pairs between the top 1200 wordvecs computed.
 
 ...THE END...
