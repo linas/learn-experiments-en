@@ -12,10 +12,68 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (define pca (make-pseudo-cset-api))
 (define pcs (add-pair-stars pca))
 (define sup (add-support-api pcs))
-(define sap (add-similarity-api pcs))
+(define smi (add-similarity-api pcs #f "mi"))
 
 (pcs 'fetch-pairs)
-(sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+(smi 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+
+(define wa (Word "is"))
+(define wb (Word "was"))
+
+(define ol2 (/ 1.0 (log 2.0)))
+(define (log2 x)
+   (if (< 0 x) (* (log x) ol2) (- (inf))))
+
+(define trp (add-transpose-api pcs))
+(define tot-mmt (trp 'total-mmt-count))
+(define ltot-mmt (log2 tot-mmt))
+
+; This is log_2 p(w) = log_2 \sum_d p(w,d) p(d,*)
+(define (marg-mmt WRD)
+   (- (log2 (trp 'mmt-count WRD)) ltot-mmt))
+
+; This is MI(a,b) -0.5(p(a) + p(b)) and has that funky square-root in it.
+(define (common-MI WA WB)
+   (+ (cog-value-ref (smi 'pair-count WA WB) 0)
+      (* 0.5 (+ (marg-mmt WA) (marg-mmt WB)))))
+
+; Examine individual supports and counts
+(sup 'right-support wa)
+(sup 'right-support wb)
+(sup 'right-count wa)
+(sup 'right-count wb)
+
+
+; Compute the common support
+(define sim (add-similarity-compute pcs))
+(sim 'right-overlap wa wb)
+
+(define (either x y) (if (or (< 0.0 x) (< 0.0 y)) 1.0 0.0))
+(define (both x y) (if (and (< 0.0 x) (< 0.0 y)) 1.0 0.0))
+(define either-obj (add-support-compute (add-tuple-math pcs either)))
+(define both-obj (add-support-compute (add-tuple-math pcs both)))
+
+(either-obj 'right-support (list wa wb))
+(both-obj 'right-support (list wa wb))
+
+(define (none WA WB) 0.0)
+
+(define is-was ((add-cluster-gram pcs) 'make-cluster wa wb))
+; merge
+(start-cluster pcs is-was wa wb none 0 #f)
+
+
+(define cnt 0)
+(define (remove-zero WRD)
+	(for-each
+		(lambda (ITEM)
+			(when (and (cog-atom? ITEM) (is-zero? (pcs 'get-count ITEM)))
+				(cog-delete! ITEM)
+				(set! cnt (+ 1 cnt))))
+		(pcs 'right-stars WRD)))
+
+(length (pcs 'right-stars  wa))
+
 
 
 The End
