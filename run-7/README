@@ -1,0 +1,22 @@
+
+Run-7 -- Explore individual merges
+----------------------------------
+Sept 2021
+
+Starting point is to copy data file `r6-similarity-tsup.rdb` which itself is a
+copy of `run-1-t1234-tsup-1-1-1.rdb`.  The later trims everything with to have
+a support of more than 1.  The former contains MI similarity for the top-ranked
+1200 words.
+
+
+(define pca (make-pseudo-cset-api))
+(define pcs (add-pair-stars pca))
+(define sup (add-support-api pcs))
+(define sap (add-similarity-api pcs))
+
+(pcs 'fetch-pairs)
+(sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+
+
+The End
+-------
