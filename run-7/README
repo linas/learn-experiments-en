@@ -17,6 +17,10 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (pcs 'fetch-pairs)
 (smi 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
 
+(define sha (add-shape-vec-api pcs))
+
+(define e (make-elapsed-secs)) (sha 'explode-sections) (e)
+
 (define wa (Word "is"))
 (define wb (Word "was"))
 
@@ -59,8 +63,11 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (define (none WA WB) 0.0)
 
 (define is-was ((add-cluster-gram pcs) 'make-cluster wa wb))
-; merge
+; merge but not connectors
 (start-cluster pcs is-was wa wb none 0 #f)
+
+# merge connectors
+(start-cluster pcs is-was wa wb none 0 #t)
 
 
 (define cnt 0)
@@ -75,6 +82,22 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (length (pcs 'right-stars  wa))
 
 
+(define atc (add-transpose-compute pcs))
+(atc 'set-mmt-marginals WRD)
+(atc 'set-mmt-totals)
+	
+
+(define (set-mmt-totals)
+         (let ((mmt-sup (atc 'total-mmt-support))
+               (mmt-cnt (atc 'total-mmt-count))
+               (mmt-len (atc 'total-mmt-length))
+               (mmt-amp (atc 'total-mmt-amplitude)))
+            (trp 'set-mmt-totals mmt-sup mmt-cnt mmt-len mmt-amp)))
+
+(define asm (add-symmetric-mi-compute pcs))
+(asm 'mmt-fmi wa wb)
+
+(define e (make-elapsed-secs)) (set-mmt-totals) (e)
 
 The End
 -------
