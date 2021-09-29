@@ -121,6 +121,8 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (cog-incoming-size-by-type (AnyNode "cset-disjunct") 'List)
 
 ;===============================
+; Same as above, but with shape merges.
+
 (use-modules (srfi srfi-1))
 (define pca (make-pseudo-cset-api))
 (define pcs (add-pair-stars pca))
@@ -155,6 +157,46 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (define is-was ((add-cluster-gram pcs) 'make-cluster wa wb))
 ; merge connectors
 (start-cluster sha is-was wa wb none 0 #t)
+
+; ======================================
+; Cluster expansions
+
+(define (comi sa sb) (common-MI (Word sa) (Word sb)))
+(define (mimi sa sb) (smi 'pair-count (Word sa) (Word sb)))
+
+(define wa (Word "It"))
+(define wb (Word "He"))
+
+(define clus ((add-cluster-gram pcs) 'make-cluster wa wb))
+; merge but not connectors
+(define (none WA WB) 0.0)
+(start-cluster pcs clus wa wb none 0 #f)
+
+; Recompute MMT etc.
+(define atc (add-transpose-compute pcs))
+
+(atc 'set-mmt-marginals wa)
+(atc 'set-mmt-marginals wb)
+(atc 'set-mmt-marginals clus)
+(atc 'set-mmt-totals)
+
+(cog-value (Similarity wa wb) (Predicate "*-SimKey mi"))
+
+(define asm (add-symmetric-mi-compute pcs))
+(asm 'mmt-fmi wa wb)
+
+(define (recomp-mi WA WB)
+	(cog-set-value! (Similarity WA WB) (Predicate "*-SimKey mi")
+		(FloatValue (asm 'mmt-fmi WA WB))))
+
+(define (rest sa sb) (recomp-mi (Word sa) (Word sb)))
+
+;---------
+(define wa (Word "She"))
+(merge-into-cluster pcs clus wa none 0 #f)
+
+(define e (make-elapsed-secs)) (atc 'set-mmt-totals) (e)
+
 
 The End
 -------
