@@ -21,14 +21,48 @@ Problem: the run-1-t1234-trim-1-1-1.rdb file contains disjuncts with
 a count of 2 or greater, but a support of only 1. These seem to be ...
 junk, and need to be trimmed also.
 
+Data file `run-1-t1234-tsup-1-1-1.rdb` trims everything with a support of
+only 1.
+
 Data file `r6-similarity-tsup.rdb` is a copy of `run-1-t1234-tsup-1-1-1.rdb`
-which trims everything with a support of only 1. It contains MI similarity
-for the top-ranked 1200 words. (Same as before)
+It contains MI similarity for the top-ranked 1200 words. (Same as before)
 
 	(define pca (make-pseudo-cset-api))
 	(define psa (add-pair-stars pca))
 	(psa 'fetch-pairs)        ;; Load the dataset
 
+======================
+Data file `r6-similarity-shape.rdb` is a copy of `run-1-t1234-tsup-1-1-1.rdb`
+It contain similarity computed with cross-sections.  Like so:
+(copied from learn-lang-diary/utils/similarity-jacc.scm and modified)
+
+(define pca (make-pseudo-cset-api))
+(define pcs (add-pair-stars pca))
+(define sha (add-covering-sections pcs))
+(sha 'fetch-pairs)
+(sha 'explode-sections)
+(define btr (batch-transpose sha))
+(btr 'mmt-marginals)
+Finished left norm marginals in 3417 secs
+Done storing 1043583 left-wilds in 295 secs
+Finished mmt norm marginals in 292 secs
+
+(define smi-done? (make-once-predicate))
+(define smi (add-symmetric-mi-compute sha))
+(define (shi WA WB)
+   (if (smi-done? (Unordered WA WB))
+      -100000
+      (smi 'mmt-fmi WA WB)))
+
+(define (prt-smi WA WB)
+   (define rv (shi WA WB))
+   (if (< 3 rv)
+      (format #t ">>~A<< -- >>~A<< mi = ~6F\n"
+         (cog-name WA) (cog-name WB) rv))
+   rv)
+
+(define basi (batch-similarity sha #f "shape-mi" 0.0 prt-smi))
+(basi 'batch-compute 40)
 
 ======================
 Some reports from `r6-similarity.rdb`
