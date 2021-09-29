@@ -17,13 +17,6 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (pcs 'fetch-pairs)
 (smi 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
 
-(define sha (add-shape-vec-api pcs))
-
-(define e (make-elapsed-secs)) (sha 'explode-sections) (e)
-
-(define wa (Word "is"))
-(define wb (Word "was"))
-
 (define ol2 (/ 1.0 (log 2.0)))
 (define (log2 x)
    (if (< 0 x) (* (log x) ol2) (- (inf))))
@@ -40,6 +33,9 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (define (common-MI WA WB)
    (+ (cog-value-ref (smi 'pair-count WA WB) 0)
       (* 0.5 (+ (marg-mmt WA) (marg-mmt WB)))))
+
+(define wa (Word "is"))
+(define wb (Word "was"))
 
 ; Examine individual supports and counts
 (sup 'right-support wa)
@@ -60,14 +56,15 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (either-obj 'right-support (list wa wb))
 (both-obj 'right-support (list wa wb))
 
+; ------------------------------
 (define (none WA WB) 0.0)
+
+(define wa (Word "is"))
+(define wb (Word "was"))
 
 (define is-was ((add-cluster-gram pcs) 'make-cluster wa wb))
 ; merge but not connectors
 (start-cluster pcs is-was wa wb none 0 #f)
-
-# merge connectors
-(start-cluster pcs is-was wa wb none 0 #t)
 
 
 (define cnt 0)
@@ -98,6 +95,66 @@ a support of more than 1.  The former contains MI similarity for the top-ranked
 (asm 'mmt-fmi wa wb)
 
 (define e (make-elapsed-secs)) (set-mmt-totals) (e)
+
+(define cnt 0)
+(define (verify)
+	(for-each
+		(lambda (ITEM)
+			(when 
+				; (equal? 0 (cog-incoming-size-by-type ITEM 'Section))
+				; (equal? 0 (sup 'left-count ITEM))
+				(equal? 0 (sup 'left-support ITEM))
+				(set! cnt (+ 1 cnt))))
+		(pcs 'right-basis)))
+
+(define (verify)
+	(for-each
+		(lambda (ITEM)
+			(when 
+				(equal? 0 (trp 'mmt-count ITEM))
+				(set! cnt (+ 1 cnt))))
+		(pcs 'left-basis)))
+
+(define miss (atoms-subtract (cog-get-atoms 'ConnectorSeq) (pcs 'right-basis)))
+
+
+(cog-incoming-size-by-type (AnyNode "cset-disjunct") 'List)
+
+;===============================
+(use-modules (srfi srfi-1))
+(define pca (make-pseudo-cset-api))
+(define pcs (add-pair-stars pca))
+(define sha (add-covering-sections pcs))
+(sha 'fetch-pairs)
+(define e (make-elapsed-secs)) (sha 'explode-sections) (e)
+
+(define wa (Word "is"))
+(define wb (Word "was"))
+
+(length (filter (lambda (DJ) (equal? (cog-type DJ) 'ShapeLink)) (sha 'right-duals wb)))
+(length (filter (lambda (DJ) (equal? (cog-type DJ) 'ConnectorSeq)) (sha 'right-duals wb)))
+
+(define sup (add-support-api sha))
+
+(fold + 0 (map get-count (filter (lambda (SEC) 
+		(equal? (cog-type (gdr SEC)) 'ConnectorSeq)) (sha 'right-stars wb))))
+
+(fold + 0 (map get-count (filter (lambda (SEC) 
+		(equal? (cog-type (gdr SEC)) 'ShapeLink)) (sha 'right-stars wb))))
+
+(define (either x y) (if (or (< 0.0 x) (< 0.0 y)) 1.0 0.0))
+(define (both x y) (if (and (< 0.0 x) (< 0.0 y)) 1.0 0.0))
+(define either-obj (add-support-compute (add-tuple-math sha either)))
+(define both-obj (add-support-compute (add-tuple-math sha both)))
+
+(either-obj 'right-support (list wa wb))
+(both-obj 'right-support (list wa wb))
+
+
+(define (none WA WB) 0.0)
+(define is-was ((add-cluster-gram pcs) 'make-cluster wa wb))
+; merge connectors
+(start-cluster sha is-was wa wb none 0 #t)
 
 The End
 -------
