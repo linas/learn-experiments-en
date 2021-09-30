@@ -41,6 +41,8 @@ It contain similarity computed with cross-sections.  Like so:
 (define sha (add-covering-sections pcs))
 (sha 'fetch-pairs)
 (sha 'explode-sections)
+(load-atoms-of-type 'Similarity)
+
 (define btr (batch-transpose sha))
 (btr 'mmt-marginals)
 Finished left norm marginals in 3417 secs
@@ -60,6 +62,14 @@ Finished mmt norm marginals in 292 secs
       (format #t ">>~A<< -- >>~A<< mi = ~6F\n"
          (cog-name WA) (cog-name WB) rv))
    rv)
+
+(call-with-new-thread
+   (lambda ()
+      (define (stosle)
+         (for-each store-atom (cog-get-atoms 'Similarity))
+         (sleep 1800)
+         (stosle))
+      (stosle)))
 
 (define basi (batch-similarity sha #f "shape-mi" 0.0 prt-smi))
 (basi 'batch-compute 40)
