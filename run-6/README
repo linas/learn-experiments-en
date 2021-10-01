@@ -36,6 +36,8 @@ Data file `r6-similarity-shape.rdb` is a copy of `run-1-t1234-tsup-1-1-1.rdb`
 It contain similarity computed with cross-sections.  Like so:
 (copied from learn-lang-diary/utils/similarity-jacc.scm and modified)
 
+(use-modules (srfi srfi-1))
+
 (define pca (make-pseudo-cset-api))
 (define pcs (add-pair-stars pca))
 (define sha (add-covering-sections pcs))
@@ -49,11 +51,13 @@ Finished left norm marginals in 3417 secs
 Done storing 1043583 left-wilds in 295 secs
 Finished mmt norm marginals in 292 secs
 
+(define sap (add-similarity-api sha #f "shape-mi"))
+
 (define smi-done? (make-once-predicate))
 (define smi (add-symmetric-mi-compute sha))
 (define (shi WA WB)
-   (if (smi-done? (Unordered WA WB))
-      -100000
+   (if (or (sap 'pair-count WA WB) (smi-done? (Unordered WA WB)))
+      -10000
       (smi 'mmt-fmi WA WB)))
 
 (define (prt-smi WA WB)
@@ -71,8 +75,11 @@ Finished mmt norm marginals in 292 secs
          (stosle))
       (stosle)))
 
-(define basi (batch-similarity sha #f "shape-mi" 0.0 prt-smi))
+(define basi (batch-similarity sha #f "shape-mi" -88.0 prt-smi))
 (basi 'batch-compute 40)
+
+(define bami (batch-similarity sha #f "shape-mi" -88.0 prt-smi))
+(bami 'batch-list (drop (take ranked-words 100) 40))
 
 ======================
 Some reports from `r6-similarity.rdb`
