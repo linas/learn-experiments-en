@@ -81,6 +81,10 @@ Finished mmt norm marginals in 292 secs
 (define bami (batch-similarity sha #f "shape-mi" -88.0 prt-smi))
 (bami 'batch-list (drop (take ranked-words 100) 40))
 
+Above results in 668610 Similarity links.
+In addition, there are 51990 word pairs with zero overlap!
+ Total = (+ 668610 51990) = 720600 = (* 0.5 1200 1201) perfect.
+
 ======================
 Some reports from `r6-similarity.rdb`
 
