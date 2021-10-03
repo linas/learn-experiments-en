@@ -16,47 +16,65 @@ MI similarity for the top-ranked 1200 words using shapes.
 (sha 'fetch-pairs)
 (define e (make-elapsed-secs)) (sha 'explode-sections) (e)
 
-(define smi (add-similarity-api sha #f "shape-mi"))
-(smi 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+(define sap (add-similarity-api sha #f "shape-mi"))
+(sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
 
----------
+(define asm (add-symmetric-mi-compute sha))
 
-(define mrg (make-comi sha 0 0))
-((mrg 'merge-function) WA WB)
+; =================================
+; Create a sorted list -- just like in cliques.scm
+; cut-n-paste code from there...
+
+; =================================
+; Get ready to merge.
+
+; The fraction to merge -- zero.
+(define (none WA WB) 0.0)
+
+; When to merge -- always.
+(define (always WA WB) #t)
+
+; Recompute the support ... wait, this is done for us, already.
+; Recompute the mmt ... this will be calleed for us, automatically.
+(define atc (add-transpose-compute sha))
+(define (store-mmt row)
+   (store-atom (atc 'set-mmt-marginals row)))
+
+(define mrg (make-merger sha always none 0 0 store-mmt #t))
+
+; =================================
+; Perform the merge.
+
+(define (do-merge WA WB)
+	(define wclass ((mrg 'merge-function) WA WB))
+
+	; Post merge, recompute the mmt total.
+	(define e (make-elapsed-secs))
+	(store-atom (atc 'set-mmt-totals))
+	(format #t "Did the mmt totals in ~A secs\n" (e))
+
+	(define (recomp-pair-sim WA WB)
+		(sap 'set-pair-similarity (FloatValue (asm 'mmt-fmi WA WB))))
+
+	(define (recomp-all-sim WX)
+		(define e (make-elapsed-secs))
+		(define wrd-list (sim 'left-duals WX))
+		(for-each
+			(lambda (WRD) (recomp-pair-sim WRD WX))
+			word-list)
+		(format #t "Recomputed all ~D sims for ~A in ~A secs\n"
+			(length word-list) (cog-name WX) (e))
+	)
+
+	; Is this actually needed?
+	; We need to be selective with this, cause it takes so long.
+	(recomp-all-sim WA)
+	(recomp-all-sim WB)
+
+)
 
 (define wa (Word "is"))
 (define wb (Word "was"))
-
-(define (set-mmt-totals)
-         (let ((mmt-sup (atc 'total-mmt-support))
-               (mmt-cnt (atc 'total-mmt-count))
-               (mmt-len (atc 'total-mmt-length))
-               (mmt-amp (atc 'total-mmt-amplitude)))
-            (trp 'set-mmt-totals mmt-sup mmt-cnt mmt-len mmt-amp)))
-
-(define asm (add-symmetric-mi-compute pcs))
-(asm 'mmt-fmi wa wb)
-
-(define e (make-elapsed-secs)) (set-mmt-totals) (e)
-
-; ======================================
-
-; Recompute MMT etc.
-(define atc (add-transpose-compute pcs))
-
-(cog-value (Similarity wa wb) (Predicate "*-SimKey mi"))
-
-(define asm (add-symmetric-mi-compute pcs))
-(asm 'mmt-fmi wa wb)
-
-(define (recomp-mi WA WB)
-	(cog-set-value! (Similarity WA WB) (Predicate "*-SimKey mi")
-		(FloatValue (asm 'mmt-fmi WA WB))))
-
-(define (rest sa sb) (recomp-mi (Word sa) (Word sb)))
-
-
-(define e (make-elapsed-secs)) (atc 'set-mmt-totals) (e)
 
 
 The End
