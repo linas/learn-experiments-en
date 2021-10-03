@@ -9,6 +9,7 @@ Directories:
 * run-5 -- Trimming of word-pair files.
 * run-6 -- All similarities between top-ranked words.
 * run-7 -- Exploring one merge at a time.
+* run-8 -- Exploring one merge at a time, w/shapes, and more merges.
 
 
 Databases in the `~/data` directory
@@ -39,5 +40,6 @@ Databases in the `~/data` directory
      word-pairs between the top 1200 wordvecs computed.
 
 * r7-merge.rdb -- individual merge experiments.
+* r8-merge.rdb -- individual merge experiments.
 
 ...THE END...
