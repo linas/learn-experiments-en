@@ -1,0 +1,63 @@
+
+Run-8 -- Explore individual merges, w/ shapes and more of them.
+---------------------------------------------------------------
+Oct 2021
+
+Starting point is to copy data file `r6-similarity-shape.rdb` which
+itself is a copy of `run-1-t1234-tsup-1-1-1.rdb`.  The later trims
+everything to have a support of more than 1.  The former contains
+MI similarity for the top-ranked 1200 words using shapes.
+
+
+(use-modules (srfi srfi-1))
+(define pca (make-pseudo-cset-api))
+(define pcs (add-pair-stars pca))
+(define sha (add-covering-sections pcs))
+(sha 'fetch-pairs)
+(define e (make-elapsed-secs)) (sha 'explode-sections) (e)
+
+(define smi (add-similarity-api sha #f "shape-mi"))
+(smi 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+
+---------
+
+(define mrg (make-comi sha 0 0))
+((mrg 'merge-function) WA WB)
+
+(define wa (Word "is"))
+(define wb (Word "was"))
+
+(define (set-mmt-totals)
+         (let ((mmt-sup (atc 'total-mmt-support))
+               (mmt-cnt (atc 'total-mmt-count))
+               (mmt-len (atc 'total-mmt-length))
+               (mmt-amp (atc 'total-mmt-amplitude)))
+            (trp 'set-mmt-totals mmt-sup mmt-cnt mmt-len mmt-amp)))
+
+(define asm (add-symmetric-mi-compute pcs))
+(asm 'mmt-fmi wa wb)
+
+(define e (make-elapsed-secs)) (set-mmt-totals) (e)
+
+; ======================================
+
+; Recompute MMT etc.
+(define atc (add-transpose-compute pcs))
+
+(cog-value (Similarity wa wb) (Predicate "*-SimKey mi"))
+
+(define asm (add-symmetric-mi-compute pcs))
+(asm 'mmt-fmi wa wb)
+
+(define (recomp-mi WA WB)
+	(cog-set-value! (Similarity WA WB) (Predicate "*-SimKey mi")
+		(FloatValue (asm 'mmt-fmi WA WB))))
+
+(define (rest sa sb) (recomp-mi (Word sa) (Word sb)))
+
+
+(define e (make-elapsed-secs)) (atc 'set-mmt-totals) (e)
+
+
+The End
+-------
