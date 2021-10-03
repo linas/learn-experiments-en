@@ -25,6 +25,28 @@ MI similarity for the top-ranked 1200 words using shapes.
 ; Create a sorted list -- just like in cliques.scm
 ; cut-n-paste code from there...
 
+(prt-sorted-pairs 0)
+common-MI= 15.818 .... <<-->> --
+common-MI= 15.700 — <<-->> +
+common-MI= 15.695 ; <<-->> ,
+common-MI= 15.593 is <<-->> was
+common-MI= 15.586 i <<-->> ii
+common-MI= 15.565 and <<-->> but
+common-MI= 15.469 . <<-->> ?
+common-MI= 15.455 ! <<-->> ?
+common-MI= 15.399 It <<-->> He
+common-MI= 15.349 [ <<-->> +
+common-MI= 14.756 ” <<-->> "
+common-MI= 14.732 No <<-->> A
+common-MI= 14.728 in <<-->> of
+common-MI= 14.725 she <<-->> he
+common-MI= 14.682 It <<-->> There
+common-MI= 14.641 and <<-->> as
+common-MI= 14.600 ! <<-->> .
+common-MI= 14.574 ‘ <<-->> “
+common-MI= 14.524 the <<-->> his
+common-MI= 14.511 Footnote <<-->> Times.=
+
 ; =================================
 ; Get ready to merge.
 
@@ -41,19 +63,70 @@ MI similarity for the top-ranked 1200 words using shapes.
    (store-atom (atc 'set-mmt-marginals row)))
 
 (define mrg (make-merger sha always none 0 0 store-mmt #t))
+(define mrg (make-merger (add-cluster-gram sha) always none 0 0 store-mmt #t))
 
 ; =================================
 ; Perform the merge.
 
+(define mp (list-ref sorted-pairs 0))
+(define wa (gar mp))
+(define wb (gdr mp))
+
+(define (setup-next N)
+	(define mp (list-ref sorted-pairs N))
+	(set! wa (gar mp))
+	(set! wb (gdr mp))
+	(format #t "Setup for merge of `~A` and `~A`\n"
+		(cog-name wa) (cog-name wb)))
+
 (define (do-merge WA WB)
-	(define wclass ((mrg 'merge-function) WA WB))
+	(format #t "Start merge of `~A` and `~A`\n"
+		(cog-name WA) (cog-name WB))
+	(define e (make-elapsed-secs))
+	(define wclass (mrg 'merge-function WA WB))
+	(format #t "Merged into `~A` in ~A secs\n" (cog-name wclass) (e))
 
 	; Post merge, recompute the mmt total.
-	(define e (make-elapsed-secs))
 	(store-atom (atc 'set-mmt-totals))
 	(format #t "Did the mmt totals in ~A secs\n" (e))
+)
+
+(setup-next 0)
+Setup for merge of `....` and `--`
+merge in 213 secons
+
+(setup-next 1)
+Setup for merge of `—` and `+`
+Did the merge in 176 secs
+
+(setup-next 2)
+Start merge of `;` and `,`
+Did the merge in 490 secs
+
+(setup-next 3)
+Setup for merge of `is` and `was`
+Did the merge in 296 secs
+
+(setup-next 4)
+Setup for merge of `i` and `ii`
+Did the merge in 172 secs
+
+(setup-next 5)
+Start merge of `and` and `but`
+Merged into and but in 279 secs
+
+(setup-next 6)
+Setup for merge of `.` and `?`
+Merged into . ? in 360 secs
+
+(setup-next 7)
+Setup for merge of `!` and `?`
+Ahh and now we have to recompute similarities to see what's happening.
+
+
 
 	(define (recomp-pair-sim WA WB)
+xxx (store-atom
 		(sap 'set-pair-similarity (FloatValue (asm 'mmt-fmi WA WB))))
 
 	(define (recomp-all-sim WX)
