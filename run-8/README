@@ -56,11 +56,17 @@ common-MI= 14.511 Footnote <<-->> Times.=
 ; When to merge -- always.
 (define (always WA WB) #t)
 
-; Recompute the support ... wait, this is done for us, already.
-; Recompute the mmt ... this will be calleed for us, automatically.
+; Recompute the support ...
+; What was done is not enough, we need to recompute the marginals
+; on the disjuncts, too, to get N(*,d)
+; Recompute the mmt ... this will be called for us, automatically.
+(define psu (add-support-compute sha))
 (define atc (add-transpose-compute sha))
-(define (store-mmt row)
-   (store-atom (atc 'set-mmt-marginals row)))
+(define (store-mmt WRD)
+	(for-each
+		(lambda (DJ) (store-atom (psu 'set-left-marginals DJ)))
+		(sha 'right-duals WRD))
+   (store-atom (atc 'set-mmt-marginals WRD)))
 
 (define mrg (make-merger sha always none 0 0 store-mmt #t))
 (define mrg (make-merger (add-cluster-gram sha) always none 0 0 store-mmt #t))
@@ -76,6 +82,10 @@ common-MI= 14.511 Footnote <<-->> Times.=
 	(define mp (list-ref sorted-pairs N))
 	(set! wa (gar mp))
 	(set! wb (gdr mp))
+	(when (equal? (cog-type wb) 'WordClassNode) ; swap.
+		(set! wa (gdr mp))
+		(set! wb (gar mp)))
+
 	(format #t "Setup for merge of `~A` and `~A`\n"
 		(cog-name wa) (cog-name wb)))
 
@@ -123,31 +133,169 @@ Merged into . ? in 360 secs
 Setup for merge of `!` and `?`
 Ahh and now we have to recompute similarities to see what's happening.
 
+(cog-get-atoms 'WordClass)
 
+(define merged-words
+	(concatenate
+		(map (lambda (CLS)
+				(map (lambda (MEMB) (cog-outgoing-atom MEMB 0))
+						(cog-incoming-by-type CLS 'Member)))
+			(cog-get-atoms 'WordClass))))
 
-	(define (recomp-pair-sim WA WB)
-xxx (store-atom
-		(sap 'set-pair-similarity (FloatValue (asm 'mmt-fmi WA WB))))
+------------
 
-	(define (recomp-all-sim WX)
-		(define e (make-elapsed-secs))
-		(define wrd-list (sim 'left-duals WX))
-		(for-each
-			(lambda (WRD) (recomp-pair-sim WRD WX))
-			word-list)
-		(format #t "Recomputed all ~D sims for ~A in ~A secs\n"
-			(length word-list) (cog-name WX) (e))
-	)
+wtf... OH, OK, N(*,d) was not being recomputed... fixed...
 
-	; Is this actually needed?
-	; We need to be selective with this, cause it takes so long.
-	(recomp-all-sim WA)
-	(recomp-all-sim WB)
+------------
+(define (recomp-pair-sim WA WB)
+	(store-atom
+		(sap 'set-pair-similarity
+			(Similarity WA WB) (FloatValue (asm 'mmt-fmi WA WB)))))
 
+(define (recomp-all-sim WX)
+	(define e (make-elapsed-secs))
+	(define wrd-list (sim 'left-duals WX))
+	(define hi-list
+		(filter (lambda (WRD) (< 8.0 (common-MI WRD WX)))
+			wrd-list))
+
+	(for-each
+		(lambda (WRD) (recomp-pair-sim WRD WX))
+		hi-list)
+	(format #t "Recomputed ~3D hi-mi-sims for `~A` in ~A secs\n"
+		(length hi-list) (cog-name WX) (e))
 )
 
-(define wa (Word "is"))
-(define wb (Word "was"))
+(for-each recomp-all-sim merged-words)
+
+Recomputed   2 hi-mi-sims for `;` in 10 secs
+Recomputed 137 hi-mi-sims for `,` in 893 secs
+Recomputed  76 hi-mi-sims for `and` in 273 secs
+Recomputed  44 hi-mi-sims for `but` in 36 secs
+Recomputed  21 hi-mi-sims for `--` in 11 secs
+Recomputed   3 hi-mi-sims for `....` in 0 secs
+Recomputed 257 hi-mi-sims for `is` in 259 secs
+Recomputed 265 hi-mi-sims for `was` in 393 secs
+Recomputed  17 hi-mi-sims for `i` in 1 secs
+Recomputed   3 hi-mi-sims for `ii` in 0 secs
+Recomputed  81 hi-mi-sims for `.` in 469 secs
+Recomputed  10 hi-mi-sims for `?` in 17 secs
+Recomputed  15 hi-mi-sims for `+` in 4 secs
+Recomputed  53 hi-mi-sims for `—` in 53 secs
+
+
+(define (comp-all-cls-sim CLS)
+	(define e (make-elapsed-secs))
+
+	(for-each
+		(lambda (WRD) (recomp-pair-sim WRD CLS))
+		words-with-sims)
+	(format #t "Computed ~4D sims for `~A` in ~A secs\n"
+		(length words-with-sims) (cog-name CLS) (e))
+)
+
+(for-each comp-all-cls-sim (cog-get-atoms 'WordClass))
+
+Computed 1200 sims for `; ,` in 1018 secs
+Computed 1200 sims for `and but` in 443 secs
+Computed 1200 sims for `.... --` in 141 secs
+Computed 1200 sims for `is was` in 860 secs
+Computed 1200 sims for `i ii` in 119 secs
+Computed 1200 sims for `. ?` in 336 secs
+Computed 1200 sims for `— +` in 120 secs
+
+
+
+(define (comp-cls-cls-sim CLS)
+	(define e (make-elapsed-secs))
+	(define clist (cog-get-atoms 'WordClass))
+
+	(for-each
+		(lambda (WRD) (recomp-pair-sim WRD CLS))
+		clist)
+	(format #t "Computed ~4D sims for `~A` in ~A secs\n"
+		(length clist) (cog-name CLS) (e))
+)
+
+(for-each comp-cls-cls-sim (cog-get-atoms 'WordClass))
+
+Fast.
+
+(for-each (lambda (CA)
+	(for-each (lambda (CB)
+		(format #t "`~A` -- `~A` comi= ~6F\n" (cog-name CA)
+			(cog-name CB) (common-MI CA CB)))
+		(cog-get-atoms 'WordClass)))
+	(cog-get-atoms 'WordClass))
+
+Looks OK
+
+Recompute using tthe new values
+(length (cog-get-atoms 'Similarity)) ;; 677039
+(+ 668610 (* 7 1200) 49) ;; 677059
+
+tot-mmt ; 133428839146.0   old value
+(trp 'total-mmt-count) ;; 127451894354.0 new value
+
+ltot-mmt ; 36.95727956632733  old value
+(log2 tot-mmt)) ;;;  36.89116186046995 new value
+
+guile> (prt-sorted-pairs 0)
+common-MI= 16.115 ! <<-->> . ?          << cool!
+common-MI= 15.941 i ii <<-->> iv        << cool!
+common-MI= 15.600 as <<-->> and but     << ok sure!
+common-MI= 15.530 i ii <<-->> iii       << yes!
+common-MI= 15.432 It <<-->> He          << OK
+common-MI= 15.404 for <<-->> and but    << sure
+common-MI= 15.276 ' <<-->> .... --      << cool!
+common-MI= 15.266 ###LEFT-WALL### <<-->> ; ,    << OK
+common-MI= 15.205 .... -- <<-->> JANET    << nasty lets wait.
+common-MI= 15.041 . ? <<-->> ....
+common-MI= 14.980 ‐ <<-->> .... --
+common-MI= 14.927 . ? <<-->> ; ,
+common-MI= 14.845 i ii <<-->> v
+common-MI= 14.789 ” <<-->> "
+common-MI= 14.765 No <<-->> A
+common-MI= 14.763 — + <<-->> –
+common-MI= 14.761 in <<-->> of
+common-MI= 14.758 she <<-->> he
+common-MI= 14.739 \\\\\\\\\\\\\\\"I <<-->> .... --
+common-MI= 14.735 had <<-->> is was
+
+(setup-next 0)
+Setup for merge of `. ?` and `!`
+Merged into `. ?` in 177 secs
+
+(setup-next 1)
+Setup for merge of `i ii` and `iv`
+Merged into `i ii` in 144 secs
+
+(setup-next 2)
+Setup for merge of `and but` and `as`
+Merged into `and but` in 177 secs
+
+(setup-next 3)
+Setup for merge of `i ii` and `iii`
+Merged into `i ii` in 146 secs
+
+(setup-next 4)
+Setup for merge of `It` and `He`
+Merged into `It He` in 150 secs
+
+(setup-next 5)
+Setup for merge of `and but` and `for`
+Oh, hang on .. we should recrank here.
+
+; manual...
+(define merged-words (list
+	(Word "!")
+	(Word "iv")
+	(Word "as")
+	(Word "iii")
+	(Word "It")
+	(Word "He")))
+
+(for-each recomp-all-sim merged-words)
 
 
 The End
