@@ -1,0 +1,23 @@
+
+Run-9 -- Common-MI merge Development
+------------------------------------
+Oct 2021
+
+Starting point is a copy of `run-1-t1234-tsup-1-1-1.rdb`.
+Should be able to run merges on this. Right!?
+
+
+
+(use-modules (srfi srfi-1))
+(define pca (make-pseudo-cset-api))
+(define pcs (add-pair-stars pca))
+(define sha (add-covering-sections pcs))
+(sha 'fetch-pairs)
+(define e (make-elapsed-secs)) (sha 'explode-sections) (e)
+
+(define sap (add-similarity-api sha #f "shape-mi"))
+(sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+
+
+The End
+-------
