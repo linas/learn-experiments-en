@@ -40,6 +40,49 @@ Answer: sha does not have supports, but pcs does.
 We actually need supports on sha to get everything in tune.
 Sigh
 
+Marginal MI.  Go for it.
+------------------------
+(define trp (add-transpose-api sha))
+(define tot-mmt (trp 'total-mmt-count)) ;; 133428839146.0
+(define sup (add-support-api sha))
+(define tcl (sup 'total-count-left)) ; 22942644.0
+
+(log2 (/ tot-mmt (* tcl tcl))) ;; -11.945777087600217
+
+Sanity check
+------------
+(define trp (add-transpose-api LLOBJ))
+(define logtot-mmt (log2 (trp 'total-mmt-count)))
+(define (marg-mmt WRD)
+	(- (log2 (trp 'mmt-count WRD)) logtot-mmt))
+
+(marg-mmt (Word "she")) ;; -8.132478192249291
+
+(define smc (add-symmetric-mi-compute sha))
+(log2 (smc 'mmt-marginal (Word "she"))) ; -8.132478192249287
+
+(smc 'mmt-fmi (Word "she") (Word "he")) ; 3.717520907323397
+
+(log2 (smc 'mmt-marginal (Word "he"))) ; -6.809712318531014
+
+(* 0.5 (+ -8.132478192249287 -6.809712318531014)) ; -7.471095255390151
+
+(* 0.5 11.945777087600217)  ; 5.972888543800108
+
+
+OK Go for it, again
+-------------------
+(sap 'pair-count (Word "she") (Word "he"))
+
+(length good-sims) ;; 1338
+
+so out of 200*201/1 = 20K pairs, 1K have MI > 2 .. I guess that's allright
+
+(ranked-mi-sim (Word "she") (Word "he"))
+
+
+
+
 Data set construction
 ---------------------
 (sha 'fetch-pairs)
@@ -50,6 +93,8 @@ Elapsed time to create shapes: 104 secs
 
 (define bat (batch-transpose sha))
 (bat 'mmt-marginals)
+Finished left norm marginals in 3503 secs
+Finished mmt norm marginals in 310 secs
 
 
 
