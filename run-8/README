@@ -66,9 +66,9 @@ common-MI= 14.511 Footnote <<-->> Times.=
 	(for-each
 		(lambda (DJ) (store-atom (psu 'set-left-marginals DJ)))
 		(sha 'right-duals WRD))
+	(store-atom (psu 'set-right-marginals WRD))
    (store-atom (atc 'set-mmt-marginals WRD)))
 
-(define mrg (make-merger sha always none 0 0 store-mmt #t))
 (define mrg (make-merger (add-cluster-gram sha) always none 0 0 store-mmt #t))
 
 ; =================================
@@ -94,11 +94,10 @@ common-MI= 14.511 Footnote <<-->> Times.=
 		(cog-name WA) (cog-name WB))
 	(define e (make-elapsed-secs))
 	(define wclass (mrg 'merge-function WA WB))
-	(format #t "Merged into `~A` in ~A secs\n" (cog-name wclass) (e))
 
 	; Post merge, recompute the mmt total.
 	(store-atom (atc 'set-mmt-totals))
-	(format #t "Did the mmt totals in ~A secs\n" (e))
+	(format #t "Merged into `~A` in ~A secs\n" (cog-name wclass) (e))
 )
 
 (setup-next 0)
@@ -145,6 +144,9 @@ Ahh and now we have to recompute similarities to see what's happening.
 ------------
 
 wtf... OH, OK, N(*,d) was not being recomputed... fixed...
+
+(for-each store-mmt merged-words)
+(for-each store-mmt (cog-get-atoms 'WordClass))
 
 ------------
 (define (recomp-pair-sim WA WB)
@@ -295,7 +297,56 @@ Oh, hang on .. we should recrank here.
 	(Word "It")
 	(Word "He")))
 
+(define new-cls (list
+	(WordClass ". ?")
+	(WordClass "i ii")
+	(WordClass "and but")
+	(WordClass "It He")))
+
+(for-each store-mmt merged-words)
+(for-each store-mmt new-cls)
+
 (for-each recomp-all-sim merged-words)
+(for-each recomp-all-sim new-cls)
+(for-each comp-all-cls-sim new-cls)
+
+(for-each comp-cls-cls-sim (cog-get-atoms 'WordClass))
+
+(define tot-mmt (trp 'total-mmt-count))
+(define ltot-mmt (log2 tot-mmt))
+
+(define all-sim-pairs (cog-get-atoms 'Similarity))
+(define uniq-sims
+   (filter (lambda (SIM) (not (equal? (gar SIM) (gdr SIM)))) all-sim-pairs))
+(define hi-comi-sims
+   (filter (lambda (SIM) (< 12.0 (common-MI (gar SIM) (gdr SIM)))) uniq-sims))
+(define sorted-pairs
+	(rank-pairs (lambda (SIM) (common-MI (gar SIM) (gdr SIM)))))
+
+(prt-sorted-pairs 0)
+
+
+common-MI= 15.682 There <<-->> It He   -- OK
+common-MI= 15.650 She <<-->> It He     -- need redo but skip it
+common-MI= 15.581 for <<-->> and but   -- sure
+common-MI= 15.541 This <<-->> It He    -- another
+common-MI= 15.318 i ii <<-->> v        -- good
+common-MI= 15.283 . ? <<-->> ....      -- OK
+common-MI= 15.276 ' <<-->> .... --     -- OK
+common-MI= 15.262 ###LEFT-WALL### <<-->> ; ,   --Hmmm
+common-MI= 15.205 .... -- <<-->> JANET    -- oh no!
+common-MI= 15.016 had <<-->> is was     -- OK
+common-MI= 14.980 ‐ <<-->> .... --      -- again recomps needed.
+common-MI= 14.961 . ? <<-->> ; ,        -- another recomp but whatever.
+common-MI= 14.842 that <<-->> and but   -- sure
+common-MI= 14.786 ” <<-->> "            -- excellent
+common-MI= 14.763 No <<-->> A           -- Meh
+common-MI= 14.760 — + <<-->> –          -- good
+common-MI= 14.759 has <<-->> is was     -- yep
+common-MI= 14.759 in <<-->> of          -- OK
+common-MI= 14.756 she <<-->> he         -- good
+common-MI= 14.739 \\\\\\\\\\\\\\\"I <<-->> .... -- Meh
+
 
 
 The End
