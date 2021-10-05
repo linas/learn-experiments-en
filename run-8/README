@@ -384,6 +384,11 @@ common-MI= 14.739 \\\\\\\\\\\\\\\"I <<-->> .... -- Meh
 	(WordClass "” \"")
 	(WordClass "It He")))
 
+(define new-cls (list
+	(WordClass "in of")
+	(WordClass "he she")
+	(WordClass "” \""))
+
 ==================
 Sanity checking
 

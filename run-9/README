@@ -13,10 +13,45 @@ Should be able to run merges on this. Right!?
 (define pcs (add-pair-stars pca))
 (define sha (add-covering-sections pcs))
 (sha 'fetch-pairs)
-(define e (make-elapsed-secs)) (sha 'explode-sections) (e)
+(sha 'explode-sections)
 
+(define bat (batch-transpose sha))
+(bat 'mmt-marginals)
+
+xxx not yet...
 (define sap (add-similarity-api sha #f "shape-mi"))
 (sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+
+
+
+OK Debug session
+----------------
+Whats up with supports?
+
+(define sup (add-support-api sha))
+(define all-words (sha 'left-basis))
+(define cnt 0)
+(for-each (lambda (WRD)
+   (if (equal? 0 (sup 'right-support WRD))
+      (set! cnt (+ 1 cnt))))
+   all-words)
+
+Answer: sha does not have supports, but pcs does.
+We actually need supports on sha to get everything in tune.
+Sigh
+
+Data set construction
+---------------------
+(sha 'fetch-pairs)
+Elapsed time to load csets: 175 secs
+Elapsed time to load cross-sections: 0 seconds
+(sha 'explode-sections)
+Elapsed time to create shapes: 104 secs
+
+(define bat (batch-transpose sha))
+(bat 'mmt-marginals)
+
+
 
 
 The End
