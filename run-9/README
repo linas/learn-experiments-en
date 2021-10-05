@@ -80,6 +80,33 @@ so out of 200*201/1 = 20K pairs, 1K have MI > 2 .. I guess that's allright
 
 (ranked-mi-sim (Word "she") (Word "he"))
 
+(define (prt-sorted-pairs LST N)
+   (for-each
+      (lambda (PR)
+         (format #t "ranked-MI = ~6F MI = ~6F (`~A`, `~A`)\n"
+            (ranked-mi-sim (gar PR) (gdr PR))
+            (mi-sim (gar PR) (gdr PR))
+            (cog-name (gar PR))
+            (cog-name (gdr PR))))
+      (drop (take LST (min (length LST) (+ N 20))) N)))
+
+
+(smc 'mmt-fmi (Word "i") (Word "ii"))
+
+(define (rank-of WRD)
+	(list-index (lambda (W) (equal? WRD W)) ranked-words))
+
+(define gsims
+	(filter
+		(lambda (SIM)
+			(define WA (gar SIM))
+			(define WB (gdr SIM))
+			(and (< 6.0 (mi-sim WA WB)) (<= (mi-sim WA WB) 33.0)
+				 (not (equal? WA WB))))
+		all-sim-pairs))
+
+(define rp (rank-pairs gsims
+	(lambda (SIM) (ranked-mi-sim (gar SIM) (gdr SIM)))))
 
 
 
