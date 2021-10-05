@@ -8,6 +8,12 @@ itself is a copy of `run-1-t1234-tsup-1-1-1.rdb`.  The later trims
 everything to have a support of more than 1.  The former contains
 MI similarity for the top-ranked 1200 words using shapes.
 
+Results:
+Everything seems to be working. This allowed a code review to happen,
+a few bugs got fixed, and an outline for the next-gen merge algo
+got created.  It's going to go into `agglo-rank.scm`.
+So I think we're done here.
+
 
 (use-modules (srfi srfi-1))
 (define pca (make-pseudo-cset-api))
@@ -337,7 +343,7 @@ common-MI= 15.262 ###LEFT-WALL### <<-->> ; ,   --Hmmm
 common-MI= 15.205 .... -- <<-->> JANET    -- oh no!
 common-MI= 15.016 had <<-->> is was     -- OK
 common-MI= 14.980 ‐ <<-->> .... --      -- again recomps needed.
-common-MI= 14.961 . ? <<-->> ; ,        -- another recomp but whatever.
+common-MI= 14.961 . ? <<-->> ; ,        -- Ohh!! First merge of classes!
 common-MI= 14.842 that <<-->> and but   -- sure
 common-MI= 14.786 ” <<-->> "            -- excellent
 common-MI= 14.763 No <<-->> A           -- Meh
@@ -346,6 +352,53 @@ common-MI= 14.759 has <<-->> is was     -- yep
 common-MI= 14.759 in <<-->> of          -- OK
 common-MI= 14.756 she <<-->> he         -- good
 common-MI= 14.739 \\\\\\\\\\\\\\\"I <<-->> .... -- Meh
+
+(define merged-words (list
+	(Word "There")
+	(Word "She")
+	(Word "for")
+	(Word "This")
+	(Word "v")
+	(Word "'")
+	(Word "had")
+	(Word "has")
+	(Word "that")
+	(Word "in")
+	(Word "of")
+	(Word "he")
+	(Word "she")
+	(Word "–")
+	(Word "###LEFT-WALL###")
+	(Word "....")))
+
+(define new-cls (list
+	(WordClass ".... --")
+	(WordClass "; ,")
+	(WordClass ". ?")
+	(WordClass "i ii")
+	(WordClass "and but")
+	(WordClass "is was")
+	(WordClass "in of")
+	(WordClass "he she")
+	(WordClass "— +")
+	(WordClass "” \"")
+	(WordClass "It He")))
+
+==================
+Sanity checking
+
+(define all-words (sha 'left-basis))
+(for-each (lambda (WRD)
+	(if (equal? (cog-type WRD) 'WordClassNode)
+		(format #t "Bingo ~A\n" (cog-name WRD))))
+	all-words)
+
+(define cnt 0)
+(for-each (lambda (WRD)
+	(if (equal? 0 (sup 'right-support WRD))
+		(set! cnt (+ 1 cnt))))
+	all-words)
+
 
 
 
