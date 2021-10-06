@@ -10,7 +10,8 @@ Should be able to run merges on this. Right!?
 
 (use-modules (srfi srfi-1))
 (define pca (make-pseudo-cset-api))
-(define pcs (add-pair-stars pca))
+(define agc (add-gram-class-api pca))
+(define pcs (add-pair-stars agc))
 (define sha (add-covering-sections pcs))
 (sha 'fetch-pairs)
 (sha 'explode-sections)
@@ -122,6 +123,8 @@ Dry run, fank first 100
 -----------------------
 Bugs in cluster naming.
 
+almost monotonic but not quite
+
 ranked-MI = 9.1620 MI = 5.0377 (`;`, `,`)
 ranked-MI = 9.0605 MI = 4.6242 (`is`, `was`)
 ranked-MI = 9.0319 MI = 4.8387 (`and`, `but`)
@@ -164,6 +167,30 @@ ranked-MI = 1.0498 MI = 4.4312 (`to from`, `on`)
 ranked-MI = 1.0264 MI = 10.063 (`their`, `the a`)
 ranked-MI = 1.0065 MI = 5.1528 (`a no`, `an`)
 ranked-MI = 0.9819 MI = 4.9484 (`and`, `,`)
+ranked-MI = 2.9491 MI = 9.6009 (`and`, `but`)  << we've done this before! NOT MONTOINC
+ranked-MI = 0.9528 MI = 5.0434 (`_`, `‘ “`)
+ranked-MI = 0.7646 MI = 11.141 (`had`, `has`)
+ranked-MI = 0.7307 MI = 6.7386 (`at`, `from`)
+ranked-MI = 0.7127 MI = 6.0925 (`and ,`, `or`)
+ranked-MI = 0.4036 MI = 5.5641 (`see`, `have be`)
+ranked-MI = 0.3620 MI = 5.9597 (`!`, `,`)
+ranked-MI = 0.0722 MI = 4.0132 (`if`, `and but`)
+ranked-MI = -0.102 MI = 6.1902 (`###LEFT-WALL### :`, `"`)
+ranked-MI = -0.142 MI = 6.6770 (`not but`, `only`)
+ranked-MI = -0.185 MI = 5.4569 (`There`, `It He`)
+ranked-MI = -0.296 MI = 8.1413 (`|`, `. of`)
+ranked-MI = -0.335 MI = 8.8529 (`at from`, `on`)
+ranked-MI = -0.390 MI = 4.6509 (`in`, `to`)
+ranked-MI = 0.7632 MI = 8.5437 (`to`, `could`)  << another inversion
+ranked-MI = 0.6735 MI = 9.6363 (`in`, `into`)
+ranked-MI = 0.6357 MI = 10.103 (`would`, `to could`)
+ranked-MI = -0.401 MI = 5.7821 (`would could`, `should`)
+ranked-MI = -0.605 MI = 5.5127 (`is was`, `did`)
+ranked-MI = -0.632 MI = 4.1642 (`as`, `is`)
+
+
+
+
 
 
 
