@@ -108,6 +108,16 @@ so out of 200*201/1 = 20K pairs, 1K have MI > 2 .. I guess that's allright
 (define rp (rank-pairs gsims
 	(lambda (SIM) (ranked-mi-sim (gar SIM) (gdr SIM)))))
 
+Where are the clusters??
+(define sp (get-ranked-pairs sha 2))
+(define cnt 0)
+(for-each
+	(lambda (SIM)
+		(if (or (equal? (cog-type (gar SIM)) 'WordClassNode)
+				(equal? (cog-type (gdr SIM)) 'WordClassNode))
+			(set! cnt (+ cnt 1))))
+	sp)
+
 
 
 Data set construction
