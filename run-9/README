@@ -118,6 +118,54 @@ Where are the clusters??
 			(set! cnt (+ cnt 1))))
 	sp)
 
+Dry run, fank first 100
+-----------------------
+Bugs in cluster naming.
+
+ranked-MI = 9.1620 MI = 5.0377 (`;`, `,`)
+ranked-MI = 9.0605 MI = 4.6242 (`is`, `was`)
+ranked-MI = 9.0319 MI = 4.8387 (`and`, `but`)
+ranked-MI = 8.9357 MI = 5.8409 (`.`, `?`)
+ranked-MI = 8.8665 MI = 4.9165 (`It`, `He`)
+ranked-MI = 8.2227 MI = 5.2267 (`”`, `"`)
+ranked-MI = 8.1951 MI = 4.4320 (`in`, `of`)
+ranked-MI = 8.0408 MI = 4.5713 (`‘`, `“`)
+ranked-MI = 7.9914 MI = 4.2834 (`the`, `his`)
+ranked-MI = 7.7349 MI = 4.1172 (`###LEFT-WALL###`, `:`)
+ranked-MI = 7.6428 MI = 5.2748 (`have`, `be`)
+ranked-MI = 7.6143 MI = 4.5670 (`a`, `no`)
+ranked-MI = 7.5651 MI = 5.2749 (`would`, `could`)
+ranked-MI = 7.3664 MI = 5.7994 (`were`, `are`)
+ranked-MI = 7.3611 MI = 4.2474 (`There`, `there`)
+ranked-MI = 7.1519 MI = 4.7093 (`had`, `has`)
+ranked-MI = 6.6920 MI = 4.4414 (`do`, `did`)
+ranked-MI = 6.6489 MI = 4.4502 (`think`, `know`)
+ranked-MI = 6.6097 MI = 4.8580 (`will`, `should`)
+ranked-MI = 6.5414 MI = 4.2444 (`to`, `from`)
+ranked-MI = 5.7621 MI = 4.5039 (`on`, `into`)
+ranked-MI = 5.4821 MI = 4.1775 (`made`, `been`)
+ranked-MI = 5.4418 MI = 4.6794 (`my`, `their`)
+ranked-MI = 4.4436 MI = 4.5731 (`as`, `and but`)   <<<<< first cluster
+ranked-MI = 4.3999 MI = 4.6014 (`:`, `; ,`)
+ranked-MI = 3.6787 MI = 7.4757 (`!`, `. ?`)
+ranked-MI = 3.0092 MI = 6.0101 (`in of`, `into`)
+ranked-MI = 2.7972 MI = 4.4249 (`had`, `is was`)
+ranked-MI = 2.2098 MI = 5.6060 (`for`, `and but`)
+ranked-MI = 1.8936 MI = 4.6803 (`their`, `the his`)
+ranked-MI = 1.7668 MI = 7.0720 (`;`, `,`)       <<<< same as very first!!
+ranked-MI = 1.6940 MI = 4.0208 (`so`, `and but`)
+ranked-MI = 1.5368 MI = 9.7911 (`It`, `There`)
+ranked-MI = 1.4419 MI = 6.2566 (`the`, `a`)
+ranked-MI = 1.4097 MI = 5.7577 (`her`, `his`)
+ranked-MI = 1.2702 MI = 5.1342 (`not`, `but`)
+ranked-MI = 1.2647 MI = 5.1246 (`”`, `’`)
+ranked-MI = 1.1276 MI = 4.7510 (`.`, `of`)       <<<<<< First ugly
+ranked-MI = 1.0498 MI = 4.4312 (`to from`, `on`)
+ranked-MI = 1.0264 MI = 10.063 (`their`, `the a`)
+ranked-MI = 1.0065 MI = 5.1528 (`a no`, `an`)
+ranked-MI = 0.9819 MI = 4.9484 (`and`, `,`)
+
+
 
 
 Data set construction
