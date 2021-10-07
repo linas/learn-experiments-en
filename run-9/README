@@ -16,13 +16,15 @@ Should be able to run merges on this. Right!?
 (sha 'fetch-pairs)
 (sha 'explode-sections)
 
-(define bat (batch-transpose sha))
-(bat 'mmt-marginals)
+; Already done...
+; Crap.  The changed APi fucked it up. Do it again.
+; (define bat (batch-transpose sha))
+; (bat 'mmt-marginals)
 
-xxx not yet...
 (define sap (add-similarity-api sha #f "shape-mi"))
 (sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
 
+(do-stuff sha)
 
 
 OK Debug session
@@ -121,9 +123,11 @@ Where are the clusters??
 
 Dry run, fank first 100
 -----------------------
-Bugs in cluster naming.
+Bugs in cluster naming. and a dozen other bugs.
 
 almost monotonic but not quite
+
+below is in r9-merge-a.rdb
 
 ranked-MI = 9.1620 MI = 5.0377 (`;`, `,`)
 ranked-MI = 9.0605 MI = 4.6242 (`is`, `was`)
@@ -187,8 +191,10 @@ ranked-MI = 0.6357 MI = 10.103 (`would`, `to could`)
 ranked-MI = -0.401 MI = 5.7821 (`would could`, `should`)
 ranked-MI = -0.605 MI = 5.5127 (`is was`, `did`)
 ranked-MI = -0.632 MI = 4.1642 (`as`, `is`)
-
-
+ranked-MI = -0.691 MI = 9.5457 (`a`, `an`)
+ranked-MI = -0.931 MI = 4.2346 (`at`, `in of`)
+ranked-MI = -0.941 MI = 4.7907 (`”`, `and but`)        <<< ugly
+ranked-MI = -0.962 MI = 9.9423 (`her his`, `their`)
 
 
 
