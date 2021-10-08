@@ -10,21 +10,27 @@ Should be able to run merges on this. Right!?
 
 (use-modules (srfi srfi-1))
 (define pca (make-pseudo-cset-api))
-(define agc (add-gram-class-api pca))
-(define pcs (add-pair-stars agc))
+(define pcs (add-pair-stars pca))
 (define sha (add-covering-sections pcs))
+
 (sha 'fetch-pairs)
 (sha 'explode-sections)
 
+
 ; Already done...
-; Crap.  The changed APi fucked it up. Do it again.
+; Crap.  The changed API fucked it up. Do it again.
+; I don't get it... what changed???
+; Oh the wild-wild changed. And there are no totals on it.
+; Crap.
+
 ; (define bat (batch-transpose sha))
 ; (bat 'mmt-marginals)
 
 (define sap (add-similarity-api sha #f "shape-mi"))
 (sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
 
-(do-stuff sha)
+(pair-wise-cluster sha 100 500)  ; r9-merge-b.rdb
+(pair-wise-cluster sha 200 500)  ; r9-merge-c.rdb
 
 
 OK Debug session
@@ -196,6 +202,33 @@ ranked-MI = -0.931 MI = 4.2346 (`at`, `in of`)
 ranked-MI = -0.941 MI = 4.7907 (`”`, `and but`)        <<< ugly
 ranked-MI = -0.962 MI = 9.9423 (`her his`, `their`)
 
+r9-merge-b.rdb
+--------------
+Merge starting with top-100 words.
+
+>>>> Make-simmer mmt-q =11.945777
+ranked-MI = 9.1620 MI = 5.0377 (`;`, `,`)      ; Same as above.
+>>>> Make-simmer mmt-q =8.8404528
+>>>> Make-simmer mmt-q = 8.8404528
+ranked-MI = 9.0605 MI = 4.6242 (`is`, `was`)
+>>>> Make-simmer mmt-q = 7.1014360
+
+
+
+
+
+r9-merge-c.rdb
+--------------
+Merge starting with top-200 words.
+
+>>>> Make-simmer mmt-q =11.945777   ; ??? why is this the same as above?
+ranked-MI = 9.1671 MI = 9.3888 (`—`, `+`)   ; OK, so not in the top-100
+>>>> Make-simmer mmt-q =5.5394624
+>>>> Make-simmer mmt-q = 5.5394624
+
+ranked-MI = 9.1620 MI = 5.0377 (`;`, `,`)
+
+
 
 
 
@@ -214,6 +247,8 @@ Elapsed time to create shapes: 104 secs
 Finished left norm marginals in 3503 secs
 Finished mmt norm marginals in 310 secs
 
+Simililarity for the first 100 rows:
+Done computing MI similarity in 10985 secs
 
 
 
