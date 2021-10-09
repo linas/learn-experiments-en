@@ -16,20 +16,11 @@ Should be able to run merges on this. Right!?
 (sha 'fetch-pairs)
 (sha 'explode-sections)
 
-
 ; Already done...
-; Crap.  The changed API fucked it up. Do it again.
-; I don't get it... what changed???
-; Oh the wild-wild changed. And there are no totals on it.
-; Crap.
-
 ; (define bat (batch-transpose sha))
 ; (bat 'mmt-marginals)
 
-(define sap (add-similarity-api sha #f "shape-mi"))
-(sap 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
-
-(pair-wise-cluster sha 100 500)  ; r9-merge-b.rdb
+(pair-wise-cluster sha 100 500)  ; r9-merge-b.rdb and d too
 (pair-wise-cluster sha 200 500)  ; r9-merge-c.rdb
 
 
@@ -214,6 +205,7 @@ ranked-MI = 9.0605 MI = 4.6242 (`is`, `was`)
 >>>> Make-simmer mmt-q = 7.1014360
 
 
+FAIL
 
 
 
@@ -228,6 +220,12 @@ ranked-MI = 9.1671 MI = 9.3888 (`—`, `+`)   ; OK, so not in the top-100
 
 ranked-MI = 9.1620 MI = 5.0377 (`;`, `,`)
 
+FAIL
+
+
+OK, so both r9-merge-b.rdb and r9-merge-c.rdb have unpaired cross
+sections from some earlier merges.  Attempting to reproduce, its
+not reproducing easily.
 
 
 
