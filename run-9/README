@@ -7,7 +7,7 @@ Starting point is a copy of `run-1-t1234-tsup-1-1-1.rdb`.
 Should be able to run merges on this. Right!?
 
 
-
+$ guile -l cogserver.scm
 (use-modules (srfi srfi-1))
 (define pca (make-pseudo-cset-api))
 (define pcs (add-pair-stars pca))
@@ -20,8 +20,11 @@ Should be able to run merges on this. Right!?
 ; (define bat (batch-transpose sha))
 ; (bat 'mmt-marginals)
 
-(pair-wise-cluster sha 100 500)  ; r9-merge-b.rdb and d too
-(pair-wise-cluster sha 200 500)  ; r9-merge-c.rdb
+(pair-wise-cluster sha 100 500)  ; r9-merge-b.rdb and e.rdb
+(pair-wise-cluster sha 200 500)  ; r9-merge-c.rdb and d.rdb and f.rdb
+
+$ guile -l cogserver-gram.scm
+(in-group-cluster covr-obj 0.7 200 100) ;r9-merge-g.rdb
 
 
 OK Debug session
@@ -228,8 +231,17 @@ sections from some earlier merges.  Attempting to reproduce, its
 not reproducing easily.
 
 
+r9-merge-d.rdb
+--------------
+(pair-wise-cluster sha 200 300)
 
+Plus checkers run every loop.
 
+r9-merge-e.rdb
+--------------
+(pair-wise-cluster sha 100 300)
+
+all above failed on the word-class merge
 
 
 Data set construction

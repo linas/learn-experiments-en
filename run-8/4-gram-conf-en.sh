@@ -12,6 +12,7 @@ export COGSERVER_CONF=${CONFIG_DIR}/4-cogserver/cogserver-gram-en.conf
 export MST_DB=${ROCKS_DATA_DIR}/r8-merge.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-sim-200.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-merge-c.rdb
-export MST_DB=${ROCKS_DATA_DIR}/r9-merge-x.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r9-merge-d.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r9-merge-f.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
