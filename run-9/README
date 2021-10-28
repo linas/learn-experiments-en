@@ -25,6 +25,10 @@ $ guile -l cogserver.scm
 
 $ guile -l cogserver-gram.scm
 (in-group-cluster covr-obj 0.7 200 100) ;r9-merge-g.rdb
+; Above gets stuck in inf loop, because the in-group has zero
+; disjuncts in common! Yikes! fixed 27 Oct 2021.
+
+(in-group-cluster covr-obj 0.7 0.2 200 100) ;r9-merge-g.rdb
 
 
 OK Debug session
@@ -242,7 +246,6 @@ r9-merge-e.rdb
 (pair-wise-cluster sha 100 300)
 
 all above failed on the word-class merge
-
 
 Data set construction
 ---------------------
