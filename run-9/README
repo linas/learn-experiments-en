@@ -30,6 +30,16 @@ $ guile -l cogserver-gram.scm
 
 (in-group-cluster covr-obj 0.7 0.2 200 100) ;r9-merge-g.rdb
 
+(in-group-cluster covr-obj 0.5 0.2 4 200 100) ;r9-merge-h.rdb
+; looks good. Run it a second time. ..and another dozen times.
+
+;r9-merge-h-save1.rdb is the situation after reaching 1980 rows deep
+or 894 merges so far.  Lets keep going and see where this goes.
+
+$ du -s r9-merge-h-save1.rdb
+9326996 r9-merge-h-save1.rdb
+
+
 
 OK Debug session
 ----------------

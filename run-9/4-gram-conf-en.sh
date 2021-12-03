@@ -14,5 +14,6 @@ export MST_DB=${ROCKS_DATA_DIR}/run-1-t1234-shape.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-merge-b.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-merge-e.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-merge-g.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r9-merge-h.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
