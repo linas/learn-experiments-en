@@ -273,6 +273,11 @@ Finished mmt norm marginals in 310 secs
 Simililarity for the first 100 rows:
 Done computing MI similarity in 10985 secs
 
+r9-merge-h.rdb
+--------------
+This is the "big merge" mentioned in diary. 1.4K WordClassNodes
+with 4.5K words in them.  There is also r9-merge-h-save1.rdb
+which is maybe 2/3rds the size.
 
 
 The End
