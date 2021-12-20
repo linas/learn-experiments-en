@@ -18,22 +18,16 @@ which is wrong. So we start from scratch with the shapes:
 
 ```
 $ cp -pr run-1-t1234-tsup-1-1-1.rdb run-1-t1234-shape.rdb
+```
+Then recompute by running `marginals-mst-shape.scm` aka
+`run/3-mst-parsing/compute-mst-marginals.sh`
+```
+. 0-pipeline.sh
+cd ${COMMON_DIR}/
+../run/3-mst-parsing/compute-mst-marginals.sh
+```
 
 
-$ guile -l cogserver.scm
-(use-modules (srfi srfi-1))
-(define pca (make-pseudo-cset-api))
-(define pcs (add-pair-stars pca))
-(define sha (add-covering-sections pcs))
-
-(sha 'fetch-pairs)
-(sha 'explode-sections)
-
-; Already done...
-; (define bat (batch-transpose sha))
-; (bat 'mmt-marginals)
-
-; XXX Says "already done" above, but that seems wrong. Try again.
 
 The End
 -------

@@ -26,4 +26,5 @@ export CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export MASTER_CONFIG_FILE=${CONFIG_DIR}/$( basename "${BASH_SOURCE[0]}" )
 
 # File containing grammatical-class configuration
-export GRAM_CONF_FILE=$CONFIG_DIR/4-gram-conf.sh
+export MST_CONF_FILE=$CONFIG_DIR/3-mpg-conf-en.sh
+export GRAM_CONF_FILE=$CONFIG_DIR/4-gram-conf-en.sh
