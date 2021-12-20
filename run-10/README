@@ -1,0 +1,39 @@
+
+Run-10 -- Merge Validation
+--------------------------
+Dec 2021
+
+Pick up where run-9 left off.  It appears that marginals
+were miscomputed in the run-9 datasets, so we have to do
+them again. Like so:
+
+Starting point is a copy of `run-1-t1234-tsup-1-1-1.rdb`.
+
+```
+$ mv run-1-t1234-shape.rdb run-1-t1234-shape-borked.rdb
+```
+The above had wild-wild card at 
+`(PredicateNode "*-Direct Sum Wild (gram-class⊕cross-section)")`
+which is wrong. So we start from scratch with the shapes:
+
+```
+$ cp -pr run-1-t1234-tsup-1-1-1.rdb run-1-t1234-shape.rdb
+
+
+$ guile -l cogserver.scm
+(use-modules (srfi srfi-1))
+(define pca (make-pseudo-cset-api))
+(define pcs (add-pair-stars pca))
+(define sha (add-covering-sections pcs))
+
+(sha 'fetch-pairs)
+(sha 'explode-sections)
+
+; Already done...
+; (define bat (batch-transpose sha))
+; (bat 'mmt-marginals)
+
+; XXX Says "already done" above, but that seems wrong. Try again.
+
+The End
+-------
