@@ -20,6 +20,9 @@ $ guile -l cogserver.scm
 ; (define bat (batch-transpose sha))
 ; (bat 'mmt-marginals)
 
+; XXX Says "already done" above, but that seems wrong. Try again.
+
+
 (pair-wise-cluster sha 100 500)  ; r9-merge-b.rdb and e.rdb
 (pair-wise-cluster sha 200 500)  ; r9-merge-c.rdb and d.rdb and f.rdb
 
@@ -73,6 +76,9 @@ r9-merge-h.rdb
 This is the "big merge" mentioned in diary. 1.4K WordClassNodes
 with 4.5K words in them.  Loading this shows unbalanced left-right
 counts. WTF. Jump to bottom to start debugging.
+
+Repeated bouts of
+(in-group-cluster covr-obj 0.5 0.2 4 200 100)
 
 
 =========================================================
@@ -322,6 +328,28 @@ No MI statistics are present; run compute-mi to get them.
 
 r9-merge-j.rdb debug session
 ----------------------------
+time cp -pr r9-sim-200.rdb r9-merge-j.rdb
+guile -l cogserver-gram.scm
+but similarity links are not loaded!? Why?
+Because setup-initial-similarities does this automatically.
+
+((add-similarity-api star-obj #f "shape-mi") 'fetch-pairs)
+
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)
+Error: left and right total pairs not equal! 74313.0 2746974.0
+Error: left and right total counts not equal! 1339120.0 22637313.0
+
+Wow. So total wipeout after one run.
+
+ (define sup-obj (add-support-api star-obj))
+
+ (lsize (sup-obj 'total-support-left))
+ (rsize (sup-obj 'total-support-right))
+
+(cog-keys (sup-obj 'wild-wild))
+
+set-left-totals set-right-totals
 
 
 
