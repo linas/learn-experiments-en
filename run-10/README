@@ -3,7 +3,9 @@ Run-10 -- Merge Validation
 --------------------------
 Dec 2021
 
-Pick up where run-9 left off.  It appears that marginals
+Pick up where run-9 left off.  After much confusion
+
+It appears that marginals
 were miscomputed in the run-9 datasets, so we have to do
 them again. Like so:
 
@@ -14,7 +16,9 @@ $ mv run-1-t1234-shape.rdb run-1-t1234-shape-borked.rdb
 ```
 The above had wild-wild card at 
 `(PredicateNode "*-Direct Sum Wild (gram-class⊕cross-section)")`
-which is wrong. So we start from scratch with the shapes:
+which ... I thought was wrong, but appears to be correct. WTF.
+
+Start from scratch with the shapes:
 
 ```
 $ cp -pr run-1-t1234-tsup-1-1-1.rdb run-1-t1234-shape.rdb
@@ -26,6 +30,18 @@ Then recompute by running `marginals-mst-shape.scm` aka
 cd ${COMMON_DIR}/
 ../run/3-mst-parsing/compute-mst-marginals.sh
 ```
+
+OK, this gives the same-old:
+Wildcard: (EvaluationLink (ctv 0 0 2.29426e+07)
+  (PredicateNode "*-Direct Sum Wild (gram-class⊕cross-section)")
+  (AnyNode "left-wild-direct-sum")
+  (AnyNode "right-wild-direct-sum"))
+
+and reviewing the code, this is I guess correct. So we still don't know
+where the bug is.
+
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)
 
 
 
