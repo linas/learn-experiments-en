@@ -3,21 +3,17 @@ Run-10 -- Merge Validation
 --------------------------
 Dec 2021
 
-Pick up where run-9 left off.  After much confusion
+Pick up where run-9 left off.  After much confusion, it appears there
+are multiple bugs. Several have been fixed, one is outstanding. The
+marginals in the run-9 datasets are probably OK. Just that they were
+not being loaded on restart.
 
-It appears that marginals
-were miscomputed in the run-9 datasets, so we have to do
-them again. Like so:
-
+To recompute the marginals, do this:
 Starting point is a copy of `run-1-t1234-tsup-1-1-1.rdb`.
 
 ```
 $ mv run-1-t1234-shape.rdb run-1-t1234-shape-borked.rdb
 ```
-The above had wild-wild card at 
-`(PredicateNode "*-Direct Sum Wild (gram-class⊕cross-section)")`
-which ... I thought was wrong, but appears to be correct. WTF.
-
 Start from scratch with the shapes:
 
 ```
@@ -37,12 +33,15 @@ Wildcard: (EvaluationLink (ctv 0 0 2.29426e+07)
   (AnyNode "left-wild-direct-sum")
   (AnyNode "right-wild-direct-sum"))
 
-and reviewing the code, this is I guess correct. So we still don't know
-where the bug is.
+and reviewing the code, this is correct, it seems.
 
+-------------------------------------------
+Partial debug is in  r10-dbg-b.rdb which is r9-sim-200.rdb plus
+manual merge but no connector merge of one sections
+
+-------------------------------------------
 (in-group-cluster covr-obj 0.5 0.2 4 200 1)
 (print-matrix-summary-report star-obj)
-
 
 
 The End
