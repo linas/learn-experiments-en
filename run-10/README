@@ -4,9 +4,11 @@ Run-10 -- Merge Validation
 Dec 2021
 
 Pick up where run-9 left off.  After much confusion, it appears there
-are multiple bugs. Several have been fixed, one is outstanding. The
-marginals in the run-9 datasets are probably OK. Just that they were
-not being loaded on restart.
+are multiple bugs. Several have been fixed, one is outstanding.
+Several more have been fixed, but still trouble!
+
+The marginals in the run-9 datasets are probably OK. Just that they
+were not being loaded on restart.
 
 To recompute the marginals, do this:
 Starting point is a copy of `run-1-t1234-tsup-1-1-1.rdb`.
