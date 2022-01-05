@@ -45,6 +45,26 @@ manual merge but no connector merge of one sections
 (in-group-cluster covr-obj 0.5 0.2 4 200 1)
 (print-matrix-summary-report star-obj)
 
+-------------------------------------------
+5 Jan 2022 Wow. Looks like merged got fully debugged.
+That took ... two weeks. Ouch.
+
+So lets restart.
+
+```
+cd ~/data
+cp -pr r9-sim-200.rdb r10-merge.rdb
+. ~/experiments/run-10/4-gram-conf-en.sh
+cd ~/src/learn/run-common
+guile -l cogserver-gram.scm
+```
+
+then
+```
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)
+```
+
 
 The End
 -------
