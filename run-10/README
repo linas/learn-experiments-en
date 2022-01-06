@@ -61,8 +61,13 @@ guile -l cogserver-gram.scm
 
 then
 ```
-(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(in-group-cluster covr-obj 0.5 0.2 4 200 100)
 (print-matrix-summary-report star-obj)
+```
+
+So, crash. After ten merges,
+```
+cp -pr r10-merge.rdb r10-merge-m10.rdb
 ```
 
 
