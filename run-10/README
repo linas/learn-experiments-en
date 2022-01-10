@@ -69,7 +69,54 @@ So, crash. After ten merges,
 ```
 cp -pr r10-merge.rdb r10-merge-m10.rdb
 ```
+-------------------------------------------
+More issues.
+Start with
+r10-merge-m10.rdb
+which shows that totals look OK.
+then ((add-support-compute star-obj) 'cache-all)
+now the totals are wrong:
+Total observations: 23666688.0 instead of 22942644.0
+wtf ... is this due to the crash, or due to something else?
+-------------------------------------------
+So do one at a time.
 
+cp -pr r9-sim-200.rdb r10-singles.rdb
+guile -l cogserver-gram.scm
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)        ; still looks good
+((add-support-compute star-obj) 'cache-all)
+(print-matrix-summary-report star-obj)        ; still looks good
+
+ So maybe the crash was bad?
+Do 9 more...
+((add-support-compute star-obj) 'cache-all)
+(print-matrix-summary-report star-obj)        ; still looks good
+
+Close and reload...
+((add-support-compute star-obj) 'cache-all)
+(print-matrix-summary-report star-obj)        ; now its bad...
+Total observations: 23807577.0
+
+Again ...
+cp -pr r9-sim-200.rdb r10-singles.rdb
+guile -l cogserver-gram.scm
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)        ; still looks good
+exit, reload,
+Total observations: 22942644.0  ; still looks good
+
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)        ; WRONG!
+Error: left and right total pairs not equal! 2759540.0 2725049.0
+Error: left and right total counts not equal! 23112769.0 22942644.0
+
+((add-support-compute star-obj) 'cache-all)
+
+Total observations: 22942644.0
+
+Wow! That fixed it! ... OK, there's a bug in the marginals calcs.
+Where?
 
 The End
 -------
