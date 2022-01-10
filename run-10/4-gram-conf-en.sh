@@ -14,5 +14,6 @@ export MST_DB=${ROCKS_DATA_DIR}/r10-dbg-a.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r10-dbg-b.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r10-dbg-c.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r10-merge.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r10-singles.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
