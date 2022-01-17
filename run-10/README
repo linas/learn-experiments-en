@@ -65,10 +65,21 @@ then
 (print-matrix-summary-report star-obj)
 ```
 
-So, crash. After ten merges,
+After 26 merges,
 ```
-cp -pr r10-merge.rdb r10-merge-m10.rdb
+cp -pr r10-merge.rdb r10-merge-m26.rdb
 ```
+
+Log of merge activity:
+```
+(print-log #t)
+(print-merges #t)
+```
+
+-------------------------------------------
+-------------------------------------------
+Debug notes below.
+-------------------------------------------
 -------------------------------------------
 More issues.
 Start with
@@ -117,6 +128,37 @@ Total observations: 22942644.0
 
 Wow! That fixed it! ... OK, there's a bug in the marginals calcs.
 Where?
+
+-------------------------------------------
+Do it again.
+
+cp -pr r9-sim-200.rdb r10-singles.rdb
+guile -l cogserver-gram.scm
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)        ; still looks good
+
+close
+cp -pr r10-singles.rdb r10-singles-m1.rdb
+and reload.
+
+guile -l cogserver-gram.scm
+(in-group-cluster covr-obj 0.5 0.2 4 200 1)
+(print-matrix-summary-report star-obj)        ; now its bad.
+Error: left and right total pairs not equal! 2758433.0 2723864.0
+Error: left and right total counts not equal! 23114818.0 22942644.0
+
+In-group size=2: `,` `;`
+------ merge-majority: Merge 40028 sections in 36 secs
+------ merge-majority: Remaining 108083 cross in 159 secs
+------ merge-majority: Cleanup `, ;` in 154 secs
+------ Merged into `, ;` in 401 secs
+------ Recomputed MMT marginals in 1816 secs
+
+OK, fixed I think
+
+Not. Still wrong.  How?
+-------------------------------
+15 Jan 2022 fixed.
 
 The End
 -------
