@@ -76,6 +76,54 @@ Log of merge activity:
 (print-merges #t)
 ```
 
+```
+cp -pr r9-sim-200.rdb r10-merge.rdb
+(in-group-cluster covr-obj 0.5 0.2 4 200 100)
+mv r10-merge.rdb r10-mrg-q0.5-c0.2.rdb
+
+cp -pr r9-sim-200.rdb r10-mrg-q0.6-c0.3.rdb
+(in-group-cluster covr-obj 0.6 0.3 4 200 100)
+
+cp -pr r9-sim-200.rdb r10-mrg-q0.7-c0.4.rdb
+(in-group-cluster covr-obj 0.7 0.4 4 200 100)
+
+cp -pr r9-sim-200.rdb r10-mrg-q0.8-c0.5.rdb
+(in-group-cluster covr-obj 0.8 0.5 4 200 100)
+```
+
+File sizes: r9-sim-200.rdb is 9.5 GB
+
+-------------------------------------------
+Track entropies, too.
+```
+cp -pr r9-sim-200.rdb r9-sim-200+entropy.rdb
+guile -l cogserver-gram.scm
+(define cfr (make-compute-freq star-obj))
+(cfr 'init-freq)
+(cfr 'cache-all)
+; 2777968 -- correct
+(define ent-obj (add-entropy-compute star-obj))
+(ent-obj 'cache-all-right-entropy)
+; Finished right entropy subtotals in 107 secs
+(ent-obj 'right-entropy) ; 8.514785640953038
+(define store-obj (make-store  star-obj))
+(store-obj 'store-wildcards)
+```
+Cannot cache, cause the right's are missing.
+
+du -s
+9578520 r9-sim-200.rdb
+9866940 r9-sim-200+entropy.rdb
+
+
+-------------------------------------------
+
+```
+cp -pr r9-sim-200.rdb r9-sim-200+mi.rdb
+guile -l cogserver-gram.scm
+(batch-all-pair-mi star-obj)
+```
+
 -------------------------------------------
 -------------------------------------------
 Debug notes below.
