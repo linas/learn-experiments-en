@@ -123,6 +123,17 @@ cp -pr r9-sim-200.rdb r9-sim-200+mi.rdb
 guile -l cogserver-gram.scm
 (batch-all-pair-mi star-obj)
 ```
+Finished with MI computations; this took 3.134 hours.
+
+du -s
+9727580 r9-sim-200+mi.rdb
+Elapsed time to load cross-sections: 475 seconds
+which is much longer than the earlier
+Elapsed time to load cross-sections: 113 seconds
+Entropy Total: 19.463   Left: 16.535   Right: 8.5148
+Total MI: 5.5865
+
+
 
 -------------------------------------------
 -------------------------------------------
