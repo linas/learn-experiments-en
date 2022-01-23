@@ -14,7 +14,7 @@ greatest effect after QUORUM.
 To run this:
 ```
 cd ~/data
-cp -pr r9-sim-200+entropy.rdb r11-mrg-q0.7-c0.2-n4.rdb
+cp -pr r9-sim-200+mi.rdb r11-mrg-q0.7-c0.2-n4.rdb
 . ~/experiments/run-11/4-gram-conf-en.sh
 cd ~/src/learn/run-common
 guile -l cogserver-gram.scm
