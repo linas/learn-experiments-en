@@ -20,9 +20,9 @@ cd ~/src/learn/run-common
 guile -l cogserver-gram.scm
 ```
 
-then
+then use #t to indicate "precise" similarity recomputation:
 ```
-(in-group-cluster covr-obj 0.7 0.2 4 200 3000)
+(in-group-cluster covr-obj 0.7 0.2 4 200 3000 #t)
 (print-matrix-summary-report star-obj)
 ```
 
@@ -32,16 +32,29 @@ Log of merge activity:
 (print-merges #t)
 ```
 
-Also noise of 3:
+For speed, there are also "imprecise" computations:
+Noise of 4:
 ```
-r11-mrg-q0.7-c0.2-n3.rdb
-(in-group-cluster covr-obj 0.7 0.2 3 200 3000)
+r11-imp-q0.7-c0.2-n4.rdb
+(in-group-cluster covr-obj 0.7 0.2 4 200 3000 #f)
 ```
 
-Noise of 2:
+Also imprecise noise of 3: (not started yet)
 ```
-r11-mrg-q0.7-c0.2-n2.rdb
-(in-group-cluster covr-obj 0.7 0.2 2 200 3000)
+r11-imp-q0.7-c0.2-n3.rdb
+(in-group-cluster covr-obj 0.7 0.2 3 200 3000 #f)
+```
+
+Imprecise Noise of 2:
+```
+r11-imp-q0.7-c0.2-n2.rdb
+(in-group-cluster covr-obj 0.7 0.2 2 200 3000 #f)
+```
+
+Imprecise Noise of 1: (not started)
+```
+r11-imp-q0.7-c0.2-n1.rdb
+(in-group-cluster covr-obj 0.7 0.2 1 200 3000 #f)
 ```
 
 
