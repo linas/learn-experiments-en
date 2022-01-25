@@ -45,6 +45,26 @@ r11-mrg-q0.7-c0.2-n2.rdb
 ```
 
 
+Sample output from n=3
+----------------------
+```
+------ Start merge 1 with seed pair `—` and `+`
+Initial in-group size=8: `+` `—` `”` `_` `)` `[` `(` `]`
+In-group size=8 overlap = 12 of 13987 disjuncts, commonality= 0.09%
+In-group size=7 overlap = 25 of 13400 disjuncts, commonality= 0.19%
+In-group size=6 overlap = 45 of 12840 disjuncts, commonality= 0.35%
+In-group size=5 overlap = 40 of 12004 disjuncts, commonality= 0.33%
+In-group size=6: `+` `—` `”` `_` `)` `[`
+------ merge-majority: Merge 4884 of 7957 sections in 11 secs
+------ merge-majority: Remaining 12502 of 22863 cross in 37 secs
+------ Merged into `+ — ” _ ) [` in 106 secs
+------ Find affected basis of (12857, 98371) in 542 secs
+------ Recomputed entropies in 725 secs
+------ Recomputed MMT marginals in 2527 secs
+------ Recomputed MI in 299 secs
+------ Completed merge in 2932 secs
+------ Extended the universe in 119 secs
+```
 
 Appendix of How-to notes below.
 ===============================
