@@ -18,5 +18,6 @@ export MST_DB=${ROCKS_DATA_DIR}/r10-mrg-q0.8-c0.5.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-sim-200+entropy.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r9-sim-200+mi.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r10-mrg-q0.5-c0.2.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r10-export.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
