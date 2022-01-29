@@ -94,6 +94,16 @@ cp -pr r9-sim-200.rdb r10-mrg-q0.8-c0.5.rdb
 File sizes: r9-sim-200.rdb is 9.5 GB
 
 -------------------------------------------
+Results:
+r10-mrg-q0.8-c0.5.rdb died prematurely. Although it did 986 merges,
+It resulted in only 502 classes. Also, NONE of the MemberLinks were
+recorded! Ouch!
+
+Also: some of the above were restarted part-way through, and are thus
+missing MemberLinks also. Basically, these are junk datasets. Will
+be deleted fortwith.
+
+-------------------------------------------
 Track entropies, too.
 ```
 cp -pr r9-sim-200.rdb r9-sim-200+entropy.rdb
