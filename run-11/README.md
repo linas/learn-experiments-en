@@ -50,6 +50,9 @@ Imprecise Noise of 2:
 r11-imp-q0.7-c0.2-n2.rdb
 (in-group-cluster covr-obj 0.7 0.2 2 200 3000 #f)
 ```
+Log of above may be garbled at merge 59; it crashed, and the log format
+may be changed..... never mind. Restarted from scratch.
+
 
 Imprecise Noise of 1: (not started)
 ```
