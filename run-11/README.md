@@ -28,9 +28,10 @@ then use #t to indicate "precise" similarity recomputation:
 
 Log of merge activity:
 ```
-(print-log #t)
-(print-merges #t)
+(dump-log star-obj "/tmp/r11-xxx-log" print-log)
+(dump-log star-obj "/tmp/r11-xxx-cls" print-merges)
 ```
+actually use `dump-log.sh` instead
 
 For speed, there are also "imprecise" computations:
 Noise of 4:
@@ -39,7 +40,7 @@ r11-imp-q0.7-c0.2-n4.rdb
 (in-group-cluster covr-obj 0.7 0.2 4 200 3000 #f)
 ```
 
-Also imprecise noise of 3: (not started yet)
+Also imprecise noise of 3:
 ```
 r11-imp-q0.7-c0.2-n3.rdb
 (in-group-cluster covr-obj 0.7 0.2 3 200 3000 #f)
@@ -54,7 +55,7 @@ Log of above may be garbled at merge 59; it crashed, and the log format
 may be changed..... never mind. Restarted from scratch.
 
 
-Imprecise Noise of 1: (not started)
+Imprecise Noise of 1:
 ```
 r11-imp-q0.7-c0.2-n1.rdb
 (in-group-cluster covr-obj 0.7 0.2 1 200 3000 #f)
