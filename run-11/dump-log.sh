@@ -1,11 +1,13 @@
 #! /bin/sh
 
 dumpi(){
+	# echo "(load \"/tmp/log-merge.scm\")\n" | nc -q0 localhost $1
 	echo "(dump-log star-obj \"/tmp/r11-log\" print-log)\n" \
 		"(dump-log star-obj \"/tmp/r11-cls\" print-merges)\n" | nc -q0 localhost $1
 }
 
 dumpp(){
+	# echo "(load \"/tmp/log-merge.scm\")\n" | nc -q0 localhost $1
 	echo "(dump-log star-obj \"/tmp/r11-p-log\" print-log)\n" \
 		"(dump-log star-obj \"/tmp/r11-p-cls\" print-merges)\n" | nc -q0 localhost $1
 }
