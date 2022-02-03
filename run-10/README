@@ -103,6 +103,9 @@ Also: some of the above were restarted part-way through, and are thus
 missing MemberLinks also. Basically, these are completely useless for
 creating dictionaries. Will be deleted fortwith.
 
+Root cause: (1) MemberLinks were not being stored on update, and
+(2) MemberLinks were not being loaded on restart.
+
 -------------------------------------------
 Track entropies, too.
 ```
