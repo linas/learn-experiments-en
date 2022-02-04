@@ -67,3 +67,11 @@ Finished with MI computations; this took 2.496 hours.
 
 cp -pr r12-trim.rdb r12-mi.rdb
 ```
+
+OK, now, precompute similarity:
+```
+guile -l cogserver-gram.scm
+(setup-initial-similarities star-obj 200)
+
+cp -pr r12-trim.rdb r12-mi-sim200.rdb
+```
