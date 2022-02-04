@@ -8,3 +8,41 @@ the bottom of things, and try to have a clean dataset... again.
 
 time cp -r run-1-t1234-tsup-1-1-1.rdb  r12-trim.rdb
 
+(define cset-obj (make-pseudo-cset-api))
+(cset-obj 'fetch-pairs)
+(define stars-obj (add-pair-stars cset-obj))
+
+(check-linkability stars-obj)
+OK, that passes, as before. So ?
+
+... r9-sim-200.rdb with csets-only tests OK.
+Also with cover-obj tests OK
+also OK after implode-sections.   So ... is it the merges??
+------------------
+Anyway, above checks were not bi-directions on the linkages.
+So, from scratch:
+
+cp -r run-1-t1234-tsup-1-1-1.rdb  r12-trim.rdb
+
+(define cset-obj (make-pseudo-cset-api))
+(cset-obj 'fetch-pairs)
+(define stars-obj (add-pair-stars cset-obj))
+(load "cleanup.scm")
+(check-gram-dataset stars-obj)
+(cleanup-gram-dataset stars-obj)
+(stars-obj 'clobber)
+(cleanup-gram-dataset stars-obj)  ; yes, run it twice
+(check-gram-dataset stars-obj)
+
+;;;;; marginals-mst.scm   ; copy by hand.
+(define btr (batch-transpose stars-obj))
+(btr 'clobber)
+(btr 'mmt-marginals)
+(print-matrix-summary-report stars-obj)
+
+cp -pr r12-trim.rdb r12-mst.rdb
+
+OK so I think that's good. Now add shapes.
+
+;;; Run marginals-mst-shape.scm by hand
+
