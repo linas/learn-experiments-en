@@ -72,6 +72,8 @@ OK, now, precompute similarity:
 ```
 guile -l cogserver-gram.scm
 (setup-initial-similarities star-obj 200)
+; Done computing MI similarity in 5929 secs
+
 
 cp -pr r12-trim.rdb r12-mi-sim200.rdb
 ```

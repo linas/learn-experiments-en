@@ -1,7 +1,7 @@
 #! /bin/sh
 
 dumpi(){
-	export STORAGE_NODE="(RocksStorage \"$MST_DB\")"
+	export STORAGE_NODE="(RocksStorage \"rocks://$MST_DB\")"
 	echo -e "(sleep 1)\n" \
 		"(define cset-obj (make-pseudo-cset-api))\n" \
 		"(define covr-obj (add-covering-sections cset-obj))\n" \
@@ -10,10 +10,11 @@ dumpi(){
 		"(dump-log star-obj \"/tmp/r11-log\" print-log)\n" \
 		"(dump-log star-obj \"/tmp/r11-cls\" print-merges)\n" \
 		"(exit-server)\n" | guile -l cogserver.scm
+		# "(format #t \"bye\n\") (exit 0)\n" | guile -l cogserver.scm
 }
 
 dumpp(){
-	export STORAGE_NODE="(RocksStorage \"$MST_DB\")"
+	export STORAGE_NODE="(RocksStorage \"rocks://$MST_DB\")"
 	echo -e "(sleep 1)\n" \
 		"(define cset-obj (make-pseudo-cset-api))\n" \
 		"(define covr-obj (add-covering-sections cset-obj))\n" \
@@ -22,6 +23,7 @@ dumpp(){
 		"(dump-log star-obj \"/tmp/r11-p-log\" print-log)\n" \
 		"(dump-log star-obj \"/tmp/r11-p-cls\" print-merges)\n" \
 		"(exit-server)\n" | guile -l cogserver.scm
+		# "(format #t \"bye\n\") (exit 0)\n" | guile -l cogserver.scm
 }
 
 export MST_DB=${ROCKS_DATA_DIR}/r11-imp-q0.7-c0.2-n1.rdb
