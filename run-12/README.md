@@ -77,3 +77,32 @@ guile -l cogserver-gram.scm
 
 cp -pr r12-trim.rdb r12-mi-sim200.rdb
 ```
+
+Now make sure that merging preserves the clean structure.
+Right?
+```
+(in-group-cluster covr-obj 0.8 0.2 4 200 1 #f)
+(load "cleanup.scm")
+(check-gram-dataset covr-obj)
+```
+
+Run-12 clustering
+=================
+Run 8 total clustering efforts. These are
+```
+(in-group-cluster covr-obj 0.6 0.2 4 200 3000 #t)
+(in-group-cluster covr-obj 0.7 0.2 4 200 3000 #t)
+(in-group-cluster covr-obj 0.8 0.2 4 200 3000 #t)
+(in-group-cluster covr-obj 0.8 0.2 1 200 3000 #t)
+
+(in-group-cluster covr-obj 0.7 0.2 1 200 3000)
+(in-group-cluster covr-obj 0.7 0.2 2 200 3000)
+(in-group-cluster covr-obj 0.7 0.2 3 200 3000)
+(in-group-cluster covr-obj 0.7 0.2 4 200 3000)
+```
+and the correspondingly-named rocks files.
+
+Run with
+`HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libhugetlbfs.so.0 guile -l cogserver-gram.scm`
+
+---------------
