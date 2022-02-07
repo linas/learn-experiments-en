@@ -83,6 +83,54 @@ In-group size=6: `+` `—` `”` `_` `)` `[`
 ------ Extended the universe in 119 secs
 ```
 
+Halted, power outage from snowstorm 4 Feb 2022 stopped everything
+r11-imp-q0.7-c0.2-n1.rdb had 250 merges
+
+LG Export
+---------
+Lets try export again:
+cp -pr r11-imp-q0.7-c0.2-n1.rdb r11-export-trim.rdb
+
+(define cset-obj (make-pseudo-cset-api))
+(define gram-obj (add-gram-class-api cset-obj))
+(gram-obj 'fetch-pairs)
+(load "cleanup.scm")
+(cleanup-gram-dataset gram-obj)
+(cleanup-gram-dataset gram-obj)
+(check-gram-dataset gram-obj)
+
+cp -pr r11-export-trim.rdb r11-export-100.rdb
+
+(define cset-obj (make-pseudo-cset-api))
+(define cov (add-covering-sections cset-obj)) ; must do this
+(cov 'fetch-pairs)
+(check-gram-dataset cov)
+; (cleanup-gram-dataset cov)  ; Not needed; above should be OK.
+
+(define sin (add-singleton-classes cov))
+(sin 'create-hi-count-singles 100)  ; whence the name export-100
+After trimming, 5866 words left, out of 9573
+Created 5866 singleton word classes in 5687 secs
+
+So that's a pretty big sample. And too wayyy too long.
+
+(cleanup-gram-dataset cov)
+(cleanup-gram-dataset cov)
+(cleanup-gram-dataset cov)
+(check-gram-dataset cov)
+
+(define gcf (add-word-remover cov #t))
+
+(gcf 'left-basis-size) ; 5944
+(gcf 'right-basis-size) ; 206202 OK, I guess
+
+(batch-all-pair-mi gcf)
+
+
+
+
+
+
 Appendix of How-to notes below.
 ===============================
 
