@@ -41,5 +41,6 @@ export MST_DB=${ROCKS_DATA_DIR}/r11-mrg-q0.6-c0.2-n4.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r11-mrg-q0.7-c0.2-n4.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r11-mrg-q0.8-c0.2-n4.rdb
 export MST_DB=${ROCKS_DATA_DIR}/r11-mrg-q0.8-c0.2-n1.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r11-export-100.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
