@@ -125,10 +125,12 @@ So that's a pretty big sample. And too wayyy too long.
 (gcf 'right-basis-size) ; 206202 OK, I guess
 
 (batch-all-pair-mi gcf)
+Finished with MI computations; this took 0.269 hours.
 
+(use-modules (opencog nlp lg-export))
+(export-csets gcf "/tmp/dict.db" "EN_us")
 
-
-
+Finished inserting 720997 records in 229 secs (3148.5/sec)
 
 
 Appendix of How-to notes below.
