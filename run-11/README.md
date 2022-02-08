@@ -89,6 +89,7 @@ r11-imp-q0.7-c0.2-n1.rdb had 250 merges
 LG Export
 ---------
 Lets try export again:
+```
 cp -pr r11-imp-q0.7-c0.2-n1.rdb r11-export-trim.rdb
 
 (define cset-obj (make-pseudo-cset-api))
@@ -99,7 +100,7 @@ cp -pr r11-imp-q0.7-c0.2-n1.rdb r11-export-trim.rdb
 (cleanup-gram-dataset gram-obj)
 (check-gram-dataset gram-obj)
 
-cp -pr r11-export-trim.rdb r11-export-100.rdb
+cp -pr r11-export-trim.rdb r11-export-100-gcf.rdb
 
 (define cset-obj (make-pseudo-cset-api))
 (define cov (add-covering-sections cset-obj)) ; must do this
@@ -119,6 +120,7 @@ So that's a pretty big sample. And too wayyy too long.
 (cleanup-gram-dataset cov)
 (check-gram-dataset cov)
 
+; Ooops, should not have done this, see below.
 (define gcf (add-word-remover cov #t))
 
 (gcf 'left-basis-size) ; 5944
@@ -131,6 +133,36 @@ Finished with MI computations; this took 0.269 hours.
 (export-csets gcf "/tmp/dict.db" "EN_us")
 
 Finished inserting 720997 records in 229 secs (3148.5/sec)
+```
+---------------------
+Try again.
+```
+cp -pr r11-export-100-gcf.rdb r11-export-100.rdb
+
+(define cset-obj (make-pseudo-cset-api))
+(define cov (add-covering-sections cset-obj)) ; must do this
+(cov 'fetch-pairs)
+(cleanup-gram-dataset cov)  ; Yes, its needed.
+(cleanup-gram-dataset cov)  ; ... at least twice...
+(check-gram-dataset cov)
+
+(define (is-word-class? ITEM) (eq? 'WordClassNode (cog-type ITEM))
+(cov 'implode-sections)
+(linking-trim cov is-word-class?)
+
+(cleanup-gram-dataset cov)
+(cleanup-gram-dataset cov) ; ... at least twice ...
+
+(cov 'explode-sections)
+(batch-all-pair-mi cov)
+Finished with MI computations; this took 2.549 hours.
+
+Rows: 5877 Columns: 933026
+Size: 2348063.0
+Total observations: 21856976.0
+Entropy Total: 18.680   Left: 16.229   Right: 8.5677
+Total MI: 6.1172
+```
 
 
 Appendix of How-to notes below.
