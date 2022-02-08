@@ -106,3 +106,21 @@ Run with
 `HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libhugetlbfs.so.0 guile -l cogserver-gram.scm`
 
 ---------------
+8 Feb 2022
+
+The imprecise `(in-group-cluster covr-obj 0.7 0.2 2 200 3000)`
+job crashed at iteration 176. After bug-fixes and restart, it fails
+to move forward:
+```
+Throw to key `bad-summation' with args `(compute-total-entropy "Left and
+right entropy sums fail to be equal: 23.73641651069839
+27.248554685599636\n")'.
+```
+
+Choices: start from zero, or just recompute marginals (batch-mi).
+Lets try batch-mi first:
+```
+(batch-all-pair-mi covr-obj)
+```
+
+---------------
