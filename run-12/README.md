@@ -121,6 +121,37 @@ Choices: start from zero, or just recompute marginals (batch-mi).
 Lets try batch-mi first:
 ```
 (batch-all-pair-mi covr-obj)
+Finished with MI computations; this took 4.449 hours.
 ```
 
+Fuu. Crashes because
+`(WordClassNode "perhaps by where no after without with each from since these had during I’m of are were others")`
+did not have support on it.
+
+Seems that the above batch failed to recompute for this one...
+How did that happen?
+
+
+Crashed immediately, with
+```
+Throw to key `bad-summation' with args `(compute-total-entropy "Left and
+right entropy sums fail to be equal: 19.136441476785922
+19.1239452333717\n")'.
+```
+
+Conclude: batch summation mised something, and when added by hand,
+I failed to recompute both left and right.  Clearly there is a bug,
+and it might be a significant bug, and I am going to pretend it is not
+there cause I don't have the time to deal with it right now.
+
+The damaged files are
+```
+r12-imp-q0.7-c0.2-n2.rdb-175-maybe-mildly-bork
+r12-imp-q0.7-c0.2-n2.rdb-175-fresh-marginals
+```
+and the fresh-marginals is missing support for the above word-class
+(and what else is it missing?)
+
+
+I'm going to restart, fresh.
 ---------------
