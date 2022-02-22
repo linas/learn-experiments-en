@@ -211,4 +211,6 @@ Atomspace C++ exception:
 (dflt-fetch-incoming-by-type Missing closing paren in StringValue:  "+ —
 ” _ ) [" "+ [ *"
 ```
+
+Seems like it was bad escaping in `ValueSexpr.cc` ... oh well.
 ========
