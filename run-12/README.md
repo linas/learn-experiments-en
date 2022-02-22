@@ -139,7 +139,7 @@ right entropy sums fail to be equal: 19.136441476785922
 19.1239452333717\n")'.
 ```
 
-Conclude: batch summation mised something, and when added by hand,
+Conclude: batch summation missed something, and when added by hand,
 I failed to recompute both left and right.  Clearly there is a bug,
 and it might be a significant bug, and I am going to pretend it is not
 there cause I don't have the time to deal with it right now.
@@ -155,3 +155,33 @@ and the fresh-marginals is missing support for the above word-class
 
 I'm going to restart, fresh.
 ---------------
+21 Feb 2022
+-----------
+Five jobs halted due to failure to get hugepages. Crap.
+These are
+```
+r12-prc-q0.8-c0.2-n1.rdb-139-crash
+```
+and the four imprecise. The four imprecise won't start due to some
+bug with quotes in some class names.
+
+The precise crashes with unbalanced marginals.
+```
+------ Start merge 139 with seed pair `his their the` and `his`
+Initial in-group size=6: `his` `his their the` `a` `my` `any` `our`
+In-group size=6 overlap = 211 of 77350 disjuncts, commonality= 0.27%
+In-group size=5 overlap = 473 of 75644 disjuncts, commonality= 0.63%
+In-group size=4 overlap = 2548 of 73290 disjuncts, commonality= 3.48%
+In-group size=3 overlap = 7974 of 69555 disjuncts, commonality= 11.46%
+In-group size=2 overlap = 3271 of 24675 disjuncts, commonality= 13.26%
+In-group size=2: `his` `his their the`
+------ merge-majority: Merge 6064 of 7767 sections in 7 secs
+------ merge-majority: Remaining 4355 of 16906 cross in 18 secs
+------ Merged into `his his their the` in 57 secs
+------ Find affected basis of (7114, 65210) in 204 secs
+------ Recomputed entropies in 329 secs
+ice-9/boot-9.scm:1669:16: In procedure raise-exception:
+Throw to key `bad-summation' with args `(compute-total-entropy "Left and
+right entropy sums fail to be equal: 20.829045669971702
+25.023068763264902\n")'.
+```
