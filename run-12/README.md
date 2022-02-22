@@ -185,3 +185,30 @@ Throw to key `bad-summation' with args `(compute-total-entropy "Left and
 right entropy sums fail to be equal: 20.829045669971702
 25.023068763264902\n")'.
 ```
+So then:
+```
+(batch-all-pair-mi covr-obj)
+Finished with MI computations; this took 2.824 hours.
+```
+That seems to do the trick.
+
+Spoke too soon .. after two iterations, it fails again:
+```
+Throw to key `bad-summation' with args `(compute-total-entropy "Left and right entropy sums fail to be equal: 19.055120243768545 19.04535087816835\n")'.
+```
+So the basis is borked somehow...
+-----------------------------------------------------------------
+
+The other is a care-dump:
+In cogserver-gram.scm:
+20:0  2 (_)
+In opencog/matrix/direct-sum.scm:
+189:24  1 (_ _ . _)
+In unknown file:
+0 (opencog-extension dflt-fetch-incoming-by-type (# #))
+ERROR: In procedure opencog-extension:
+Atomspace C++ exception:
+(dflt-fetch-incoming-by-type Missing closing paren in StringValue:  "+ —
+” _ ) [" "+ [ *"
+```
+========
