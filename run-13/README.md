@@ -7,6 +7,7 @@ Data archive is at
 `/home2/linas/src/novamente/data`
 
 Datasets
+--------
 * `run-1-en_pairs-tranche-12345.rdb` -- I think this is what the name
   implies; its just the pairs.
 * `run-1-marg-tranche-12345.rdb` -- above, with marginals ... seems not
@@ -16,3 +17,13 @@ Datasets
   marginals.
 * `run-1-t1234-tsup-1-1-1.rdb` -- Pairs, trimed to 1,1,1, with support
   marginals.
+
+Notes
+-----
+Pair-count histograms
+```
+guile -l cogserver-mst.scm
+```
+
+Then use `density-of-states.scm` from diary utils.
+---------------

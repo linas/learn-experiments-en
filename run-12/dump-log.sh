@@ -10,11 +10,13 @@ dumpp(){
 		"(dump-log star-obj \"/tmp/r12-p-cls\" print-merges)\n" | nc -q0 localhost $1
 }
 
+# The imprecise dumps
 dumpi 20412
 dumpi 20312
 dumpi 20212
 dumpi 20112
 
+# The precise dumps
 dumpp 19612
 dumpp 19712
 dumpp 19812
