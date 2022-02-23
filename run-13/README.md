@@ -5,6 +5,11 @@ files to do some random explorations of stuff.
 
 Data archive is at
 `/home2/linas/src/novamente/data`
+and
+`/home2/linas/src/novamente/data/rocks-archive`
+
+To restore, type
+`sudo cp -pr /home2/linas/src/novamente/data/rocks-archive/r3-mpg-marg.rdb /data/lxc-databases/learn-en/rootfs/data`
 
 Datasets
 --------
@@ -17,6 +22,8 @@ Datasets
   marginals.
 * `run-1-t1234-tsup-1-1-1.rdb` -- Pairs, trimed to 1,1,1, with support
   marginals.
+* `r3-mpg-marg.rdb` -- A "badly-trimmed" dataset, but for which we
+  report stats if the agi-22 article.
 
 Notes
 -----

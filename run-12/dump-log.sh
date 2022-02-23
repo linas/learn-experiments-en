@@ -12,8 +12,8 @@ dumpp(){
 
 # The imprecise dumps
 dumpi 20412
-dumpi 20312
-dumpi 20212
+# dumpi 20312
+# dumpi 20212
 dumpi 20112
 
 # The precise dumps
