@@ -197,6 +197,16 @@ Spoke too soon .. after two iterations, it fails again:
 Throw to key `bad-summation' with args `(compute-total-entropy "Left and right entropy sums fail to be equal: 19.055120243768545 19.04535087816835\n")'.
 ```
 So the basis is borked somehow...
+
+Recomputed MI, restart, merge goes then fails with
+```
+Throw to key `bad-membership' with args `(merge-majority "No counts on
+word class!")'.
+```
+
+Abandon all hope. Kill this, and restart completly from scratch.
+Crap.
+
 -----------------------------------------------------------------
 
 The other is a care-dump:
@@ -224,5 +234,24 @@ merge 1342" so another big wtf.
 
 So I guess the crash caused the logs to not get written ...
 crap.
+
+-----------
+and now imprecise-2 is failing with unbalanced ....
+and try
+```
+(batch-all-pair-mi covr-obj)
+```
+
+and imprecise-3 also crashes with unbalanced...
+and imprecise 1 and 4 ... so all 4 crashed.
+Re-batching on all four, see if we get lucky....
+
+after rebatching, 3 dies with
+```
+Throw to key `bad-membership' with args `(merge-majority "No counts on word class!")'.
+```
+
+after rebatchng, 2 dies with unbalanced marginals
+
 
 ========
