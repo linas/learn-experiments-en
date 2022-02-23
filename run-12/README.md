@@ -213,4 +213,16 @@ Atomspace C++ exception:
 ```
 
 Seems like it was bad escaping in `ValueSexpr.cc` ... oh well.
+
+---------------------------------
+So, the above is now fixed .... but log files:
+r12-cls-q0.7-c0.2-n4.dat is missing records 941 to 953 but says "start
+merge 1057 " so wtf ....
+
+Also r12-cls-q0.7-c0.2-n1.dat is missing 369 to 1204 but says "start
+merge 1342" so another big wtf.
+
+So I guess the crash caused the logs to not get written ...
+crap.
+
 ========
