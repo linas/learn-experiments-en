@@ -2,7 +2,7 @@
 Sept 2021
 ---------
 This is the working directory for examining deep trimming of a dataset.
-All testing is done on the run-1-en_mpg-tranche-123.rdb dataset.
+All testing is done on the `run-1-en_mpg-tranche-123.rdb` dataset.
 To avoid accidental data destruction/confusion, all work is done here
 in the run-4 directory.
 
@@ -21,6 +21,15 @@ Datasets:
   ... It has the support marginals. It does not have the centrality
   report marginals.
 
+* r4-trim*djmi.rdb -- these are re-trimmed using the latest and greatest
+  trim scripts in `cleanup.scm`. Then they get the word-disjunct MI
+  computed. This is documented in Diary Part Six.
+
+* r4-mpg-djmi.rdb -- A copy of r4-mpg-marg.rdb with the word-disjunct
+  MI batched (batch-all-pair-mi)  This required 106MB RAM to accomplish
+  this! Ouch!   Anyway, its "clean" in that the `cleanup.scm` scripts
+  passed it and found no problems.
+
 
 Notes:
 Do as the README suggests:
@@ -36,7 +45,6 @@ Elapsed time to load csets: 6606 secs  second time...
 Elapsed time to load csets: 6640 secs
 (print-matrix-summary-report psa) says : no cached data! Yikes!
 RSS is 60.6 GB
-
 
 
 The ../run-3/README file explains how to create filtered subsets.

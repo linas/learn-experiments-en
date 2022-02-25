@@ -251,7 +251,8 @@ after rebatching, 3 dies with
 Throw to key `bad-membership' with args `(merge-majority "No counts on word class!")'.
 ```
 
-after rebatchng, 2 dies with unbalanced marginals
+after rebatchng, 2 dies with unbalanced marginals ... and so do 1 and 4.
+So end of the line on all the imprecise datasets.
 
 
 ========
