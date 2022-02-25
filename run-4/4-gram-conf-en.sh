@@ -36,4 +36,9 @@ export MST_DB=${ROCKS_DATA_DIR}/run-1-t1-tsup-1-1-1.rdb
 # export MST_DB=${ROCKS_DATA_DIR}/run-1-t123-tsup-1-1-1.rdb
 # export MST_DB=${ROCKS_DATA_DIR}/run-1-t1234-tsup-1-1-1.rdb
 
+export MST_DB=${ROCKS_DATA_DIR}/r4-trim-10-4-2-djmi.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/r4-trim-5-2-2-djmi.rdb
+#export MST_DB=${ROCKS_DATA_DIR}/r4-trim-2-2-2-djmi.rdb
+#export MST_DB=${ROCKS_DATA_DIR}/r4-trim-1-1-1-djmi.rdb
+
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
