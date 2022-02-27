@@ -211,7 +211,7 @@ Crap.
 
 The other is a care-dump:
 In cogserver-gram.scm:
-20:0  2 (_)
+20:0  2 ()
 In opencog/matrix/direct-sum.scm:
 189:24  1 (_ _ . _)
 In unknown file:
@@ -219,7 +219,7 @@ In unknown file:
 ERROR: In procedure opencog-extension:
 Atomspace C++ exception:
 (dflt-fetch-incoming-by-type Missing closing paren in StringValue:  "+ —
-” _ ) [" "+ [ *"
+” _ ) [" "+ [ "
 ```
 
 Seems like it was bad escaping in `ValueSexpr.cc` ... oh well.
@@ -253,6 +253,31 @@ Throw to key `bad-membership' with args `(merge-majority "No counts on word clas
 
 after rebatchng, 2 dies with unbalanced marginals ... and so do 1 and 4.
 So end of the line on all the imprecise datasets.
+
+========
+25 Feb 2022
+
+OK, try to do some data analysis on what we got.
+First, save the good copies:
+```
+cp -pr r12-imp-q0.7-c0.2-n3.rdb r12-imp-q0.7-c0.2-n3-ext.rdb
+cp -pr r12-imp-q0.7-c0.2-n4.rdb r12-imp-q0.7-c0.2-n4-ext.rdb
+```
+and work with the ext files.
+
+So what's the deal with the marginals? Why is recomputing them not
+enough? Who is missing what? Didn't we go through this once before?
+like maybe in run-10? But that was during merges.  Start all over
+again.  See the notes.
+
+Ahh. The files contain CrossSections that were never deleted.
+1) delete the CrossSections
+2) exit, restart normally,
+3) run the cleanup scripts to remove bogus marginals
+4) recompute mmt
+5) perform experiments
+
+
 
 
 ========
