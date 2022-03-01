@@ -274,8 +274,25 @@ Ahh. The files contain CrossSections that were never deleted.
 1) delete the CrossSections
 2) exit, restart normally,
 3) run the cleanup scripts to remove bogus marginals
-4) recompute mmt
-5) perform experiments
+4) recompute entropy marginals:
+5) recompute mmt
+6) perform experiments
+
+Huh. This might be enough to revive the halted runs!
+
+To redo the entropies:
+(star-obj 'clobber)
+(define cfq (make-compute-freq star-obj))
+(cfq 'init-freq)
+(cfq 'cache-all-left-freqs)
+(cfq 'cache-all-right-freqs)
+(define enc (add-entropy-compute star-obj))
+(enc 'cache-all-left-entropy)
+(enc 'cache-all-right-entropy)
+
+Then the mmt:
+(define btr (batch-transpose star-obj))
+(btr 'mmt-marginals)
 
 
 
