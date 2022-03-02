@@ -294,7 +294,15 @@ Then the mmt:
 (define btr (batch-transpose star-obj))
 (btr 'mmt-marginals)
 
+Well, but then some of the similarities are clearly bad, because
+they were not recomputed in earlier merges. In particular, noise=1
+fails this way. Getting tedious. Seems best to restart with the new
+code.
 
-
+Abandon ship. I'm tired of patching the problems. That, plus the
+new "orthogonality" metric sounds intersting. Also the new
+jaccard-membership implementation is intrigueing. Also, set
+commonality to 0.9 to just avoid that. So restart fresh in
+run-14.
 
 ========
