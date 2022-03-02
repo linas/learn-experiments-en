@@ -35,6 +35,13 @@ guile -l cogserver-gram.scm
 I think the similarities are still valid from before.
 ```
 (print-matrix-summary-report star-obj)
+
+Rows: 9495 Columns: 1015850  == log_2 13.2130 x 19.9543
+Size: 2717117.0  log_2 size: 21.3736
+Fraction non-zero: 2.8170E-4 Sparsity: 11.7936  Rarity: 4.79004
+Total obs: 22643824.0  Avg obs/pair: 8.33377  log_2 avg: 3.05897
+Entropy Tot: 19.4210  Left: 16.5007  Right: 8.46831  MI: 5.54801
+MM^T support=193557505.0     count=131743839840.0     entropy=18.117
 ```
 
 
@@ -42,6 +49,7 @@ Run-14 clustering
 =================
 Run 4 total clustering efforts. These are
 ```
+cp -pr r14-sim200.rdb r14-imp-q0.7-c0.9-n1.rdb
 (in-group-cluster covr-obj 0.7 0.9 1 200 3000)
 (in-group-cluster covr-obj 0.7 0.9 2 200 3000)
 (in-group-cluster covr-obj 0.7 0.9 3 200 3000)
