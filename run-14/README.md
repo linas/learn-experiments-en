@@ -47,13 +47,15 @@ MM^T support=193557505.0     count=131743839840.0     entropy=18.117
 
 Run-14 clustering
 =================
-Run 4 total clustering efforts. These are
+Run 3 total clustering efforts. These are
 ```
+cp -pr r14-sim200.rdb r14-imp-q0.7-c0.9-n0.rdb
 cp -pr r14-sim200.rdb r14-imp-q0.7-c0.9-n1.rdb
+cp -pr r14-sim200.rdb r14-imp-q0.7-c0.9-n3.rdb
+
+(in-group-cluster covr-obj 0.7 0.9 0 200 3000)
 (in-group-cluster covr-obj 0.7 0.9 1 200 3000)
-(in-group-cluster covr-obj 0.7 0.9 2 200 3000)
 (in-group-cluster covr-obj 0.7 0.9 3 200 3000)
-(in-group-cluster covr-obj 0.7 0.9 4 200 3000)
 ```
 and the correspondingly-named rocks files.
 
