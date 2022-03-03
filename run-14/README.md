@@ -20,12 +20,13 @@ Then exit and restart:
 ```
 guile -l cogserver-gram.scm
 (star-obj 'clobber)
-(define cfq (make-compute-freq star-obj))
-(cfq 'init-freq)
-(cfq 'cache-all)
-(define enc (add-entropy-compute star-obj))
-(enc 'cache-all-left-entropy)
-(enc 'cache-all-right-entropy)
+; (define cfq (make-compute-freq star-obj))
+; (cfq 'init-freq)
+; (cfq 'cache-all)
+; Oh No!!! Need to storeobj all pairs incuding CrossSecitons!
+; (define enc (add-entropy-compute star-obj))
+; (enc 'cache-all-left-entropy)
+; (enc 'cache-all-right-entropy)
 
 (define btr (batch-transpose star-obj))
 (btr 'mmt-marginals)
@@ -33,6 +34,16 @@ guile -l cogserver-gram.scm
 
 The frequencies and entropies are needed only because we are logging
 progress; except for logging, these are not otherwise needed.
+... and I'm not tracking them any longer. They've been a huge pain
+in the butt. Not only do they need recomputation, but they also
+depend on the freq obj to stores freqs on CrossSections ... which
+we are NOT storing in the DB! So Basically, all is borked unless
+we store CrossSections.
+
+I guess that's why run-12 stored CrossSections ... but only intially.
+After a crash and restart, the run-12 had the wrong frequencies on the
+CrossSections, which inhibited the restarts. What an effing mess that
+was.  Painful, lost several weeks of time.
 
 I think the similarities are still valid from before.
 ```
