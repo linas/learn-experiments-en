@@ -31,6 +31,9 @@ guile -l cogserver-gram.scm
 (btr 'mmt-marginals)
 ```
 
+The frequencies and entropies are needed only because we are logging
+progress; except for logging, these are not otherwise needed.
+
 I think the similarities are still valid from before.
 ```
 (print-matrix-summary-report star-obj)
