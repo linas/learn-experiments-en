@@ -13,9 +13,16 @@ Directories:
 * run-9 -- Bringup of production ranked merge.
 
 
+Spindled databases
+==================
+Archived dtabases are in
+```
+/home2/linas/src/novamente/data/rocks-archive
+```
+
 Databases in the `~/data` directory
 ===================================
-The assorted run-1-*.rdb databases are "master copies" of the best
+The assorted `run-1-*.rdb` databases are "master copies" of the best
 runs with the properly, correctly applied processing.  These took
 a long time to generate, and need to be archived. They are imperfect:
 right from the get-go, there's some bug with escaping quotes that
@@ -23,11 +30,13 @@ needlessly pollutes these files. However ... that bug has not been
 found yet, has not been fixed yet, and we haven't re-run anything,
 so the below will do.
 
-* run-1-en_pairs-tranche-1.rdb -- run-1 guten-tranche-1 only.
-* run-1-en_pairs-tranche-12.rdb -- run-1 guten-tranche-1 and 2.
-* run-1-en_pairs-tranche-12*.rdb -- etc.
+* `run-1-en_pairs-tranche-1.rdb` -- run-1 guten-tranche-1 only.
+* `run-1-en_pairs-tranche-12.rdb` -- run-1 guten-tranche-1 and 2.
+* `run-1-en_pairs-tranche-12*.rdb` -- etc.
 
-* run-1-t1*-trim-1-1-1.rdb -- MPG-parsed and trimmed to remove words,
+The above are large.
+
+* `run-1-t1*-trim-1-1-1.rdb` -- MPG-parsed and trimmed to remove words,
      disjuncts, and sections with a count of 1. Includes MM^T marginals
      (but for word-disjunct pairs only) and redone pair marginals.
      This amount of trimming was not enough! See below.
@@ -48,16 +57,16 @@ Junk Databases
 The following were generated in various experiments, but do not
 need to be archived, they can be deleted.
 
-* r2-en_pairs.rdb -- just pair counts for guten-tranche-1 only.
+* `r2-en_pairs.rdb` -- just pair counts for guten-tranche-1 only.
      Above is missing 400+ files. There were some crashes.
      Part of run-2 -- includes MI
 
-* r2-mpg_parse.rdb -- MPG disjunct counts for above aka run-2.
+* `r2-mpg_parse.rdb` -- MPG disjunct counts for above aka run-2.
      This includes the MM^T marginals.
 
-* r3-* -- Assorted Similarilty Smackdown databases.
+* `r3-*rdb` -- Assorted Similarilty Smackdown databases.
 
-* r6-similarity-tsup.rdb -- copy of run-1-t1234-tsup-1-1-1.rdb with MI for
+* `r6-similarity-tsup.rdb` -- copy of run-1-t1234-tsup-1-1-1.rdb with MI for
      word-pairs between the top 1200 wordvecs computed.
 
 * r7-merge.rdb -- individual merge experiments.
