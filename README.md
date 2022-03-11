@@ -36,6 +36,15 @@ so the below will do.
 
 The above are large.
 
+* `run-1-en_mpg-tranche-1234.rdb` -- ?? I guess mpg-parsed ??
+
+* `run-1-marg-tranche-123.rdb` -- Described in Diary Part Three
+  page 6,8 ... contains word pairs and also disjuncts, and MMT
+  marginals for disjuncts (and maybe word-pair marginals?)
+
+  This takes 50GB to load word pairs, and 60 GB to do anything with
+  them.
+
 * `run-1-t1*-trim-1-1-1.rdb` -- MPG-parsed and trimmed to remove words,
      disjuncts, and sections with a count of 1. Includes MM^T marginals
      (but for word-disjunct pairs only) and redone pair marginals.
