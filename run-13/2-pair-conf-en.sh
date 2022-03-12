@@ -17,5 +17,6 @@ export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-1234.rdb
 export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-en_pairs-tranche-123.rdb
 export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-marg-tranche-123.rdb
 # export PAIRS_DB=${ROCKS_DATA_DIR}/r3-mpg-marg.rdb
+export PAIRS_DB=${ROCKS_DATA_DIR}/run-1-t12-tsup-1-1-1.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"
