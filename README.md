@@ -62,6 +62,9 @@ The above are large.
      has 7.1K x 66K (w,d) matrix, 270K word-disjunct pairs.
      Needs only additional 0.4 GB to also load (w,d) for total of 6.4 GB
 
+     XXX -- there is an issue: the matrix-summary says 7.4M word-word
+     pairs, but there are only 3.4M atoms. So the summary is pre-trim.
+
 * `run-1-t1*-shape.rdb` -- Copy of above, with MM^T marginals on shapes.
      This is on the fat side, as it still retains the original
      word-pairs. It also contains the (un-needed) support and MM^T
