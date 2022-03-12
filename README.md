@@ -37,26 +37,32 @@ so the below will do.
 The above are large.
 
 * `run-1-en_mpg-tranche-1234.rdb` -- ?? I guess mpg-parsed ??
+   Huge. See Diary Part Two
 
 * `run-1-marg-tranche-123.rdb` -- Described in Diary Part Three
-  page 6,8 ... contains word pairs and also disjuncts, and MMT
-  marginals for disjuncts (and maybe word-pair marginals?)
+    page 6,8 ... contains word pairs and also disjuncts, and MMT
+    marginals for disjuncts (and maybe word-pair marginals?)
 
-  This takes 50GB to load word pairs, and 60 GB to do anything with
-  them.
+    This takes 50GB to load word pairs, and 60 GB to do anything with
+    them.
 
 * `run-1-t1*-trim-1-1-1.rdb` -- MPG-parsed and trimmed to remove words,
      disjuncts, and sections with a count of 1. Includes MM^T marginals
      (but for word-disjunct pairs only) and redone pair marginals.
      This amount of trimming was not enough! See below.
 
-* run-1-t1*-tsup-1-1-1.rdb -- As above, but also removed all words, disjuncts
+* `run-1-t1*-tsup-1-1-1.rdb` -- As above, but also removed all words, disjuncts
      with a support of only 1. See see run-5, run-6 and diary part three.
      This is the correct amount to trim!  Includes MM^T marginals.
      ... but the MM^T marginals are only on the (w,d) pairs, and NOT
      on the shapes. The merge work needs shapes!
 
-* run-1-t1*-shape.rdb -- Copy of above, with MM^T marginals on shapes.
+* `run-1-t12-tsup-1-1-1.rdb` has ... 7.5K x 7.8K words, total of 7.4M
+     word-pairs; takes 6.0 GB to load word-pairs.
+     has 7.1K x 66K (w,d) matrix, 270K word-disjunct pairs.
+     Needs only additional 0.4 GB to also load (w,d) for total of 6.4 GB
+
+* `run-1-t1*-shape.rdb` -- Copy of above, with MM^T marginals on shapes.
      This is on the fat side, as it still retains the original
      word-pairs. It also contains the (un-needed) support and MM^T
      on the shapeless (w,d) pairs.
