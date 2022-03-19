@@ -11,6 +11,10 @@ Directories:
 * run-7 -- Exploring one merge at a time.
 * run-8 -- Exploring one merge at a time, w/shapes, and more merges.
 * run-9 -- Bringup of production ranked merge.
+* run-10 -- Four different merge experiments, crashed around 15 classes
+* run-11 -- Precise & imprecise merge, crashed, flawed
+* run-12
+* run-14
 
 
 Spindled databases
@@ -64,6 +68,19 @@ The above are large.
 
      XXX -- there is an issue: the matrix-summary says 7.4M word-word
      pairs, but there are only 3.4M atoms. So the summary is pre-trim.
+
+* `run-1-t123-tsup-1-1-1.rdb` has ... 44K x 44K words, total of 18.5M
+     word-pairs; takes 13.6 GB to load word-pairs.
+     has 11.3K x 136K (w,d) matrix, 560K word-disjunct pairs.
+     Needs only additional 0.9 GB to also load (w,d) for total of 14.5 GB
+
+* `run-1-t123-clean-1-1-1.rdb` is a copy of run-1-t123-tsup-1-1-1.rdb
+     with exhaustive trimming applied to (w,d pairs).  The cleanup:
+     (cleanup-gram-dataset cset-stars)
+     This results in only 7K words in the dataset!  Which means that
+     - The marginals are wrong,
+     - The word-pair MI is inappropriate.
+     ...
 
 * `run-1-t1*-shape.rdb` -- Copy of above, with MM^T marginals on shapes.
      This is on the fat side, as it still retains the original

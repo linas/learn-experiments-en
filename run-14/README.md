@@ -78,7 +78,7 @@ Do NOT use HUGETLB -- this burns when running out of ram,
 the malloc just .. fails, and everything fucks up.
 
 Notable differences from run-12:
-* This will log the orhtogonality of the clusters
+* This will log the orthogonality of the clusters
 * Setting commonality to 0.9 eliminates that variable
 * Uses the new exhaustive-jaccard implementation to create groups.
 
