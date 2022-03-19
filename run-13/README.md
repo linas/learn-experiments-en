@@ -25,6 +25,24 @@ Datasets
 * `r3-mpg-marg.rdb` -- A "badly-trimmed" dataset, but for which we
   report stats if the agi-22 article.
 
+* `run-1-t123-clean-1-1-1.rdb` is a copy of run-1-t123-tsup-1-1-1.rdb
+     with exhaustive trimming applied to (w,d pairs).  The cleanup:
+     (cleanup-gram-dataset cset-stars)
+     This results in only 7K words in the dataset!  Which means that
+     - The marginals are for the earlier, untrimmed dataset
+     - The word-pair MI is for the full, untrimmed dataset.
+     Still takes 20 mins to load, and 13.6 GB
+     Because I guess lots of low-quality MI pairs ...
+
+* `r13-all-in-one.rdb` -- copy of r14-sim200.rdb which has word-sims
+     for the top-200 word-pairs. It also has the following stuff:
+     -- Word pairs, from long ago.  These are trimmed to remove all
+        word-pairs with MI of one or less.
+     -- word-pair MI that are appropriate, prior to this trim.
+     -- word-disjunct pairs, with chap marginals on them.
+
+
+
 Notes
 -----
 Pair-count histograms
@@ -33,4 +51,43 @@ guile -l cogserver-mst.scm
 ```
 
 Then use `density-of-states.scm` from diary utils.
+
+
+`r13-all-in-one.rdb` Notes
+--------------------------
+
+* copy of r14-sim200.rdb which has word-sims
+* Takes 35 minutes to load word-pairs and taks 24GB RAM
+* 13206 WordNodes
+* 12420426 -- 12M word-pairs
+
+Marginals say:
+```
+Rows: 58251 Columns: 58573  == log_2 15.8300 x 15.8379
+Size: 26173771.0  log_2 size: 24.6416
+Fraction non-zero: 7.6712E-3 Sparsity: 7.02632  Rarity: 8.80765
+Total obs: 1346347214.0  Avg obs/pair: 51.4388  log_2 avg: 5.68478
+Entropy Tot: 17.9341  Left: 9.70115  Right: 9.47621  MI: 1.24330
+```
+So this is clearly for the non-trimmed word-pairs.
+
+
+To delete word-pairs with MI less than 0.0:
+```
+(define pair-obj (make-any-link-api))
+(pair-obj 'fetch-pairs)
+(define pair-stars (add-pair-stars pair-obj))
+(print-matrix-summary-report pair-stars)
+(define pair-freq (add-pair-freq-api pair-stars))
+```
+Then
+```
+(define all-pairs (pair-stars 'get-all-elts))
+(define CUT 0.5)
+(for-each (lambda (PR)
+	(when (< (pair-freq 'pair-fmi PR) CUT)
+		(cog-delete-recursive! (gdr PR))))
+	all-pairs)
+```
+
 ---------------
