@@ -37,7 +37,7 @@ Datasets
 * `r13-all-in-one.rdb` -- copy of r14-sim200.rdb which has word-sims
      for the top-200 word-pairs. It also has the following stuff:
      -- Word pairs, from long ago.  These are trimmed to remove all
-        word-pairs with MI of one or less.
+        word-pairs with MI of 1.1 or less, leaving 3.9M pairs.
      -- word-pair MI that are appropriate, prior to this trim.
      -- word-disjunct pairs, with chap marginals on them.
 
@@ -83,11 +83,30 @@ To delete word-pairs with MI less than 0.0:
 Then
 ```
 (define all-pairs (pair-stars 'get-all-elts))
+(length all-pairs)
+$4 = 12399182
+
 (define CUT 0.5)
 (for-each (lambda (PR)
 	(when (< (pair-freq 'pair-fmi PR) CUT)
 		(cog-delete-recursive! (gdr PR))))
 	all-pairs)
 ```
+This leaves 5M pairs behind.
+5021032 pairs
+
+(define CUT 1.1) ;; leaves 3.9M pairs behind.
+3878193 pairs
+
+Close and re-open, load pairs.  Takes 600 secs to load.
+Takes 6.8 GB RAM  and has 10634 words.
+Load all words ...
+There are 13206 words.  in total.
+
+Load csets, grows to 8.2G
+total of 833833 sections, 204680 connector seqs
+(which matches matrix summary report exactly. Yay!)
+
+Now run cleanup...
 
 ---------------
