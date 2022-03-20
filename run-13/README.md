@@ -41,7 +41,12 @@ Datasets
      -- word-pair MI that are appropriate, prior to this trim.
      -- word-disjunct pairs, with shape marginals on them.
 
-* `r13-all-in-one.rdb` -- copy of above, with addtional similarities
+* `r13-all-in-one.rdb` -- copy of above, with:
+     -- word-disjunct MI values. (missing in above)
+     -- similarities for top-ranked 1000 words
+     -- Requires 6.5 GB to load word-pairs only. (same as above)
+     -- Grows to 8.3 GB after loading word-disjunct pairs.
+     -- Grows to 8.6 GB to load similarities.
 
 
 Notes
