@@ -34,13 +34,14 @@ Datasets
      Still takes 20 mins to load, and 13.6 GB
      Because I guess lots of low-quality MI pairs ...
 
-* `r13-all-in-one.rdb` -- copy of r14-sim200.rdb which has word-sims
+* `r13-one-sim200.rdb` -- copy of r14-sim200.rdb which has word-sims
      for the top-200 word-pairs. It also has the following stuff:
      -- Word pairs, from long ago.  These are trimmed to remove all
         word-pairs with MI of 1.1 or less, leaving 3.9M pairs.
      -- word-pair MI that are appropriate, prior to this trim.
-     -- word-disjunct pairs, with chap marginals on them.
+     -- word-disjunct pairs, with shape marginals on them.
 
+* `r13-all-in-one.rdb` -- copy of above, with addtional similarities
 
 
 Notes
@@ -108,5 +109,28 @@ total of 833833 sections, 204680 connector seqs
 (which matches matrix summary report exactly. Yay!)
 
 Now run cleanup...
+
+Now 6.5G to load word-pairs, 9280 words.
+Then 7.9 GB to load sections
+8.3 G after loading sections.
+
+((PredicateNode . 19) (ListLink . 3906154) (AnyNode . 4) (Connector .
+17060) (ConnectorDir . 2) (ConnectorSeq . 204680) (Section . 833833)
+(EvaluationLink . 3691978) (TypeNode . 2) (SimilarityLink . 20100)
+(SchemaNode . 1) (RocksStorageNode . 1) (WordNode . 9496) (LgLinkNode .
+1))
+
+
+More similarities
+-----------------
+```
+(define cset-obj (make-pseudo-cset-api))
+(define covr-obj (add-covering-sections cset-obj))
+(covr-obj 'fetch-pairs)
+(covr-obj 'explode-sections)
+(define star-obj covr-obj)
+
+(setup-initial-similarities star-obj 500)
+```
 
 ---------------
