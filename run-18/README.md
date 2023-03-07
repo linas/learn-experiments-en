@@ -301,10 +301,29 @@ Revise `3-mpg-conf-en.sh` and run
 ./mst-submit.sh
 ```
 Starts with 67369 words, 9935011 pairs
+This came from 6485386.0 sentences and 25941544.0 parses
+(fetch-atom (SentenceNode "ANY"))
+(cog-count (SentenceNode "ANY"))
+
+So exactly 4 parses per sentence... Hmm. Why not 6??
 
 
-(cog-incoming-set (cog-atomspace))
-(list-ref is 17)
-(cog-set-atomspace! (list-ref is 16))
+
+Hmm. Setting window size to 12 and num-parses to 3 is
+slow.... but gc-stats is excelltent:
+Tot cpu time 1145 minutes
+gc time 11 minutes -- or 1%
+8317 gc times or 0.08 secs/gc
+Bravo!
+
+(monitor-parse-rate "foo")
+foo done=8533 rate=0.868 per sec
+foo done=11151 rate=0.924 per sec
+foo done=13373 rate=0.942 per sec
+foo done=46281 rate=1.012 per sec
+foo done=52005 rate=1.017 per sec
+
+
+
 
 ----

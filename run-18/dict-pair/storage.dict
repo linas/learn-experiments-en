@@ -6,16 +6,21 @@
 #define max-disjunct-cost 8.5;
 
 % The currently-running pair process
-#define storage-node "(CogStorageNode \"cog://localhost:20018\")";
+% #define storage-node "(CogStorageNode \"cog://localhost:20118\")";
+#define storage-node "(CogSimpleStorageNode \"cog-simple://localhost:20118\")";
 
-#define cost-key "(Predicate \"*-Mutual Info Key cover-section\")";
+% -----------------------
+% dynamic experiments.
+% #define cost-key "(Predicate \"*-Mutual Info Key cover-section\")";
 
-% #define pair-key "(Predicate \"*-Mutual Info Key cover-section\")";
-% #define pair-offset 1;
+% #define pair-formula "(DefinedProcedure \"*-dynamic MI ANY\")";
+% #define pair-offset 0;
 
-#define pair-formula "(DefinedProcedure \"*-dynamic MI ANY\")";
-#define pair-offset 0;
-
+% -----------------------
+% From the current cogserver pairs.
+#define pair-predicate "(BondNode "ANY")";
+#define pair-key "(Predicate "*-Mutual Info Key-*")";
+#define pair-offset 1;
 
 % -----------------------
 % At least one bogus entry is needed.
