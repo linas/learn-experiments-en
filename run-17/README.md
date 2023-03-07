@@ -9,8 +9,37 @@ Development and debug of LG dictionary API.
 
 Summary
 -------
-* The disjuncts in `r16-merge.rdb` and `
+* The disjuncts in `r16-merge.rdb` and `r13-all-in-one.rdb` are
+  insufficient to generate interesting sentences. There are too
+  few of them.
+* Apparently, trimming has depleted the ranks. Thus, although they
+  "look good" when examine individually, they're not rich enough to
+  be used.
+* The LG `dict-atomese` backend was extended to use word-pairs and
+  also ANY links.
+* Existing disjuncts can be supplemented with optional single links
+  taken from word-pairs. This explodes the RAM usage in LG, up to
+  10 GB or 20GB or maybe more, depending.
+* This suggests clustering should be more aggressive.
+* Since the LG atomese dict can now use single word-pairs, that means
+  it can do MST/MPG parsing. Thus, we can get rid of the atomspace
+  MST parser.
+* The LG backend can also suppliment disjuncts with ANY links.
+* The MST/MPG mode can also use ANY links.
+* As a result, the LG parser can do all of it -- random-tree ANY
+  parsing, MST/MPG parsing, and Section/disjunct parsing.
+* This creates a possibility of doing "continuous learning": learning
+  word pairs and disjuncts at the same time.
+* However, the more complex portions cannot run until marginals
+  recomputed. This suggests a natural awake/asleep cycle. During the
+  awake cycle, data is ingested. During the asleep cycle, marginals
+  are (re-) computed, MI is (re-)computed, similarities are updated.
+  This is very nice, it gets rid of the pipeline.
+* So it seems like it's time to abolish the pipeline.
+* BTW, we can do GOE similarity with just word-pair MI. So clustering
+  can begin before disjuncts have been created.
 
+Experiment 18 starts this process.
 
 process
 -------
