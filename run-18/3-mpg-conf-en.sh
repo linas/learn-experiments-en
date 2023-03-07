@@ -5,7 +5,7 @@
 # IPv4 hostname and port number of where the cogserver is running.
 export HOSTNAME=localhost
 export PORT=20118
-export PROMPT="mpg@(run-18)"
+export PROMPT="scheme@(mpg-18) "
 export OCPROMPT="[0;32mcogserver-mpg@(run-18) [0m"
 export LOGFILE=/tmp/cogserver-mst-en.log
 

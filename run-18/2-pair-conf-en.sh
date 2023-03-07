@@ -5,9 +5,8 @@
 # IPv4 hostname and port number of where the cogserver is running.
 export HOSTNAME=localhost
 export PORT=20118
-export PROMPT="[0;34mscheme@(pairs-18)[0m "
 export OCPROMPT="[0;32mcogserver@(pairs-18)[0m "
-export PROMPT="scheme@(pairs-18)"
+export PROMPT="scheme@(pairs-18) "
 export LOGFILE=/tmp/cogserver-pairs-en.log
 export LOGFILE=/tmp/cogserver-bond-en.log
 
