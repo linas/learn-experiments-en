@@ -14,13 +14,13 @@
 % #define cost-key "(Predicate \"*-Mutual Info Key cover-section\")";
 
 % #define pair-formula "(DefinedProcedure \"*-dynamic MI ANY\")";
-% #define pair-offset 0;
+% #define pair-index 0;
 
 % -----------------------
 % From the current cogserver pairs.
 #define pair-predicate "(BondNode "ANY")";
 #define pair-key "(Predicate "*-Mutual Info Key-*")";
-#define pair-offset 1;
+#define pair-index 1;
 
 #define pair-scale -0.25;
 #define pair-offset 3.0;
