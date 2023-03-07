@@ -1,9 +1,21 @@
 
 Experiment 17
 =============
+October 2022 concluded Nov 2022
+
+Goal
+----
 Development and debug of LG dictionary API.
 
+Summary
+-------
+* The disjuncts in `r16-merge.rdb` and `
+
+
+process
+-------
 startup
+```
 cd ~/data
 cp -pr r16-merge.rdb r17-parse.rdb
 
@@ -12,9 +24,10 @@ guile -l cogserver-lg.scm
 vi test-dict/storage.dict and verify
 
 link-parser test-dict
+```
 
-
-Issues:
+Issues
+------
 * Some sections don't have costs
   -- The sections that have WordClassNodes in them!
   -- Becuase this is the GOE dataset, these have not been computed yet.
@@ -229,17 +242,134 @@ vi test-dict/storage.dict and verify
 
 
 --------
-fetch-atom -> getAtom-> cog-node or cog-link
--> cog_node
-->cog-keys->alist
--> cog_keys_alist
+(cog-link 'List (Word "the") (Word "dog"))
+(cog-incoming-by-type (List  (Word "the") (Word "dog")) 'Evaluation)
+(cog-incoming-by-type (List  (Word "dog") (Word "watched")) 'Evaluation)
 
-fetch->value -> fetch_value -> loadValue -> cog-value
-->cog_value
-load-atoms-of-ty -> fetch_all_atoms_of_type ->loadType -> cog-get-atoms
-load-atomsp -> load_atomspace -> loadAtomSpace -> cog-get-atoms
--> cog_get_atoms
+links for the - dog - watched -the -cat
+
+There is
+(cog-link 'List (Word "###LEFT-WALL###") (Word "the"))
+but it has no incomnig link?
 
 
+as_boolean_lookup
+count_sections
+
+printf("duuude %s after sects %d\n", germ->get_name().c_str(), size_of_expression(orhead));
+```
+
+the dog watched the bird
+duuude ###LEFT-WALL### after sects 347
+duuude the after sects 55451
+duuude dog after sects 122
+duuude watched after sects 103
+duuude bird after sects 92
+
+duude wrd=###LEFT-WALL### ndj=3606
+duude wrd=cat ndj=2664
+duude wrd=bird ndj=3327
+duude wrd=dog ndj=3231
+
+fuuuuu w 1-prai and 1 any
+duude wrd=###LEFT-WALL### nsect=484402
+duude wrd=the nsect=154637219
+duude wrd=dog nsect=112345
+duude wrd=watched nsect=131297
+duude wrd=bird nsect=86753
+
+1 pair 0 any
+duude wrd=###LEFT-WALL### nsect=483598
+duude wrd=the nsect=154528167
+duude wrd=dog nsect=112137
+duude wrd=watched nsect=131113
+duude wrd=bird nsect=86597
+
+ 2 pair
+duude wrd=###LEFT-WALL### nsect=966802
+duude wrd=the nsect=309000325
+duude wrd=dog nsect=224145
+duude wrd=watched nsect=262121
+duude wrd=bird nsect=173099
+
+ 3 pair
+duude wrd=###LEFT-WALL### nsect=1450006
+duude wrd=the nsect=463472483
+duude wrd=dog nsect=336153
+duude wrd=watched nsect=393129
+duude wrd=bird nsect=259601
+
+
+	Linkage 1, cost vector = (UNUSED=1 DIS=-2.91 LEN=3)
+
+           +---------ATE--------+
+           +OLE+-VBG-+-RGD-+-ATE+
+           |   |     |     |    |
+LEFT-WALL the dog watched the bird
+
+linkparser>
+	Linkage 6, cost vector = (UNUSED=1 DIS=-2.29 LEN=3)
+
+           +---------ATE--------+
+           |   +-VBG-+-RGD-+-ATE+
+           |   |     |     |    |
+LEFT-WALL the dog watched the bird
+
+
+L+ or K+ or E+ or J+ or I+ or H+ or G+ or E+ or A+ or C+ or D+ or B+
+
+
+M+ or K+ or J+ or I+ or H+ or F+ or E+ & or C+ & or A+ & or B+
+
+duuude got sects 604 for ###LEFT-WALL###
+
+
+;        +-------A-------+
+;        |     +----D----+----I---+
+;        |     | +---E---+---H--+ |
+;        |     | | +--F--+--G-+ | |
+;        |     | | |     |    | | |
+;    LEFT-WALL 1 2 3 fountain 4 5 6
+;
+; The expected disjunct on the word 'fountain' is
+;
+;      F- & E- & D- & A- & G+ & H+ & I+
+
+level playing field
+
+John saw a cat
+
+
+todo - later bool lookup too DONE
+-- add pairs to disjuncts DONE
+-- change to middle DONE
+-- allow unknown words DONE
+
+lots of repeated parses bug report
+
+linkage_get_disjunct_cost
+   return linkage->lifo.disjunct_cost;
+
+struct Disjunct_struct
+{
+   Connector *left, *right;
+
+->multi
+->desc->string
+->desc->uc_length; uc_start;
+lkg->link_array[i].rw
+
+Link *          link_array;
+struct Link_s
+{
+   size_t lw;              /* Offset into Linkage->word NOT Sentence->word */
+   size_t rw;              /* Offset into Linkage->word NOT Sentence->word */
+   Connector * lc;
+   Connector * rc;
+
+../prepare/build-disjuncts.c:
+struct condesc_struct
+
+13 17 -- 29 bingo
 
 ========
