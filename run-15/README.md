@@ -40,9 +40,14 @@ Now compute more similarities. This will auto-load existing
 similarities.
 ```
 (setup-initial-similarities star-obj 500)
+(setup-initial-similarities star-obj 2500)
+(setup-initial-similarities star-obj 6000)
 ```
 
-The r14-sim200.rdb has 20116 SimilarityLink's
+The r14-sim200.rdb has 20116(?) SimilarityLink's
+The r14-sim500.rdb has 125250 SimilarityLink's
+The r14-sim2500.rdb has 3126250 SimilarityLink's
+The r14-sim6000.rdb has  SimilarityLink's
 
 Data Analysis
 -------------
