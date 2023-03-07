@@ -3,11 +3,11 @@
 #define dictionary-locale         en_US.UTF-8;
 #define dictionary-version-number 5.12.0;
 
-#define max-disjunct-cost 8.5;
+#define max-disjunct-cost 4.0;
 
 % The currently-running pair process
-% #define storage-node "(CogStorageNode \"cog://localhost:20118\")";
-#define storage-node "(CogSimpleStorageNode \"cog://localhost:20118\")";
+#define storage-node "(CogStorageNode \"cog://localhost:20118\")";
+% #define storage-node "(CogSimpleStorageNode \"cog://localhost:20118\")";
 
 % -----------------------
 % dynamic experiments.
@@ -21,6 +21,11 @@
 #define pair-predicate "(BondNode "ANY")";
 #define pair-key "(Predicate "*-Mutual Info Key-*")";
 #define pair-offset 1;
+
+#define pair-scale -0.25;
+#define pair-offset 3.0;
+#define pair-cutoff 2.0;
+
 
 % -----------------------
 % At least one bogus entry is needed.
