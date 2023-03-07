@@ -139,7 +139,7 @@ So we set up a proxy. First, test basic operation of a basic proxy.
 
 (cog-open sto)
 
-; Stuf we plan to send to the CogServer
+; Define some stuff we plan to send to the CogServer
 (define rsn (RocksStorageNode "rocks:///home/ubuntu/data/r18-pair.rdb"))
 
 (define tvp (PredicateNode "*-TruthValueKey-*"))
@@ -158,13 +158,16 @@ So we set up a proxy. First, test basic operation of a basic proxy.
 
 (fetch-atom (Word "the"))
 (cog-keys (Word "the"))
+(cog-value (Word "the") tvp)
 ```
 
-
+OK, so above works as expected -- it dynamically fetches the
+requested value, without using the read-through proxy.  Let's
+see if we can get fancier. We have two choices: Do the MI
+computation on the server side, and on the client side. The
+should be enough to do it on the client side (but so should
+the read-thru proxy.)  Lets test the simpler case first:
+client-side.
 ```
-(define ppr
-	(ProxyParameters
-		(ReadThruProxy "rthru pairs")
-		(List rsn)))
 
 ```
