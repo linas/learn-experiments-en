@@ -17,3 +17,7 @@ export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
 export MSG="MPG-Processing"
 
 export CORPORA_DIR=/home/ubuntu/textx/pair-counted
+
+export IN_PROCESS_DIR=mpg-split
+export COMPLETED_DIR=mpg-done
+
