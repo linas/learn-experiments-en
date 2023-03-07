@@ -1,6 +1,6 @@
 Restart of English language-learning experiments
 ================================================
-Restarted July 2021 ... ongoing, through Sept 2022
+Restarted July 2021 ... ongoing, through Oct 2022
 
 Directories:
 * run-1 -- attempt to have a perfect run-through of everything. (July 2021)
@@ -16,8 +16,9 @@ Directories:
 * run-11 -- Precise & imprecise merge, crashed, flawed
 * run-12 -- Attempted compute of similarities. Broken.
 * run-13 -- Staging area; no experiments.
-* run-14 -- Clustering attempts; get about 100-200 merges deep.
-* run-15 -- Deep compute of similarities.
+* run-14 -- Clustering attempts; get about 100-200 merges deep, then blah.
+* run-15 -- Deep compute of MI similarities and GOE similarities. (Sept 2022)
+* run-16 -- Cluster attempts with GOE similaries.
 
 
 Spindled databases
