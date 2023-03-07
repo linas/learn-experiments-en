@@ -212,4 +212,6 @@ TODO:
 
 * Modify rocks-storage to report what atoms are being stored.
   (Similar to cog-report-counts format)
+  https://github.com/opencog/atomspace-rocks/issues/17
 * Provide an "is this stored already?" function.
+  https://github.com/opencog/atomspace-rocks/issues/18
