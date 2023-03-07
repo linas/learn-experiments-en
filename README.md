@@ -1,5 +1,6 @@
-Restart of English language-learning. July 2021
-===============================================
+Restart of English language-learning experiments
+================================================
+Restarted July 2021 ... ongoing, through March 2022
 
 Directories:
 * run-1 -- attempt to have a perfect run-through of everything. (July 2021)
@@ -19,7 +20,7 @@ Directories:
 
 Spindled databases
 ==================
-Archived dtabases are in
+Archived databases are in
 ```
 /home2/linas/src/novamente/data/rocks-archive
 ```
@@ -103,8 +104,8 @@ need to be archived, they can be deleted.
 * `r6-similarity-tsup.rdb` -- copy of run-1-t1234-tsup-1-1-1.rdb with MI for
      word-pairs between the top 1200 wordvecs computed.
 
-* r7-merge.rdb -- individual merge experiments.
-* r8-merge.rdb -- individual merge experiments.
-* r9-merge.rdb -- Bringup of production merge.
+* `r7-merge.rdb` -- individual merge experiments.
+* `r8-merge.rdb` -- individual merge experiments.
+* `r9-merge.rdb` -- Bringup of production merge.
 
-...THE END...
+**...THE END...**
