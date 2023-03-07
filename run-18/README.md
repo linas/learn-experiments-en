@@ -288,6 +288,10 @@ guile -l cogserver.scm
 ```
 
 What's missing? Weighting?
+What the heck. Let's do a full MST parse, using a weight of 1.0
+and see what happens.
+
+export CORPORA_DIR=/home/ubuntu/textx/pair-counted
 
 
 ----
