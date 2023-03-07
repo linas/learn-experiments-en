@@ -6,6 +6,9 @@ Efforts below stalled. Major rework if link-grammar for MST
 parsing. Also switch to EdgeLink from EvaluationLink. Therefore
 progress to run-19.
 
+A side-effect of that switch is that r18 dicts are incompatible
+with the latest code. Bummer.
+
 The dream of unified processing remains a dream. For now, will
 focus on LG MST-parsing. .. in run-19.
 
@@ -22,7 +25,7 @@ files
 * `r18-bond-plain.rdb` -- 9935011 pairs and 67369 words.
   Block-counted pairs, for fanfic only. No marginals.
   Uses `(BondNode "Any")` for the pair predicate.
-  
+
 * `r18-bond-marge.rdb` -- pairs with MI values on them
 
 Procedure
@@ -40,6 +43,7 @@ Start from scratch.
   Rate: 21 parses per second.
   Issues: gc runs way too often; collects 250K each run, takes 0.1 secs
   per run, uses 50% of total CPU time, seems to try to keep size at 10M
+* Sizes: (EvaluationLink . 9935011) (WordNode . 67369)
 * See below, run `run-common/marginals-pair.scm`
   to bulk compute pair MI's.
 
