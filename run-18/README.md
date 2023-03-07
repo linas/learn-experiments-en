@@ -97,7 +97,7 @@ So this:
 			(RocksStorageNode "rocks:///home/ubuntu/data/r18-pair.rdb"))))
 
 (cog-proxy-open)
-; That's odd .. this does a second open, which suceeds!? Huh??
+; That's odd .. this does a second open, which succeeds!? Huh??
 ; Because the second one has one slash, not two...!!
 
 (fetch-atom (Word "house"))
@@ -105,12 +105,13 @@ So this:
 (define pr (List (Word "the") (Word "house")))
 (fetch-incoming-set pr)
 (define epr (car (cog-incoming-set pr)))
+; Above works.
 ```
 
-Above proves the basic proxy works.
-Earlier, from `(opencog matrix)` we had this:
+Above proves the basic proxy works. Just like before.
 
-Run it in the client. The 'pair count fails, because there's
+Earlier, from `(opencog matrix)` we had this:
+Run the below in the client. The 'pair count fails, because there's
 no fetch.
 ```
 (use-modules (opencog matrix))
@@ -124,5 +125,46 @@ no fetch.
 (ady 'pair-count (Word "the") (Word "horse"))
 ```
 
+So we want to move that formula to the server, to install that
+formula into a `DynamicDataProxy`. But how? Well lets try it.
+
+So we set up a proxy. First, test basic operation of a basic proxy.
+
+```
+(use-modules (opencog) (opencog persist))
+(use-modules (opencog persist-cog))
+(use-modules (opencog matrix))
+(use-modules (opencog nlp) (opencog learn))
+(define sto (CogStorageNode "cog://10.0.3.208:20018"))
+
+(cog-open sto)
+
+; Stuf we plan to send to the CogServer
+(define rsn (RocksStorageNode "rocks:///home/ubuntu/data/r18-pair.rdb"))
+
+(define tvp (PredicateNode "*-TruthValueKey-*"))
+(define dgc (DefinedProcedureNode "get-cnt"))
+(define dfc (DefineLink dgc
+	(Lambda (Variable "X")  (FetchValueOf (Variable "X") tvp rsn))))
+
+(define ddp (DynamicDataProxy "dyn-cnt"))
+(cog-set-value! ddp tvp dgc)
+
+(store-atom dfc)
+(store-atom ddp)
+(cog-set-proxy! ddp)
+
+(cog-proxy-open)
+
+(fetch-atom (Word "the"))
+(cog-keys (Word "the"))
+```
 
 
+```
+(define ppr
+	(ProxyParameters
+		(ReadThruProxy "rthru pairs")
+		(List rsn)))
+
+```
