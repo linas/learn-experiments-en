@@ -10,7 +10,8 @@ requires bring-up.
 So here we go.
 
 files
-* `r18-pairs.rdb` -- block-counted pairs, for fanfic only.
+* `r18-pair-plain.rdb` -- block-counted pairs, for fanfic only.
+  No marginals; counted with the pre-marginal code.
 
 
 Bringup Notes
@@ -26,6 +27,9 @@ Well, try two things:
 Next ... items:
 * Use uniform sentence lengths DONE
 config OBSERVE `(observe-block TEXT)`
+
+TODO:
+-- ParseNode should have cost on it... where??
 
 
 batch-pairs -- run-common
@@ -61,3 +65,5 @@ maxrss: 26023264 KB  majflt: 56  inblk: 48  outblk: 178783224
 18.2 G virt 16.1 G resident
 (count-all) ; 13328951 == 13M so about 1.2KB per atom
 wc pair-counted/fanfic/ * == 547703
+
+----------------------

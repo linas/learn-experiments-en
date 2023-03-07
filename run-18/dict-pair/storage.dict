@@ -1,0 +1,18 @@
+
+#define dictionary-lang           en;
+#define dictionary-locale         en_US.UTF-8;
+#define dictionary-version-number 5.12.0;
+
+#define max-disjunct-cost 8.5;
+
+% The currently-running pair process
+#define storage-node "(CogStorageNode \"cog://localhost:20018\")";
+
+% #define mi-key "(Predicate \"*-Mutual Info Key cover-section\")";
+% #define mi-offset 1;
+
+
+% -----------------------
+% At least one bogus entry is needed.
+% This file is read as an affix file, so only affix names are allowed.
+foo: UNITS+;
