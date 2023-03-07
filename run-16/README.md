@@ -100,7 +100,91 @@ goe-cluster agglo-goe.scm
 )
 ```
 
+Stats
+=====
+Here we go:
+
+```
+(define e (make-elapsed-secs))
+(load-atoms-of-type 'Similarity)
+(format #t "Fetched in ~A secs\n" (e))
+Fetched in 1956 secs
+
+(define smi (add-similarity-api covr-obj #f "goe"))
+(smi 'fetch-pairs)
+
+(define level-one (cog-new-atomspace (cog-atomspace)))
+(cog-set-atomspace! level-one)
+(store-frames (cog-atomspace))
+(define touched (goe-cluster covr-obj 100))
+```
+
+Results:
+```
+Sorted 499500 GOE pairs in 664 secs
+Found 1000 words with GOE sims
+------ Round 0 Next in line:
+goe-theta= 0.0183 cos= 0.9998 mi= 7.6915 (`60w`, `50w`)
+goe-theta= 0.0677 cos= 0.9977 mi= 7.0143 (`Ag`, `Ap`)
+goe-theta= 0.1206 cos= 0.9927 mi= 6.8538 (`60w`, `6d`)
+goe-theta= 0.1248 cos= 0.9922 mi= 6.7958 (`6d`, `50w`)
+goe-theta= 0.1468 cos= 0.9892 mi= 6.9751 (`6d`, `Ap`)
+goe-theta= 0.1538 cos= 0.9882 mi= 6.8176 (`60w`, `Ap`)
+goe-theta= 0.1583 cos= 0.9875 mi= 6.7567 (`Ap`, `50w`)
+goe-theta= 0.1586 cos= 0.9875 mi= 7.0401 (`26`, `13`)
+goe-theta= 0.1654 cos= 0.9864 mi= 7.0198 (`Ag`, `Jl`)
+goe-theta= 0.1654 cos= 0.9863 mi= 6.9765 (`6d`, `Ag`)
+goe-theta= 0.1715 cos= 0.9853 mi= 6.8190 (`60w`, `Ag`)
+goe-theta= 0.1757 cos= 0.9846 mi= 6.7582 (`Ag`, `50w`)
+
+ (cog-report-counts)
+((PredicateNode . 56) (ListLink . 418856) (MemberLink . 236) (AnyNode . 7) (Connector . 17253) (ConnectorDir . 2) (ConnectorSeq . 272509) (Section . 1322160) (ShapeLink . 1148630) (CrossSection . 3050065) (VariableNode . 1) (EvaluationLink . 9496) (TypeNode . 6) (TypeChoice . 3) (AnchorNode . 1) (SimilarityLink . 18003000) (SchemaNode . 1) (RocksStorageNode . 1) (WordNode . 9495) (WordClassNode . 100))
+
+(cog-rocks-stats storage-node)
+Connected to `rocks:///home/ubuntu/data//r16-merge.rdb`
+Database contents:
+  Next aid: 215551431  Frames f@: 102
+  Atoms/Links/Nodes a@: 45615219 l@: 45601570 n@: 13364
+  Keys/Incoming/Hash k@: 76268143 i@: 92666883 h@: 0
+
+  Height Distribution:
+    z1@: 30467601
+    z2@: 13501872
+    z3@: 1632378
+
+  Number of Frame tops: 1
+  Frame top: `GOE-merge layer 100`
+  Size   Name
+    45160170    `(uuid . 1)`
+    15  `(uuid . 3)`
+    90  `GOE-merge layer 1`
+    25  `GOE-merge layer 2`
+    548 `GOE-merge layer 3`
+    186 `GOE-merge layer 4`
+    88  `GOE-merge layer 5`
+    56  `GOE-merge layer 6`
+    1085        `GOE-merge layer 7`
+    456 `GOE-merge layer 8`
+    397 `GOE-merge layer 9`
+    106 `GOE-merge layer 10`
+    748 `GOE-merge layer 11`
+...
+    11153       `GOE-merge layer 92`
+    5007        `GOE-merge layer 93`
+    4554        `GOE-merge layer 94`
+    1460        `GOE-merge layer 95`
+    1054        `GOE-merge layer 96`
+    10188       `GOE-merge layer 97`
+    122 `GOE-merge layer 98`
+    10739       `GOE-merge layer 99`
+    1431        `GOE-merge layer 100`
+```
+
+
+
+
 Debug
+=====
 
 ```
 (define * (f X #:key (foo 1) (bar 2))
