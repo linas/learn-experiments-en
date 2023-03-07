@@ -54,4 +54,10 @@ Data Analysis
 
 Code in learn-lang-diary/utils/orthogonal-ensemble.scm
 
+cp -pr r15-sim2500.rdb r15-goe.rdb
+guile -l cogserver-gram.scm
+
+XXX Do we really need the gram part?  I suspect not...
+
+
 ---------
