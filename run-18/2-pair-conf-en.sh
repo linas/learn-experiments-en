@@ -9,11 +9,13 @@ export PROMPT="[0;34mscheme@(pairs-18)[0m "
 export OCPROMPT="[0;32mcogserver@(pairs-18)[0m "
 export PROMPT="scheme@(pairs-18)"
 export LOGFILE=/tmp/cogserver-pairs-en.log
+export LOGFILE=/tmp/cogserver-bond-en.log
 
 # Location where pair counts will accumulate.
 export PAIRS_DB=${ROCKS_DATA_DIR}/r18-pair.rdb
+export PAIRS_DB=${ROCKS_DATA_DIR}/r18-bond.rdb
 # export PAIRS_DB=${ROCKS_DATA_DIR}/r18-junk.rdb
-export PAIRS_DB=${ROCKS_DATA_DIR}/r18-pair-marge.rdb
+# export PAIRS_DB=${ROCKS_DATA_DIR}/r18-pair-marge.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"
 
 export CORPORA_DIR=$TEXT_DIR/beta-pages

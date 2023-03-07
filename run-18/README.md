@@ -15,6 +15,17 @@ files
 
 * `r18-pair-marge.rdb` -- pairs with MI values on them TODO
 
+Procedure
+---------
+Start from scratch.
+
+* Copy fanfic to `textx/betax`.
+* `guile -l cogserver.scm`
+* `cd ~/src/learn/run-common`
+* `. ~/experiments/run-18/0-pipeline.sh`
+* `./process-corpus.sh ~/experiments/run-18/2-pair-conf-en.sh`
+* Wait ...
+
 Plan
 ----
 
