@@ -194,11 +194,38 @@ cp -pr r13-all-in-one.rdb r17-all-in-one.rdb
 guile -l cogserver.scm
 
 rlwrap telnet localhost 20017
-load /usr/local/lib/opencog/modules/libwthru-proxy.so
-config SexprShellModule libwthru-proxy.so
+rlwrap telnet 10.0.3.208 20017
+load /usr/local/lib/opencog/modules/libw-thru-proxy.so
+config SexprShellModule libr-thru-proxy.so
+# not needed config SexprShellModule libw-thru-proxy.so
 (cog-report-counts)
 
 vi test-dict/storage.dict and verify
+
+(use-modules (opencog) (opencog persist) (opencog persist-cog))
+(use-modules (opencog nlp))
+(define csn (CogStorageNode "cog://10.0.3.208:20017"))
+(cog-open csn)
+(fetch-incoming-by-type (Word "it") 'Section)
+
+(for-each cog-extract-recursive! (cog-get-atoms 'Word))
+
+
+(fetch-incoming-by-type (Word "it") 'List)
+(car (cog-get-atoms 'List))
+
+(fetch-incoming-by-type (car (cog-get-atoms 'List)) 'Evaluation)
+
+(EvaluationLink (ctv 1 0 225)
+  (LgLinkNode "ANY")
+  (ListLink
+    (WordNode "aimed")
+    (WordNode "it")))
+
+(define e (car (cog-get-atoms 'Evaluation)))
+(cog-keys e)
+(PredicateNode "*-Mutual Info Key-*")
+(cog-value e (PredicateNode "*-Mutual Info Key-*"))
 
 
 --------
@@ -212,62 +239,6 @@ fetch->value -> fetch_value -> loadValue -> cog-value
 load-atoms-of-ty -> fetch_all_atoms_of_type ->loadType -> cog-get-atoms
 load-atomsp -> load_atomspace -> loadAtomSpace -> cog-get-atoms
 -> cog_get_atoms
-
-
-
-18080
-tcpdump port 18080
-
-
-WTF -- capture while cogserver running:
-
-18:21:07.634384 IP 162.218.65.161.26526 > fanny.18080: Flags [S], seq 3806261560, win 64240, options [mss 1460,sackOK,TS val 4001273613 ecr 0,nop,wscale 7], length 0
-18:21:07.634503 IP fanny.18080 > 162.218.65.161.26526: Flags [S.], seq 1921315049, ack 3806261561, win 65160, options [mss 1460,sackOK,TS val 3818867504 ecr 4001273613,nop,wscale 7], length 0
-18:21:07.674908 IP 162.218.65.161.26526 > fanny.18080: Flags [.], ack 1, win 502, options [nop,nop,TS val 4001273653 ecr 3818867504], length 0
-18:21:07.674909 IP 162.218.65.161.26526 > fanny.18080: Flags [P.], seq 1:9, ack 1, win 502, options [nop,nop,TS val 4001273653 ecr 3818867504], length 8
-18:21:07.675090 IP fanny.18080 > 162.218.65.161.26526: Flags [.], ack 9, win 509, options [nop,nop,TS val 3818867545 ecr 4001273653], length 0
-18:21:07.714578 IP 162.218.65.161.26526 > fanny.18080: Flags [P.], seq 9:263, ack 1, win 502, options [nop,nop,TS val 4001273693 ecr 3818867545], length 254
-18:21:07.714638 IP fanny.18080 > 162.218.65.161.26526: Flags [.], ack 263, win 508, options [nop,nop,TS val 3818867584 ecr 4001273693], length 0
-18:21:07.714824 IP fanny.18080 > 162.218.65.161.26526: Flags [P.], seq 1:52, ack 263, win 508, options [nop,nop,TS val 3818867585 ecr 4001273693], length 51
-18:21:07.715010 IP fanny.18080 > 162.218.65.161.26526: Flags [F.], seq 52, ack 263, win 508, options [nop,nop,TS val 3818867585 ecr 4001273693], length 0
-18:21:07.754258 IP 162.218.65.161.26526 > fanny.18080: Flags [.], ack 52, win 502, options [nop,nop,TS val 4001273733 ecr 3818867585], length 0
-18:21:07.794968 IP 162.218.65.161.26526 > fanny.18080: Flags [.], ack 53, win 502, options [nop,nop,TS val 4001273773 ecr 3818867585], length 0
-18:21:08.675209 IP 162.218.65.161.26526 > fanny.18080: Flags [R.], seq 263, ack 53, win 502, options [nop,nop,TS val 4001274654 ecr 3818867585], length 0
-
-six seconds later;:
-18:21:13.675706 IP 162.218.65.162.51792 > fanny.18080: Flags [S], seq 2737485821, win 64240, options [mss 1460,sackOK,TS val 3478766769 ecr 0,nop,wscale 7], length 0
-18:21:13.675792 IP fanny.18080 > 162.218.65.162.51792: Flags [S.], seq 1947561967, ack 2737485822, win 65160, options [mss 1460,sackOK,TS val 4271182257 ecr 3478766769,nop,wscale 7], length 0
-
-
-cogserver not running:
-
-listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
-18:31:38.001729 IP 162.218.65.176.3564 > fanny.18080: Flags [S], seq 1151307629, win 64240, options [mss 1460,sackOK,TS val 2122991075 ecr 0,nop,wscale 7], length 0
-18:31:38.001814 IP fanny.18080 > 162.218.65.176.3564: Flags [R.], seq 0, ack 1151307630, win 0, length 0
-18:32:38.051786 IP 162.218.65.177.24117 > fanny.18080: Flags [S], seq 3510207828, win 64240, options [mss 1460,sackOK,TS val 634899544 ecr 0,nop,wscale 7], length 0
-18:32:38.051881 IP fanny.18080 > 162.218.65.177.24117: Flags [R.], seq 0, ack 3510207829, win 0, length 0
-18:33:38.093977 IP 162.218.65.178.62064 > fanny.18080: Flags [S], seq 460061136, win 64240, options [mss 1460,sackOK,TS val 844071500 ecr 0,nop,wscale 7], length 0
-18:33:38.094084 IP fanny.18080 > 162.218.65.178.62064: Flags [R.], seq 0, ack 460061137, win 0, length 0
-
-wtf the server is not even runnig!!!
-Note exactly 6 seconds apart
-
-dig -x 162.218.65.176
-65.218.162.in-addr.arpa. 10572	IN	SOA	ns00.forked.net. admin.forked.net. 2017090700 86400 3600 604800 21600
-
-Oregon Colocation and Dedicated Servers - Oregon
-
-18:41:39.458582 IP 162.218.65.186.11904 > fanny.18080: Flags [S], seq 1938192295, win 64240, options [mss 1460,sackOK,TS val 2011110984 ecr 0,nop,wscale 7], length 0
-18:41:39.458688 IP fanny.18080 > 162.218.65.186.11904: Flags [R.], seq 0, ack 1938192296, win 0, length 0
-
-Then not in step:
-soon 
-18:42:01.972516 IP 162.218.65.219.17306 > fanny.18080: Flags [S], seq 1827998968, win 64240, options [mss 1460,sackOK,TS val 3632543284 ecr 0,nop,wscale 7], length 0
-18:42:01.972624 IP fanny.18080 > 162.218.65.219.17306: Flags [R.], seq 0, ack 1827998969, win 0, length 0
-
-oh its monerod
-tcpdump port 18080
-tcpdump net 162.218.65/24
 
 
 
