@@ -20,7 +20,8 @@ Directories:
             (later; revive for some frame debugging work.)
 * run-15 -- Deep compute of MI similarities and GOE similarities. (Sept 2022)
 * run-16 -- Cluster attempts with GOE similaries.
-* run-17 -- Link-Grammar API development & test.
+* run-17 -- Link-Grammar API development & test. (Oct 2022)
+* run-18 -- Integrated pair+MST+clustering bring-up. (Nov 2022)
 
 
 Spindled databases
