@@ -324,6 +324,10 @@ foo done=46281 rate=1.012 per sec
 foo done=52005 rate=1.017 per sec
 
 
+XXX Where is `dict-pair-exp` set, for the dictionary to use ???
+scm/parse/lg-parser.scm  (LgDictNode "dict-pair") hard-coded ...
+OK, but that is installed from `run-config`
+
 
 
 ----
