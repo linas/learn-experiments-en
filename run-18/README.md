@@ -24,7 +24,13 @@ Start from scratch.
 * `cd ~/src/learn/run-common`
 * `. ~/experiments/run-18/0-pipeline.sh`
 * `./process-corpus.sh ~/experiments/run-18/2-pair-conf-en.sh`
-* Wait ...
+* Wait several days ...
+  Rate: 21 parses per second.
+  Issues: gc runs way too often; collects 250K each run, takes 0.1 secs
+  per run, uses 50% of total CPU time, seems to try to keep size at 10M
+* See below, run `run-common/marginals-pair.scm`
+  to bulk compute pair MI's.
+
 
 Plan
 ----
