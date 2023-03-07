@@ -54,10 +54,39 @@ Data Analysis
 
 Code in learn-lang-diary/utils/orthogonal-ensemble.scm
 
+OK, So, like a first run of bulk goe computations is now possible.
+Lets try it.  Use scripts in ortho-compute.scm
+
 cp -pr r15-sim2500.rdb r15-goe.rdb
 guile -l cogserver-gram.scm
 
 XXX Do we really need the gram part?  I suspect not...
+
+(goe 'mean-rms)
+; (-1.4053400751699667 2.898486631855367)
+(gor 'mean-rms)
+; (-2.1492146508638945 2.9517800711660547)
+
+
+(loop-upper-diagonal dot-prod allwo 0 250)
+(loop-upper-diagonal dot-prod allwo 0 500)
+
+; --------------------------------
+
+cp -pr r15-sim500.rdb r15-goe-500.rdb
+
+; --------------------------------
+
+cp -pr r15-sim6000.rdb r15-goe-6k.rdb
+guile -l cogserver.scm
+
+(goe 'mean-rms)
+; (-0.7240391833706027 2.6398276840879658)
+(gor 'mean-rms)
+; (-2.754334601252323 2.601919247381592)
+
+(loop-upper-diagonal dot-prod allwo 0 250)
+
 
 
 ---------
