@@ -14,6 +14,7 @@ An unfulfilled goal from run-18:
 Files:
 ------
 * `r19-pair-plain.rdb` -- pair-counts only, no marginals. See below.
+* `r19-pair-marge.rdb` -- pair-counts & marginals & pair MI.
 
 
 Procedure
@@ -66,3 +67,23 @@ Stats:
   slides is same as num words.
 
 So this all looks good.
+
+
+Pair Marginals
+--------------
+Next, recompute pair marginals.
+```
+guile -l run-common/marginals-pair.scm
+```
+
+Before batching:
+Elapsed time to load pairs: 559 secs
+(count-all) 15182063
+RSS 8.9GB --> 586 Bytes/Atom
+
+After batching:
+(count-all) 15451385
+13.6g RSS -> 880 Bytes/Atom
+
+Time to reload pairs (after batching): 714 secs
+11.8G RSS -> 764 Bytes/Atom -- Yayy!
