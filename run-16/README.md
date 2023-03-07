@@ -74,6 +74,7 @@ Now start doing merges.
 entry point
 goe-cluster agglo-goe.scm
 
+```
 (define sha (add-covering-sections pcs))
 (define LLOBJ sha)
 
@@ -97,16 +98,20 @@ goe-cluster agglo-goe.scm
 	#:lower-bound -0.7  ; for theta sim
 	#:max-jump 2.5
 )
+```
 
-
-
+Debug
 
 ```
-(define* (f X #:key (foo 1) (bar 2))
+(define * (f X #:key (foo 1) (bar 2))
 	(define Y 42)
 	(format #t "yes ~A ~A ~A ~A\n" X foo bar Y))
 (f 1 #:foo 2 #:bar 3)
 ```
+
+Atomspace frames:
+-- what if atomspace is created/stored with the same name as existing
+atomspace?   Ouch!? Currently has no effect...
 
 ; --------------------------------
 

@@ -96,4 +96,44 @@ must call as
 ```
 The above will also place each merge in it's own space-frame.
 
+This code seemss to be buggy. Working on it.
+
+Repeatedly call this then exit and restart.
+```
+(in-group-mi-cluster covr-obj 200 5
+   #:QUORUM 0.7 #:COMMONALITY 0.9  #:NOISE 6)
+```
+
+After the first round:
+```
+(r14-i6)> (cog-report-counts)
+$1 = ((PredicateNode . 48) (ListLink . 467287) (MemberLink . 19) (AnyNode . 7) (Connector . 17072) (ConnectorDir . 2) (ConnectorSeq . 253111) (Section . 1124713) (ShapeLink . 1023407) (CrossSection . 2485678) (VariableNode . 1) (EvaluationLink . 9501) (TypeNode . 6) (TypeChoice . 3) (AnchorNode . 1) (WordNode . 9495) (WordClassNode . 5))
+(r14-i6)> (cog-rocks-stats storage-node)
+Connected to `rocks:///home/ubuntu/data//r14-junk.rdb`
+Database contents:
+
+Database contents:
+  Next aid: 198009597  Frames f@: 6
+  Atoms/Links/Nodes a@: 28073481 l@: 28059919 n@: 13277
+  Keys/Incoming/Hash k@: 59976951 i@: 58086575 h@: 0
+
+  Height Distribution:
+    z1@: 12490473
+    z2@: 13712038
+    z3@: 1857689
+
+  Number of Frame tops: 1
+  Frame top: `MI-merge layer 5`
+  Size   Name
+    27181103    `(uuid . 1)`
+    78803       `MI-merge layer 1`
+    352791      `MI-merge layer 2`
+    19254       `MI-merge layer 3`
+    128597      `MI-merge layer 4`
+    312933      `MI-merge layer 5`
+
+Unix max open files rlimit cur: 1024 rlimit max: 1048576
+```
+
+
 ========
