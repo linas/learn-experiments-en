@@ -19,7 +19,10 @@ Datasets
   to exist? Presumably because we ran out of RAM to compute the
   marginals? Should we try again?
 * `run-1-marg-tranche-1234.rdb` -- Biggest pair file which does have
-  marginals.
+  marginals. Issues: it has many backslashes. It has words with no
+  counts on them. Not all UTF-8 punct was handled. UTF-8 whitespace not
+  handled.
+
 * `run-1-t1234-tsup-1-1-1.rdb` -- Pairs, trimed to 1,1,1, with support
   marginals.
 * `r3-mpg-marg.rdb` -- A "badly-trimmed" dataset, but for which we
