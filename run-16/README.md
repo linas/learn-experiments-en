@@ -29,9 +29,36 @@ cd ~/src/learn/run-common/
 guile -l cogserver-gram.scm
 ```
 
-Verify everything looks good.
+Manual load of similarity data:
 ```
-(cog-report-counts)
+(define pca (make-pseudo-cset-api)) ; shapes not needed to fetch sims.
+(define pcs (add-pair-stars pca))
+(define smi (add-similarity-api pcs #f "shape-mi"))
+
+; Need to fetch all pairs, because the similarity object doesn't
+; automate this.
+(smi 'fetch-pairs) ;;; same as (load-atoms-of-type 'Similarity)
+```
+
+Then access similarites and verify something is there:
+```
+(define gos (add-similarity-api smi #f "goe"))
+(gos 'pair-count (Word "she") (Word "he"))
+(gos 'get-count (Similarity (Word "she") (Word "he")))
+
+(define (add-goe-sim LLOBJ)
+	(define (get-ref PR IDX)
+		; Expect FloatValue always IDX=0 is the MI sims, and 1 is the RMI
+		(cog-value-ref (LLOBJ 'get-count PR) IDX))
+
+	(lambda (message . args)
+		(case message
+			((get-count)  (get-ref (car args) 0))
+			; ((pair-count)  (get-ref (car args) 0))
+			(else		(apply LLOBJ (cons message args))))
+	))
+
+(define goe (add-goe-sim gos))
 ```
 
 Merge
