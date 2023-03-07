@@ -68,10 +68,14 @@ Now start doing merges.
 ```
 (define layer-one (cog-new-atomspace "layer one" (cog-atomspace)))
 (cog-set-atomspace! layer-one)
+(store-frames layer-one)
 ```
 
 entry point
 goe-cluster agglo-goe.scm
+
+(define sha (add-covering-sections pcs))
+(define LLOBJ sha)
 
 (define jaccard-select (make-jaccard-selector LLOBJ
    QUORUM COMMONALITY NOISE))
@@ -103,6 +107,7 @@ epsilon is the win size of similarity
 
 winsize = 1/ epsi-step
 window initialliy a list of 2 that is winsize long
+
 
 
 ```
