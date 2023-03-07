@@ -9,7 +9,7 @@ export PROMPT="[0;34mscheme@(run-18) [0m"
 export OCPROMPT="[0;32mcogserver@(run-18) [0m"
 export LOGFILE=/tmp/cogserver-mst-en.log
 
-# Location of the database containing MPG pairs
+# Location of the database where MPG counts will accumulate.
 export MST_DB=${ROCKS_DATA_DIR}/r18-mpg.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
 

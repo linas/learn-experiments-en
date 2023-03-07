@@ -13,6 +13,8 @@ files
 * `r18-pair-plain.rdb` -- block-counted pairs, for fanfic only.
   No marginals; counted with the pre-marginal code.
 
+* `r18-pair-marge.rdb` -- pairs with MI values on them TODO
+
 Plan
 ----
 
@@ -64,6 +66,25 @@ maxrss: 26023264 KB  majflt: 56  inblk: 48  outblk: 178783224
 wc pair-counted/fanfic/ * == 547703
 ```
 ----------------------
+
+Punt
+====
+I got bored doing the proxying below. It's been a distraction.
+So I'm gonna brute-force compute pair MI as before. How does that
+go, again?
+
+
+Run `run-common/marginals-pair.scm`
+```
+guile -l cogserver.scm
+and do the above.
+```
+13 GB to load
+Elapsed time to load pairs: 707 secs
+Start computing the basis
+Support: found num left= 67443 num right= 67456 in 1336 secs
+
+
 
 Proxy setup
 ===========
@@ -169,5 +190,40 @@ should be enough to do it on the client side (but so should
 the read-thru proxy.)  Lets test the simpler case first:
 client-side.
 ```
+(use-modules (opencog matrix))
+(use-modules (opencog learn))
+(define ala (make-any-link-api))
+(define alc (add-count-api ala))
+(define als (add-storage-count alc))
+(define ady (add-dynamic-mi als))
+(define dpn (ady 'formula))
+(define form (car (cog-incoming-by-type dpn 'DefineLink)))
 
+(define ppn (DefinedProcedure "*-put-MI-*))
+(define pfm
+	(Define ppn
+		(Lambda
+			(VariableList
+				(VariableNode "$L")
+				(VariableNode "$R"))
+			(
+... define the FetchValueOf variant ...
 ```
+
+Argh. Plan:
+Give Dynamic proxy that gets formula from vertex atom.
+This formula computes MI. It has to be this:
+
+(define vtx (ala 'make-pair (Word "the") (Word "house")))
+
+
+(ala 'left-element
+
+(Lambda (Variable "vtx")
+	(DoExec
+		(ExecutionOutput
+			(DefinedProcedureNode "*-dynamic MI ANY")
+			(OutgoingOf (Variable "vtx") (Number 1)) ; gets ListLink
+		)))
+
+----
