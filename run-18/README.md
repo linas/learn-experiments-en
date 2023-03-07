@@ -10,16 +10,11 @@ requires bring-up.
 So here we go.
 
 files
-* `r18-pair-plain.rdb` -- block-counted pairs, for fanfic only.
-  No marginals; counted with the pre-marginal code.
-  Uses `(LgLinkNode "Any")` for the pair predicate.
-
-* `r18-pair-marge.rdb` -- pairs with MI values on them TODO
-
 * `r18-bond-plain.rdb` -- 9935011 pairs and 67369 words.
   Block-counted pairs, for fanfic only. No marginals.
   Uses `(BondNode "Any")` for the pair predicate.
   
+* `r18-bond-marge.rdb` -- pairs with MI values on them
 
 Procedure
 ---------
@@ -103,12 +98,16 @@ go, again?
 guile -l run-common/marginals-pair.scm
 ```
 13 GB to load
-Elapsed time to load pairs: 707 secs
+Elapsed time to load pairs: 707 secs ... 938 secs
 Start computing the basis
 Support: found num left= 67443 num right= 67456 in 1336 secs
+Support: found num left= 67354 num right= 67368 in 1400 secs
+Hmm.. why'd that change?
 
-18 GB after computation
+18 GB after computation ... 16.6GB
 Finished with MI computations; this took 1.784 hours.
+Finished with MI computations; this took 1.842 hours.
+
 
 It works:
 ```
