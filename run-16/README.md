@@ -77,11 +77,6 @@ goe-cluster agglo-goe.scm
 (define sha (add-covering-sections pcs))
 (define LLOBJ sha)
 
-(define jaccard-select (make-jaccard-selector LLOBJ
-   QUORUM COMMONALITY NOISE))
-
-(define jaccard-select (make-jaccard-selector LLOBJ
-   0.5 0.2 4))
 
 (define NRANK 1000)
 (define words-with-sims (take ranked-words NRANK))
@@ -98,15 +93,11 @@ goe-cluster agglo-goe.scm
 	words-with-sims
 	#:epsi-step 0.01
 	#:win-size 0.02
-	#:max-epsi 0.5  ; for theta sim
-	#:lower-bound -0.5  ; for theta sim
+	#:max-epsi 0.3  ; for theta sim
+	#:lower-bound -0.7  ; for theta sim
 	#:max-jump 2.5
 )
 
-epsilon is the win size of similarity
-
-winsize = 1/ epsi-step
-window initialliy a list of 2 that is winsize long
 
 
 

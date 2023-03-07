@@ -72,6 +72,7 @@ cp -pr r14-sim200.rdb r14-imp-q0.7-c0.9-n6.rdb
 (in-group-cluster covr-obj 0.7 0.9 3 200 3000)
 (in-group-cluster covr-obj 0.7 0.9 6 200 3000)
 ```
+
 and the correspondingly-named rocks files.
 
 Do NOT use HUGETLB -- this burns when running out of ram,
@@ -81,5 +82,18 @@ Notable differences from run-12:
 * This will log the orthogonality of the clusters
 * Setting commonality to 0.9 eliminates that variable
 * Uses the new exhaustive-jaccard implementation to create groups.
+
+October 2022
+------------
+API changes. Instead of calling
+```
+(in-group-cluster covr-obj 0.7 0.9 6 200 3000)
+```
+must call as
+```
+(in-group-mi-cluster covr-obj 200 3000
+	#:QUORUM 0.7 #:COMMONALITY 0.9  #:NOISE 6)
+```
+The above will also place each merge in it's own space-frame.
 
 ========
