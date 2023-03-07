@@ -1,6 +1,8 @@
 
 Experiment 15
 =============
+Started 21 Sept 2022
+
 Gaussian Orthogonal Ensemble experiments.
 
 * Expansion of the size of the similarity matrix.
@@ -28,11 +30,21 @@ guile -l cogserver-gram.scm
 
 Verify everything looks good.
 ```
+(cog-report-counts)
 ```
 
-Now compute more similarities:
+More Similarities
+-----------------
+
+Now compute more similarities. This will auto-load existing
+similarities.
 ```
 (setup-initial-similarities star-obj 500)
 ```
+
+The r14-sim200.rdb has 20116 SimilarityLink's
+
+Data Analysis
+-------------
 
 ---------
