@@ -11,5 +11,13 @@ An unfulfilled goal from run-18:
   as an integrated, continuous system. This remains an out-of-reach
   dream.
 
-Start from scratch:
-* pairs
+Procedure
+---------
+Start from scratch.
+
+* Copy fanfic to `textx/betax`.
+* `guile -l cogserver.scm`
+* `cd ~/src/learn/run-common`
+* `. ~/experiments/run-19/0-pipeline.sh`
+* `./process-corpus.sh ~/experiments/run-19/2-pair-conf-en.sh`
+* Wait several days ... started 15 Feb 18:20 ...
