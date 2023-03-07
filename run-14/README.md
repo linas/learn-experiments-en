@@ -1,6 +1,8 @@
 
 Experiment 14
 =============
+February 2022
+
 Very similar to run-12, but with some a-priori fixes of known
 dataset bugs. This includes:
 
@@ -9,6 +11,15 @@ dataset bugs. This includes:
 * Removal of all Shapes (i.e. marginals) followed by a
   recomputation of the same marginals.
 
+October 2022 Update:
+--------------------
+Verify that everything works, using space frames. There were
+multiple bugs, these got fixed. Seems like it all works now.
+
+
+How to Run
+----------
+The February 2022 variant.
 
 ```
 cp -pr r12-mi-sim200.rdb r14-sim200.rdb
@@ -82,6 +93,8 @@ Notable differences from run-12:
 * This will log the orthogonality of the clusters
 * Setting commonality to 0.9 eliminates that variable
 * Uses the new exhaustive-jaccard implementation to create groups.
+
+===============================================================
 
 October 2022
 ------------
@@ -233,6 +246,54 @@ In-group size=2: `? !` `?`
 ------ merge-majority: Merge 4018 of 4101 sections in 10 secs
 ------ merge-majority: Remaining 10953 of 12156 cross in 33 secs
 
+------ Round 8 Next in line:
+ranked-MI = 9.5080 MI = 8.7373 (`!`, `.`)
+ranked-MI = 8.8475 MI = 4.8992 (`It`, `He`)
+ranked-MI = 8.2707 MI = 5.3147 (`”`, `"`)
+ranked-MI = 8.1875 MI = 4.6989 (`No`, `A`)
+ranked-MI = 8.1764 MI = 4.4153 (`in`, `of`)
+ranked-MI = 8.1305 MI = 4.5859 (`It`, `There`)
+
+------ Start MI-based merge 8 with seed pair `!` and `.`
+Initial in-group size=4: `.` `!` `-` `am`
+Best: size=3 overlap = 699 of 17142 disjuncts, commonality= 4.08%
+In-group size=3: `.` `!` `am`
+------ merge-majority: Merge 6935 of 9318 sections in 17 secs
+------ merge-majority: Remaining 78066 of 90382 cross in 188 secs
+
+
+------ Round 9 Next in line:
+ranked-MI = 8.8475 MI = 4.8992 (`It`, `He`)
+ranked-MI = 8.2707 MI = 5.3147 (`”`, `"`)
+ranked-MI = 8.1875 MI = 4.6989 (`No`, `A`)
+ranked-MI = 8.1764 MI = 4.4153 (`in`, `of`)
+ranked-MI = 8.1305 MI = 4.5859 (`It`, `There`)
+ranked-MI = 8.0221 MI = 4.5547 (`‘`, `“`)
+
+------ Start MI-based merge 9 with seed pair `It` and `He`
+In-group size=6: `He` `It` `She` `This` `We` `They`
+------ merge-majority: Merge 5024 of 5729 sections in 17 secs
+------ merge-majority: Remaining 9614 of 11231 cross in 24 secs
+
+
+------ Round 10 Next in line:
+ranked-MI = 8.2707 MI = 5.3147 (`”`, `"`)
+ranked-MI = 8.1875 MI = 4.6989 (`No`, `A`)
+ranked-MI = 8.1764 MI = 4.4153 (`in`, `of`)
+ranked-MI = 8.0221 MI = 4.5547 (`‘`, `“`)
+ranked-MI = 8.0113 MI = 5.7344 (`--`, `'`)
+
+------ Start MI-based merge 10 with seed pair `”` and `"`
+Initial in-group size=4: `"` `”` `###LEFT-WALL###` `]`
+Best: size=3 overlap = 335 of 7966 disjuncts, commonality= 4.21%
+In-group size=3: `"` `”` `]`
+------ merge-majority: Merge 2531 of 3755 sections in 5 secs
+------ merge-majority: Remaining 21089 of 27095 cross in 46 secs
+
+>>>>>>>>>>>>>>>
+
+Conclude: stop and restart using frames is now working.
+Lets try one more time, for good luck...
 
 
 ========
