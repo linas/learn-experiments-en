@@ -17,8 +17,10 @@ Directories:
 * run-12 -- Attempted compute of similarities. Broken.
 * run-13 -- Staging area; no experiments.
 * run-14 -- Clustering attempts; get about 100-200 merges deep, then blah.
+            (later; revive for some frame debugging work.)
 * run-15 -- Deep compute of MI similarities and GOE similarities. (Sept 2022)
 * run-16 -- Cluster attempts with GOE similaries.
+* run-17 -- Link-Grammar API development & test.
 
 
 Spindled databases

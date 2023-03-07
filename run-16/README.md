@@ -193,6 +193,8 @@ Database contents:
 (fold (lambda (I S) (+ S (cog-incoming-size-by-type I 'Member))) 0 wc)
 ; 236
 
+So that loooks good
+
 
 
 
@@ -205,6 +207,9 @@ Debug
 	(format #t "yes ~A ~A ~A ~A\n" X foo bar Y))
 (f 1 #:foo 2 #:bar 3)
 ```
+
+(cog-rocks-check storage-node)
+
 
 Atomspace frames:
 -- what if atomspace is created/stored with the same name as existing
