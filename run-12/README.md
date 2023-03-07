@@ -313,4 +313,14 @@ jaccard-membership implementation is intriguing. Also, set
 commonality to 0.9 to just avoid that. So restart fresh in
 run-14.
 
+Archive
+-------
+How to archive:
+
+```
+mv /data/lxc-databases/learn-en/rootfs/data/r12-imp* /home2/linas/src/novamente/data/rocks-archive
+
+mv /data/lxc-databases/learn-en/rootfs/data/r12-prc* /home2/linas/src/novamente/data/rocks-archive
+```
+
 ========

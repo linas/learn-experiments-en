@@ -12,5 +12,7 @@ export COGSERVER_CONF=${CONFIG_DIR}/4-cogserver/cogserver-gram.conf
 
 # Location of the database containing MPG pairs
 export MST_DB=${ROCKS_DATA_DIR}/r17-parse.rdb
+export ALL_DB=${ROCKS_DATA_DIR}/r17-all-in-one.rdb
 
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
+export STORAGE_NODE="(RocksStorageNode \"rocks://${ALL_DB}\")"

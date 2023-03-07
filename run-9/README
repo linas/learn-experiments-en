@@ -3,6 +3,25 @@ Run-9 -- Common-MI merge Development
 ------------------------------------
 Oct 2021
 
+Status
+------
+Debug and development workspace for merging sections w/shapes.
+The only thing left here that is "useful" are some starting
+datasets continaining precomputed similarities. These are:
+
+* r9-sim-200+entropy.rdb
+* r9-sim-200+mi.rdb
+* r9-sim-200.rdb
+
+These are identical to(?) and superceeded by datasets described
+in run-13/README.md.
+
+These are now moved to
+/home2/linas/src/novamente/data/rocks-archive
+
+
+Setup howto
+-----------
 Starting point is a copy of `run-1-t1234-tsup-1-1-1.rdb`.
 Should be able to run merges on this. Right!?
 

@@ -180,15 +180,11 @@ Word Pairs
 Can we repeat this trick, using word-pairs? i.e. can we emulate MST
 parsing using LG ???
 
-Candidates:
-run-1-en_pairs-tranche-12345.rd
-run-1-en_pairs-tranche-1234.rdb
-run-1-marg-tranche-1234.rdb
-run-1-t1234-tsup-1-1-1.rdb
+See run-13/README.md for a description of datasets.
 
 startup
 cd ~/data
-cp -pr r16-merge.rdb r17-pairs.rdb
+cp -pr r13-all-in-one.rdb r17-all-in-one.rdb
 
 guile -l cogserver-lg.scm
 

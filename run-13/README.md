@@ -23,7 +23,7 @@ Datasets
 * `run-1-t1234-tsup-1-1-1.rdb` -- Pairs, trimed to 1,1,1, with support
   marginals.
 * `r3-mpg-marg.rdb` -- A "badly-trimmed" dataset, but for which we
-  report stats if the agi-22 article.
+  report stats in the agi-22 article.
 
 * `run-1-t123-clean-1-1-1.rdb` is a copy of run-1-t123-tsup-1-1-1.rdb
      with exhaustive trimming applied to (w,d pairs).  The cleanup:
