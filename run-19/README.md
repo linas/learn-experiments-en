@@ -51,8 +51,9 @@ Stats:
   Ouch. I think I know why, its the gar/gdr or word-pairs.
 * real    2741m46.211s elapsed time to submit.
 * find pair-counted/fanfic |wc 4476
-  This does not match the official count; seems a few files got lost...
+  This does not match the master count; seems a few files got lost...
 * find ~/text-master-copy/alpha-fanfic-tranche-2/split-books/ |wc 4499
+* `(Anchor "Num blocks" (ctv 1 0 4433))` so some didn't get counted!?
 * telnet tot-cnct: 22376 -- how is this possible!?
 * telnet stalls: 4461 -- one stall per file. This makes sense.
 
@@ -65,6 +66,9 @@ Stats:
 * wc pair-counted/fanfic/ *  6597219 -- number of words -- about equal
   to number of sentences, makes sense, one sentence per slide, and num
   slides is same as num words.
+* `(Anchor "Slides" (ctv 1 0 6.50894e+06))` so this is a bit less than
+  the number of words ... where did they go? Hmm Its about 12 * 4433 less
+  which lops off the last 12 bytes of each slide. So that's OK, then.
 
 So this all looks good.
 
@@ -92,3 +96,19 @@ Disjunct-counting
 -----------------
 Text in `~/textx/pair-counted/fanfic`
 script `run/3-mst-parsing/mst-submit.sh`
+
+Slow-ish, 4 seconds per sentence
+One gc per sentence!
+Poorly parallel. Why?
+
+
+TODO:
+-----
+* Count MST pair edges used. DONE
+* Save pair edges, to have a perma-record. DONE
+* Fix LG caching of ID's to make above work. DONE
+* Save link ID every time. DONE
+* Restore of edges on restart. DONE
+* Counts on SentenceNode and ParseNode must be per-stage.
+* Data analyize MST-used edges vs. rand.
+* Data-analyze the new disjuncts.

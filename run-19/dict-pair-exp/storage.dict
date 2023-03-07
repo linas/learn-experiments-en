@@ -1,0 +1,46 @@
+
+#define dictionary-lang           en;
+#define dictionary-locale         en_US.UTF-8;
+#define dictionary-version-number 5.12.1;
+
+% The currently-running pair process
+#define storage-node "(CogStorageNode \"cog://localhost:19019\")";
+% #define storage-node "(CogSimpleStorageNode \"cog://localhost:19019\")";
+
+#define enable-sections 0;
+
+% -----------------------
+% dynamic experiments.
+% #define cost-key "(Predicate \"*-Mutual Info Key cover-section\")";
+
+% #define pair-formula "(DefinedProcedure \"*-dynamic MI ANY\")";
+% #define pair-index 0;
+
+% -----------------------
+% From the current cogserver pairs.
+#define pair-predicate "(BondNode "ANY")";
+#define pair-key "(Predicate "*-Mutual Info Key-*")";
+#define pair-index 1;
+% -----------------------
+
+#define max-disjunct-cost 4.6;
+
+#define pair-disjuncts 4;
+#define pair-cutoff 0.0;
+#define pair-default -10.0;
+
+% Map [0,4] to [1,0]
+#define pair-scale -0.25;
+#define pair-offset 1.0;
+
+#define any-default 1.6;
+#define pair-with-any 1;
+
+#define any-disjuncts 0;
+
+#define enable-unknown-word 1;
+
+% -----------------------
+% At least one bogus entry is needed.
+% This file is read as an affix file, so only affix names are allowed.
+foo: UNITS+;

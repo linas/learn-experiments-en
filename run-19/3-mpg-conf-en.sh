@@ -10,7 +10,8 @@ export OCPROMPT="[0;32mcogserver-mpg@(run-19) [0m"
 export LOGFILE=/tmp/cogserver-mst-en.log
 
 # Location of the database where MPG counts will accumulate.
-export MST_DB=${ROCKS_DATA_DIR}/r19-bond.rdb
+export MST_DB=${ROCKS_DATA_DIR}/r19-pair.rdb
+# export MST_DB=${ROCKS_DATA_DIR}/r19-pair-marge.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${MST_DB}\")"
 
 # Message printed for each processed file
