@@ -7,7 +7,7 @@ dataset bugs. This includes:
 * Removal of all CrossSections inadvetently stored in the
   sim dataset.
 * Removal of all Shapes (i.e. marginals) followed by a
-  recomutation of the same marginals.
+  recomputation of the same marginals.
 
 
 ```
