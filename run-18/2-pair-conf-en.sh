@@ -27,6 +27,9 @@ export MSG="Word-pair counting"
 
 # Enable sentence splitting.
 export SENTENCE_SPLIT=false
-export SENTENCE_SPLIT=true
-export SPLIT_LANG=en
-export OBSERVE="observe-text"
+export XFORM_SPLIT=false
+export OBSERVE="observe-block"
+
+# export SENTENCE_SPLIT=true
+# export SPLIT_LANG=en
+# export OBSERVE="observe-text"

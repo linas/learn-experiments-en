@@ -18,10 +18,13 @@ Well, try two things:
 
 Plan items:
 * Use uniform sentence lengths
+OBSERVE
+  `(observe-block TEXT)`
 
-Notes:
-* (split-text plain-text) does toeknization
+file-nosplit-process.sh
+ "$observe submit-plain.pl
 
+SENTENCE_SPLIT = false
 
 batch-pairs -- run-common
 make-any-link-api -- used
