@@ -7,7 +7,7 @@ export HOSTNAME=localhost
 export PORT=20018
 export PROMPT="[0;34mscheme@(pairs-18)[0m "
 export OCPROMPT="[0;32mcogserver@(pairs-18)[0m "
-# export PROMPT="scheme@(pairs-18)"
+export PROMPT="scheme@(pairs-18)"
 export LOGFILE=/tmp/cogserver-pairs-en.log
 
 # Location where pair counts will accumulate.

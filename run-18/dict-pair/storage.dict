@@ -8,8 +8,13 @@
 % The currently-running pair process
 #define storage-node "(CogStorageNode \"cog://localhost:20018\")";
 
-% #define mi-key "(Predicate \"*-Mutual Info Key cover-section\")";
-% #define mi-offset 1;
+#define cost-key "(Predicate \"*-Mutual Info Key cover-section\")";
+
+% #define pair-key "(Predicate \"*-Mutual Info Key cover-section\")";
+% #define pair-offset 1;
+
+#define pair-formula "(DefinedProcedure \"*-dynamic MI ANY\")";
+#define pair-offset 0;
 
 
 % -----------------------

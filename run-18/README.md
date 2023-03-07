@@ -13,31 +13,27 @@ files
 * `r18-pair-plain.rdb` -- block-counted pairs, for fanfic only.
   No marginals; counted with the pre-marginal code.
 
+Plan
+----
+
+Try the following things:
+
+* do MST parsing with LG
+* compute GOE from pairs
+
 
 Bringup Notes
 -------------
-Gonna cheat a bit, start with `run-1-marg-tranche-123.rdb` --
-this has all pairs, untrimmed, but with marginals.
-No that fails.
 
-Well, try two things:
-(1) MST parsing with LG
-(2) GOE from pairs
-
-Next ... items:
-* Use uniform sentence lengths DONE
-config OBSERVE `(observe-block TEXT)`
 
 TODO:
--- ParseNode should have cost on it... where??
+* ParseNode should have cost on it... but lg-atomsemse does
+  not write it yet...
+* Should cog-push-atomspace be cow?  (not documented!)
 
+DONE:
+* Use uniform sentence lengths DONE
 
-batch-pairs -- run-common
-make-any-link-api -- used
-
-------
-
-Should cog-push-atomspace be cow?  (not documented!)
 
 Check old code:
 -----------
