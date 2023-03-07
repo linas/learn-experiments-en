@@ -1,6 +1,15 @@
 Experiment 18
 =============
-November 2022
+November 2022 - Feb 2023
+
+Efforts below stalled. Major rework if link-grammar for MST
+parsing. Also switch to EdgeLink from EvaluationLink. Therefore
+progress to run-19.
+
+The dream of unified processing remains a dream. For now, will
+focus on LG MST-parsing. .. in run-19.
+
+-------
 
 The changes to LG in expt-17 now opens the door for a unified
 pair-parsing, MST-parsing, gram-parsing and clustering, as an
