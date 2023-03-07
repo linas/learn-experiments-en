@@ -12,8 +12,14 @@ So here we go.
 files
 * `r18-pair-plain.rdb` -- block-counted pairs, for fanfic only.
   No marginals; counted with the pre-marginal code.
+  Uses `(LgLinkNode "Any")` for the pair predicate.
 
 * `r18-pair-marge.rdb` -- pairs with MI values on them TODO
+
+* `r18-bond-plain.rdb` -- 9935011 pairs and 67369 words.
+  Block-counted pairs, for fanfic only. No marginals.
+  Uses `(BondNode "Any")` for the pair predicate.
+  
 
 Procedure
 ---------
@@ -24,7 +30,9 @@ Start from scratch.
 * `cd ~/src/learn/run-common`
 * `. ~/experiments/run-18/0-pipeline.sh`
 * `./process-corpus.sh ~/experiments/run-18/2-pair-conf-en.sh`
-* Wait several days ...
+* Wait several days ... 4 days.
+  18691 minutes CPU = 311 hours = 13 days CPU time.
+  15.2GB RAM resident at end.
   Rate: 21 parses per second.
   Issues: gc runs way too often; collects 250K each run, takes 0.1 secs
   per run, uses 50% of total CPU time, seems to try to keep size at 10M
@@ -91,10 +99,8 @@ So I'm gonna brute-force compute pair MI as before. How does that
 go, again?
 
 
-Run `run-common/marginals-pair.scm`
 ```
-guile -l cogserver.scm
-and do the above.
+guile -l run-common/marginals-pair.scm
 ```
 13 GB to load
 Elapsed time to load pairs: 707 secs
@@ -250,5 +256,39 @@ This formula computes MI. It has to be this:
 			(DefinedProcedureNode "*-dynamic MI ANY")
 			(OutgoingOf (Variable "vtx") (Number 1)) ; gets ListLink
 		)))
+
+----
+
+Unified parser testing
+----------------------
+Hmm test the dict.
+```
+guile -l cogserver.scm
+(define ala (make-any-link-api))
+(ala 'fetch-pairs)
+
+(define ala    (make-evaluation-pair-api
+      (LgLinkNode "ANY")
+      'WordNode
+      'WordNode
+      (AnyNode "left-word")
+      (AnyNode "right-word")
+      "ANY"
+      "Link Grammar ANY link Word Pairs"))
+
+(ala 'fetch-pairs)
+; Elapsed time to load pairs: 1306 secs
+; 16 GB
+
+(define psa (make-pseudo-cset-api))
+(define psc (add-count-api psa))
+(define dict (LgDictNode "/home/ubuntu/src/learn/run-config/dict-combined"))
+(define parser (make-disjunct-counter psc dict))
+(parser "this is a test")
+(cog-get-atoms 'Section)
+```
+
+What's missing? Weighting?
+
 
 ----
