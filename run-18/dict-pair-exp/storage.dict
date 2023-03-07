@@ -7,7 +7,7 @@
 
 % The currently-running pair process
 % #define storage-node "(CogStorageNode \"cog://localhost:20118\")";
-#define storage-node "(CogSimpleStorageNode \"cog-simple://localhost:20118\")";
+#define storage-node "(CogSimpleStorageNode \"cog://localhost:20118\")";
 
 % -----------------------
 % dynamic experiments.
