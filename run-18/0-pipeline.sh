@@ -23,3 +23,4 @@ export CONFIG_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export MASTER_CONFIG_FILE=${CONFIG_DIR}/$( basename "${BASH_SOURCE[0]}" )
 
 export PAIR_CONF_FILE=$CONFIG_DIR/2-pair-conf-en.sh
+export MST_CONF_FILE=$CONFIG_DIR/3-mst-conf-en.sh
