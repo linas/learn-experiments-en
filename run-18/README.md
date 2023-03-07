@@ -19,17 +19,3 @@ Well, try two things:
 Plan items:
 * Use uniform sentence lengths
 
-
-Bugs
-\"This \\is \\\\a \\\\\\test, right?\"\\\\
-
-Backslash issue...
-(use-modules (opencog) (opencog persist) (opencog persist-rocks))
-(define rsn (RocksStorage "rocks:///tmp/foo.rdb"))
-(cog-open rsn)
-(store-atom (Concept "\"robber"))
-(store-atom (Concept "\\\"ohh"))
-(store-atom (Concept "\\\\\"gorp"))
-(store-atom (Concept "\\\\\\\"forp"))
-(cog-close rsn)
- works great.
