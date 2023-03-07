@@ -5,7 +5,7 @@ Development and debug of LG dictionary API.
 
 startup
 cd ~/data
-cp -pr xxx r17-parse.rdb
+cp -pr r16-merge.rdb r17-parse.rdb
 
 guile -l cogserver-lg.scm
 
@@ -17,11 +17,33 @@ link-parser test-dict
 Issues:
 * Some sections don't have costs
   -- The sections that have WordClassNodes in them!
+  -- Becuase this is the GOE dataset, these have not been computed yet.
 * Repeated sentences because repeated linakges.  #1348
 
------------
 
+Link Generator
+--------------
+Using the GOE merge up to 100 dataset. `r16-merge.rdb`
+
+Conclude:
+* First impression: the generated sentences are terrible.
+* But why?
+* Perhaps the trimming cut out too much. Rarely observed sections
+  are probably needed for a full grammar.
+* There's a way to spin this as good news: The generated text shows
+  a very strong preference for things that look like chapter titles
+  and table-of-contents entries. This suggests that the generator is
+  dreaming of "entitites"; that perhaps entities will not require
+  special considerations?
+
+```
 link-generator -l ../data/baz -s2
+
+#define cost-scale -0.2;      <<< Note minus sign needed for invesion
+#define cost-offset 0.0;
+#define cost-cutoff 8.0;
+#define cost-default 1.0;     <<< used below. Too much?
+
 
 two words
 # Linkages found: 141
@@ -119,13 +141,11 @@ LEFT-WALL A bright smile and a formal # linkage-cost= -10.045
 LEFT-WALL Jack looked over the road --
 
 
-
 eight words (bad ordering)
 # Linkages found: 2147483647
 LEFT-WALL Winter comes , the delight of the two
 LEFT-WALL Winter is , it wants to . ”
 LEFT-WALL In London , the large part , is
-
 
 
 nine words (bad ordering)
@@ -153,7 +173,26 @@ LEFT-WALL ###LEFT-WALL### It is one ! He started laughing . NOTES # linkage-cost
 LEFT-WALL A blind man , should be successful , as ' # linkage-cost= -13.962
 LEFT-WALL THE PAGE 1 . _ ] It was clear .  # linkage-cost= -13.954
 LEFT-WALL A soft voice , when our men from the two # linkage-cost= -13.759
-
-
 ```
+
+Word Pairs
+----------
+Can we repeat this trick, using word-pairs? i.e. can we emulate MST
+parsing using LG ???
+
+Candidates:
+run-1-en_pairs-tranche-12345.rd
+run-1-en_pairs-tranche-1234.rdb
+run-1-marg-tranche-1234.rdb
+run-1-t1234-tsup-1-1-1.rdb
+
+startup
+cd ~/data
+cp -pr r16-merge.rdb r17-pairs.rdb
+
+guile -l cogserver-lg.scm
+
+vi test-dict/storage.dict and verify
+
+
 ========

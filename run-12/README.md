@@ -1,11 +1,19 @@
 
 Experiment 12
 =============
+February 2022
+
 Sanity check.  Apparently, files from run-10 are not consistent
 with linkage (have connectors that cannot connect to words) and
 also have spurious marginals in them. The goal here is to get to
 the bottom of things, and try to have a clean dataset... again.
 
+Conclusion: Lots of bugs were hunted down and squashed.  No usable
+datasets resulted from this.
+
+
+Startup
+-------
 ```
 time cp -r run-1-t1234-tsup-1-1-1.rdb  r12-trim.rdb
 
@@ -105,8 +113,8 @@ and the correspondingly-named rocks files.
 Run with
 `HUGETLB_MORECORE=yes LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libhugetlbfs.so.0 guile -l cogserver-gram.scm`
 
----------------
 8 Feb 2022
+----------
 
 The imprecise `(in-group-cluster covr-obj 0.7 0.2 2 200 3000)`
 job crashed at iteration 176. After bug-fixes and restart, it fails
@@ -254,8 +262,8 @@ Throw to key `bad-membership' with args `(merge-majority "No counts on word clas
 after rebatchng, 2 dies with unbalanced marginals ... and so do 1 and 4.
 So end of the line on all the imprecise datasets.
 
-========
 25 Feb 2022
+===========
 
 OK, try to do some data analysis on what we got.
 First, save the good copies:
@@ -301,7 +309,7 @@ code.
 
 Abandon ship. I'm tired of patching the problems. That, plus the
 new "orthogonality" metric sounds intersting. Also the new
-jaccard-membership implementation is intrigueing. Also, set
+jaccard-membership implementation is intriguing. Also, set
 commonality to 0.9 to just avoid that. So restart fresh in
 run-14.
 
