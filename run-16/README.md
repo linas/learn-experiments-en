@@ -73,6 +73,44 @@ Now start doing merges.
 entry point
 goe-cluster agglo-goe.scm
 
+(define jaccard-select (make-jaccard-selector LLOBJ
+   QUORUM COMMONALITY NOISE))
+
+(define jaccard-select (make-jaccard-selector LLOBJ
+   0.5 0.2 4))
+
+(define NRANK 1000)
+(define words-with-sims (take ranked-words NRANK))
+(define all-cosi (gos 'get-all-elts))
+(length all-cosi)
+(define uniq-cosi
+   (remove (lambda (PR) (equal? (gar PR) (gdr PR))) all-cosi))
+(define sorted-pairs (sort uniq-cosi lessi))
+
+
+(define start-pr (car sorted-pairs))
+(optimal-in-group theta-sim
+	(gar start-pr) (gdr start-pr)
+	words-with-sims
+	#:epsi-step 0.01
+	#:win-size 0.02
+	#:max-epsi 0.5  ; for theta sim
+	#:lower-bound -0.5  ; for theta sim
+	#:max-jump 2.5
+)
+
+epsilon is the win size of similarity
+
+winsize = 1/ epsi-step
+window initialliy a list of 2 that is winsize long
+
+
+```
+(define* (f X #:key (foo 1) (bar 2))
+	(define Y 42)
+	(format #t "yes ~A ~A ~A ~A\n" X foo bar Y))
+(f 1 #:foo 2 #:bar 3)
+```
 
 ; --------------------------------
 
