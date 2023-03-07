@@ -8,3 +8,10 @@ integrated, continuous system. This should be much better, but
 requires bring-up.
 
 So here we go.
+
+Gonna cheat a bit, start with `run-1-marg-tranche-123.rdb` --
+this has all pairs, untrimmed, but with marginals.
+
+Well, try two things:
+(1) MST parsing with LG
+(2) GOE from pairs
