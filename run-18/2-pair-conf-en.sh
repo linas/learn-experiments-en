@@ -7,12 +7,12 @@ export HOSTNAME=localhost
 export PORT=20018
 export PROMPT="[0;34mscheme@(pairs-18)[0m "
 export OCPROMPT="[0;32mcogserver@(pairs-18)[0m "
-export PROMPT="scheme@(pairs-18)"
+# export PROMPT="scheme@(pairs-18)"
 export LOGFILE=/tmp/cogserver-pairs-en.log
 
 # Location where pair counts will accumulate.
 export PAIRS_DB=${ROCKS_DATA_DIR}/r18-pair.rdb
-export PAIRS_DB=${ROCKS_DATA_DIR}/r18-junk.rdb
+# export PAIRS_DB=${ROCKS_DATA_DIR}/r18-junk.rdb
 export STORAGE_NODE="(RocksStorageNode \"rocks://${PAIRS_DB}\")"
 
 export CORPORA_DIR=$TEXT_DIR/beta-pages
@@ -25,11 +25,8 @@ export IN_PROCESS_DIR=pair-split
 export COMPLETED_DIR=pair-counted
 export MSG="Word-pair counting"
 
-# Enable sentence splitting.
-export SENTENCE_SPLIT=false
-export XFORM_SPLIT=false
+# Use block submission
+export BLOCK_SUBMIT=true
 export OBSERVE="observe-block"
 
-# export SENTENCE_SPLIT=true
-# export SPLIT_LANG=en
-# export OBSERVE="observe-text"
+# -----------

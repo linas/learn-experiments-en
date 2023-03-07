@@ -9,22 +9,24 @@ requires bring-up.
 
 So here we go.
 
+files
+* `r18-pairs.rdb` -- block-counted pairs, for fanfic only.
+
+
+Bringup Notes
+-------------
 Gonna cheat a bit, start with `run-1-marg-tranche-123.rdb` --
 this has all pairs, untrimmed, but with marginals.
+No that fails.
 
 Well, try two things:
 (1) MST parsing with LG
 (2) GOE from pairs
 
-Plan items:
-* Use uniform sentence lengths
-OBSERVE
-  `(observe-block TEXT)`
+Next ... items:
+* Use uniform sentence lengths DONE
+config OBSERVE `(observe-block TEXT)`
 
-file-nosplit-process.sh
- "$observe submit-plain.pl
-
-SENTENCE_SPLIT = false
 
 batch-pairs -- run-common
 make-any-link-api -- used
@@ -38,6 +40,7 @@ Check old code:
 This is for the old pe-sentence observe code:
 fanfic
 total cpu time: 4514 minutes
+(monitor-parse-rate "foo")
 foo done=547692 rate=9.716 sentences per sec
 (gc-time-taken . 149815788883396) == 2497 minutes!
  (heap-size . 12095488)
@@ -58,4 +61,3 @@ maxrss: 26023264 KB  majflt: 56  inblk: 48  outblk: 178783224
 18.2 G virt 16.1 G resident
 (count-all) ; 13328951 == 13M so about 1.2KB per atom
 wc pair-counted/fanfic/ * == 547703
-
