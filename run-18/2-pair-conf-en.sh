@@ -28,7 +28,6 @@ export COMPLETED_DIR=pair-counted
 export MSG="Word-pair counting"
 
 # Use block submission
-export BLOCK_SUBMIT=true
-export OBSERVE="observe-block"
+export OBSERVE="observe-block-pairs"
 
 # -----------

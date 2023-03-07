@@ -287,16 +287,24 @@ guile -l cogserver.scm
 (cog-get-atoms 'Section)
 ```
 
-What's missing? Weighting?
+What's missing? Weighting? Can't do that until some diary work is done
+for MI disributins.
+
+MST/MPG parse
+-------------
 What the heck. Let's do a full MST parse, using a weight of 1.0
 and see what happens.
 
-Revise 3-mpg-conf-en.sh and run
+Revise `3-mpg-conf-en.sh` and run
+```
 ./run/3-mst-parsing/run-mst-cogserver.sh
 ./mst-submit.sh
+```
+Starts with 67369 words, 9935011 pairs
 
 
 (cog-incoming-set (cog-atomspace))
 (list-ref is 17)
 (cog-set-atomspace! (list-ref is 16))
+
 ----
