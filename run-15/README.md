@@ -60,7 +60,8 @@ Lets try it.  Use scripts in ortho-compute.scm
 cp -pr r15-sim2500.rdb r15-goe.rdb
 guile -l cogserver-gram.scm
 
-XXX Do we really need the gram part?  I suspect not...
+Do we really need the gram part?
+We do, in order to be able to create a list of ranked words.
 
 (goe 'mean-rms)
 ; (-1.4053400751699667 2.898486631855367)
@@ -70,6 +71,11 @@ XXX Do we really need the gram part?  I suspect not...
 
 (loop-upper-diagonal dot-prod allwo 0 250)
 (loop-upper-diagonal dot-prod allwo 0 500)
+(loop-upper-diagonal dot-prod allwo 0 1000)
+
+(loop-upper-diagonal dot-prod allwo 500 20)
+(loop-upper-diagonal dot-prod allwo 550 100)
+(loop-upper-diagonal dot-prod allwo 650 300)
 
 ; --------------------------------
 
@@ -78,7 +84,6 @@ cp -pr r15-sim500.rdb r15-goe-500.rdb
 ; --------------------------------
 
 cp -pr r15-sim6000.rdb r15-goe-6k.rdb
-guile -l cogserver.scm
 
 (goe 'mean-rms)
 ; (-0.7240391833706027 2.6398276840879658)
