@@ -78,12 +78,17 @@ guile -l run-common/marginals-pair.scm
 
 Before batching:
 Elapsed time to load pairs: 559 secs
-(count-all) 15182063
+(count-all) 15182063      -> 27K Atoms/sec
 RSS 8.9GB --> 586 Bytes/Atom
 
 After batching:
 (count-all) 15451385
 13.6g RSS -> 880 Bytes/Atom
 
-Time to reload pairs (after batching): 714 secs
+Time to reload pairs (after batching): 714 secs  --> 21.6K/sec
 11.8G RSS -> 764 Bytes/Atom -- Yayy!
+
+Disjunct-counting
+-----------------
+Text in `~/textx/pair-counted/fanfic`
+script `run/3-mst-parsing/mst-submit.sh`
