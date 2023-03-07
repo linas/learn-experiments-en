@@ -47,4 +47,6 @@ The r14-sim200.rdb has 20116 SimilarityLink's
 Data Analysis
 -------------
 
+Code in learn-lang-diary/utils/orthogonal-ensemble.scm
+
 ---------
