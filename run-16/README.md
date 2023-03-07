@@ -65,6 +65,14 @@ Merge
 -----
 Now start doing merges.
 
+```
+(define layer-one (cog-new-atomspace "layer one" (cog-atomspace)))
+(cog-set-atomspace! layer-one)
+```
+
+entry point
+goe-cluster agglo-goe.scm
+
 
 ; --------------------------------
 
