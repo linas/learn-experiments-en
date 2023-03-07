@@ -180,15 +180,28 @@ Word Pairs
 Can we repeat this trick, using word-pairs? i.e. can we emulate MST
 parsing using LG ???
 
+Also debug the pass-thru proxy...
+
 See run-13/README.md for a description of datasets.
 
 startup
 cd ~/data
 cp -pr r13-all-in-one.rdb r17-all-in-one.rdb
 
-guile -l cogserver-lg.scm
+. ~/experiments/run-17/4-gram-conf-en.sh
+
+# Load nothing
+guile -l cogserver.scm
+
+rlwrap telnet localhost 20017
+load /usr/local/lib/opencog/modules/libwthru-proxy.so
+config SexprShellModule libwthru-proxy.so
+(cog-report-counts)
 
 vi test-dict/storage.dict and verify
 
+
+--------
+etch_incoming_by_type
 
 ========
