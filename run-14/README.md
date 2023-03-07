@@ -135,5 +135,104 @@ Database contents:
 Unix max open files rlimit cur: 1024 rlimit max: 1048576
 ```
 
+WTF, still borken??
+Or is this OK?
+
+
+------ Round 1 Next in line:
+ranked-MI = 9.1864 MI = 9.4480 (`—`, `+`)
+ranked-MI = 9.1428 MI = 5.0203 (`;`, `,`)
+ranked-MI = 9.0413 MI = 4.6066 (`is`, `was`)
+ranked-MI = 9.0177 MI = 4.8309 (`and`, `but`)
+ranked-MI = 8.9218 MI = 5.8340 (`.`, `?`)
+ranked-MI = 8.9079 MI = 7.1134 (`!`, `?`)
+------ Start MI-based merge 1 with seed pair `—` and `+`
+In-group size=6: `—` `”` `_` `)` `(` `[`
+------ merge-majority: Merge 6679 of 8348 sections in 14 secs
+------ merge-majority: Remaining 15043 of 21577 cross in 41 secs
+
+
+------ Round 2 Next in line:
+ranked-MI = 9.1428 MI = 5.0203 (`;`, `,`)
+ranked-MI = 9.0959 MI = 9.3359 (`—`, `+`)
+ranked-MI = 9.0413 MI = 4.6066 (`is`, `was`)
+------ Start MI-based merge 2 with seed pair `;` and `,`
+In-group size=3: `,` `;` `:`
+------ merge-majority: Merge 33124 of 41743 sections in 78 secs
+------ merge-majority: Remaining 92082 of 111616 cross in 247 secs
+
+
+------ Round 3 Next in line:
+ranked-MI = 9.0959 MI = 9.3359 (`—`, `+`)
+ranked-MI = 9.0413 MI = 4.6066 (`is`, `was`)
+ranked-MI = 9.0177 MI = 4.8309 (`and`, `but`)
+------ Start MI-based merge 3 with seed pair `—` and `+`
+In-group size=2: `+` `—`
+------ merge-majority: Merge 1058 of 1205 sections in 2 secs
+------ merge-majority: Remaining 3384 of 3805 cross in 8 secs
+
+------ Round 4 Next in line:
+ranked-MI = 9.0413 MI = 4.6066 (`is`, `was`)
+ranked-MI = 9.0177 MI = 4.8309 (`and`, `but`)
+ranked-MI = 8.9218 MI = 5.8340 (`.`, `?`)
+ranked-MI = 8.9079 MI = 7.1134 (`!`, `?`)
+ranked-MI = 8.8475 MI = 4.8992 (`It`, `He`)
+------ Start MI-based merge 4 with seed pair `is` and `was`
+In-group size=2: `was` `is`
+------ merge-majority: Merge 12229 of 13071 sections in 30 secs
+------ merge-majority: Remaining 36120 of 39463 cross in 90 secs
+
+------ Round 5 Next in line:
+ranked-MI = 9.0177 MI = 4.8309 (`and`, `but`)
+ranked-MI = 8.9218 MI = 5.8340 (`.`, `?`)
+ranked-MI = 8.9079 MI = 7.1134 (`!`, `?`)
+ranked-MI = 8.8475 MI = 4.8992 (`It`, `He`)
+ranked-MI = 8.2707 MI = 5.3147 (`”`, `"`)
+------ Start MI-based merge 5 with seed pair `and` and `but`
+In-group size=6: `but` `and` `for` `as` `or` `than`
+------ merge-majority: Merge 28471 of 32744 sections in 77 secs
+------ merge-majority: Remaining 65265 of 77584 cross in 196 secs
+
+
+>>>>>>>>>>>>>>>
+
+
+------ Round 6 Next in line:
+ranked-MI = 8.9218 MI = 5.8340 (`.`, `?`)
+ranked-MI = 8.9079 MI = 7.1134 (`!`, `?`)
+ranked-MI = 8.8475 MI = 4.8992 (`It`, `He`)
+------ Start MI-based merge 6 with seed pair `.` and `?`
+Initial in-group size=5: `?` `.` `###LEFT-WALL###` `!` `]`
+In-group size=2: `?` `!`
+------ merge-majority: Merge 4030 of 4307 sections in 7 secs
+------ merge-majority: Remaining 10858 of 12599 cross in 29 secs
+------ Merged into `? !` in 183 secs
+
+Will recompute sims for 2 words (232 unaffected) out of 234
+MI(`!`, `!`) = 13.151rank-MI = 11.746
+MI(`.`, `!`) = 8.7373rank-MI = 9.5080
+MI(`?`, `!`) = 12.362rank-MI = 11.510
+MI(`?`, `?`) = 13.335rank-MI = 13.036
+MI(`.`, `?`) = 9.2545rank-MI = 10.579
+Recomputed sims for 2 words out of 234 in 489 secs
+MI(`? !`, `? !`) = 13.121rank-MI = 13.205
+
+------ Round 7 Next in line:
+ranked-MI = 12.625 MI = 12.425 (`?`, `? !`)
+ranked-MI = 11.608 MI = 11.961 (`!`, `? !`)
+ranked-MI = 11.510 MI = 12.362 (`!`, `?`)
+ranked-MI = 10.579 MI = 9.2545 (`.`, `?`)
+ranked-MI = 10.529 MI = 8.7053 (`.`, `? !`)
+ranked-MI = 9.5080 MI = 8.7373 (`!`, `.`)
+ranked-MI = 8.8475 MI = 4.8992 (`It`, `He`)
+
+------ Start MI-based merge 7 with seed pair `?` and `? !`
+Initial in-group size=4: `? !` `?` `.` `###LEFT-WALL###`
+Best: size=2 overlap = 681 of 2661 disjuncts, commonality= 25.59%
+In-group size=2: `? !` `?`
+------ merge-majority: Merge 4018 of 4101 sections in 10 secs
+------ merge-majority: Remaining 10953 of 12156 cross in 33 secs
+
+
 
 ========

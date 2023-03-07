@@ -180,6 +180,19 @@ Database contents:
     1431        `GOE-merge layer 100`
 ```
 
+(length touched)
+336
+
+(make-merge-logger LLOBJ)
+
+(define wc (cog-get-atoms 'WordClass))
+(length wc)
+; 100
+(cog-incoming-by-type (car wc) 'Member)
+
+(fold (lambda (I S) (+ S (cog-incoming-size-by-type I 'Member))) 0 wc)
+; 236
+
 
 
 
