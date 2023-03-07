@@ -84,6 +84,14 @@ Elapsed time to load pairs: 707 secs
 Start computing the basis
 Support: found num left= 67443 num right= 67456 in 1336 secs
 
+18 GB after computation
+Finished with MI computations; this took 1.784 hours.
+
+It works:
+```
+link-parser run-config/dict-combined
+```
+
 
 
 Proxy setup
