@@ -105,6 +105,24 @@ So this:
 (define pr (List (Word "the") (Word "house")))
 (fetch-incoming-set pr)
 (define epr (car (cog-incoming-set pr)))
-
-
 ```
+
+Above proves the basic proxy works.
+Earlier, from `(opencog matrix)` we had this:
+
+Run it in the client. The 'pair count fails, because there's
+no fetch.
+```
+(use-modules (opencog matrix))
+(use-modules (opencog learn))
+(define ala (make-any-link-api))
+(define alc (add-count-api ala))
+(define als (add-storage-count alc))
+(define ady (add-dynamic-mi als))
+(ady 'formula)
+(cog-incoming-by-type (ady 'formula) 'DefineLink)
+(ady 'pair-count (Word "the") (Word "horse"))
+```
+
+
+
