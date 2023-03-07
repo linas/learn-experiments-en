@@ -1,7 +1,7 @@
 
 Experiment 15
 =============
-Started 21 Sept 2022
+Started 21 Sept 2022 Finished 2 October 2022
 
 Gaussian Orthogonal Ensemble experiments.
 
@@ -45,9 +45,22 @@ similarities.
 ```
 
 The r14-sim200.rdb has 20116(?) SimilarityLink's
-The r14-sim500.rdb has 125250 SimilarityLink's
-The r14-sim2500.rdb has 3126250 SimilarityLink's
-The r14-sim6000.rdb has  SimilarityLink's
+The r15-sim500.rdb has 125250 MI's stored in SimilarityLink's
+     i.e. N(N+1)/2 of them, out to N=500.
+The r15-sim2500.rdb has N(N+1)/2 = 3126250 MI's stored in
+    SimilarityLink's for N=2500.
+The r15-sim6000.rdb has MI's in SimilarityLink's for N=6000
+
+So: r15-goe-2500.rdb has MI similarities out to N=2500 and has GOE
+similarities out to M=1000. It also has F_2 similarities out to M=250.
+See learn-lang-diary/utils/orthogonal-ensemble.scm for the API to access
+these, and tools for graphing them.
+
+Next, r15-goe-6k.rdb has MI similarities out to N=6000 and has GOE
+similarities out to M=1000.
+
+Not sure what r15-goe-500.rdb has in it.
+
 
 Data Analysis
 -------------
@@ -92,6 +105,6 @@ cp -pr r15-sim6000.rdb r15-goe-6k.rdb
 
 (loop-upper-diagonal dot-prod allwo 0 250)
 
+; --------------------------------
 
-
----------
+That's all folks!
